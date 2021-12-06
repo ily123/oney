@@ -13,6 +13,10 @@ class Category(db.Model):
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
     updated_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
+    # 1 category has many products
+    products = db.relationship("Product", back_populates="category")
+
+
     def to_dict(self):
         return {
             'id': self.id,
