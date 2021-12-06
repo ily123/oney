@@ -15,8 +15,8 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
     products = db.relationship("Product", back_populates="user")
-
     reviews = db.relationship("Review", back_populates="user")
+    cart = db.relationship("Cart", back_populates="user")
 
     @property
     def password(self):
