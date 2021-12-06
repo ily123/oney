@@ -17,10 +17,7 @@ class Product(db.Model):
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
     updated_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
-  # 1 category has many products
     category = db.relationship("Category", back_populates="products")
-
-    # 1 user has many products
     user = db.relationship("User", back_populates="products")
-
     reviews = db.relationship("Review", back_populates="product")
+    cart = db.relationship("Cart", back_populates="products")
