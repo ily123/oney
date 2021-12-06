@@ -22,3 +22,5 @@ class Product(db.Model):
 
     # 1 user has many products
     user = db.relationship("User", back_populates="products")
+
+    reviews = db.relationship("Review", back_populates="product")
