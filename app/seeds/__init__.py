@@ -1,6 +1,7 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .categories import seed_categories, undo_categories
+from .products import seed_products, undo_products
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -13,6 +14,7 @@ def seed():
     # Seed the most important tables first
     seed_users()
     seed_categories()
+    seed_products()
     # Add other seed functions here
 
 
@@ -21,6 +23,7 @@ def seed():
 def undo():
     # ORDER HERE IS VERY IMPORTANT!!!
     # START BY DELETING TABLES THAT DO NOT DEPEND ON ANYTHING!!!
+    undo_products()
     undo_categories()
     undo_users()
     # Add other undo functions here

@@ -1,29 +1,31 @@
-from app.models import db, Category
+from app.models import db, Product
 import json
 
 
-MOCK_CATEGORY_FP = "./app/seeds/mock_data/top_items_categories.json"
+MOCK_PRODUCT_FP = "./app/seeds/mock_data/top_items.json"
 
 
 def load_mock_data():
     """Loads mock category json data as python dict."""
-    with open(MOCK_CATEGORY_FP) as file:
-        categories = json.load(file)
-    return categories
+    with open(MOCK_PRODUCT_FP) as file:
+        products = json.load(file)
+    return products
 
 
-def seed_categories():
+def seed_products():
     """Seeds Etsy mock categories."""
     mock_data = load_mock_data()
-    for mock_categ in mock_data:
-        # new_categ = Category(
-        #     id=mock_categ["category_id"],
-        #     page_title=mock_categ["page_title"] if mock_categ["page_title"] else "NAN",
-        #     short_name=mock_categ["short_name"],
-        #     page_description=mock_categ["page_description"] if mock_categ["page_description"] else "NAN",
-        #     parent=mock_categ["parent"]
-        # )
-        db.session.add(new_categ)
+    for mock_prod in mock_data:
+      new_prod = Product(
+        title=mock_prod["title"],
+        description=mock_prod["description"],
+        price=float(mock_prod["price"]) if mock_prod["price"] else 0.0,
+        category_id=mock_prod["category_id"],
+        images=mock_prod["images"],
+        num_favorers=mock_prod["num_favorers"],
+        user_id=1
+      )
+      db.session.add(new_prod)
     db.session.commit()
 
 
@@ -32,6 +34,6 @@ def seed_categories():
 # TRUNCATE Removes all the data from the table, and RESET IDENTITY
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
-def undo_categories():
-    db.session.execute('TRUNCATE categories RESTART IDENTITY CASCADE;')
+def undo_products():
+    db.session.execute('TRUNCATE products RESTART IDENTITY CASCADE;')
     db.session.commit()
