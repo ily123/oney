@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCategoryTree } from '../store/category';
+import { fetchCategoryTree } from '../../store/category';
 
 export default function CategoryDropDown() { 
   const [loaded, setLoaded] = useState(false);
