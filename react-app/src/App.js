@@ -10,7 +10,6 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import SingleProductPage from './components/SingleProductPage';
 import Top20Products from './components/Top20Products';
-import { CategoryDropDown } from './components/CategoryDropDown';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -30,7 +29,6 @@ function App() {
   return (
     <BrowserRouter>
       <Navigation />
-      <CategoryDropDown />
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />

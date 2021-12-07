@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategoryTree } from '../store/category';
 
-export function CategoryDropDown() { 
+export default function CategoryDropDown() { 
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch(); 
   const categories = useSelector(state => state.category.tree)
@@ -21,7 +21,11 @@ export function CategoryDropDown() {
   console.log(categories)
 
   return (
-    <ul>
+    <ul className="CategorisList">
+      <li>test_cat</li>
+      <li>test_cat</li>
+      <li>test_cat</li>
+      <li>test_cat</li>
       <li>test_cat</li>
     </ul>
   )
