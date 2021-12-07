@@ -1,0 +1,34 @@
+.headerDiv{
+    margin-left: 100px;
+    margin-right: 100px;
+    border-bottom: solid lightgray
+}
+
+.navigation{
+    display: flex;
+    flex-direction: row;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding-top: 10px;
+    list-style: none;
+    gap:50px;
+    justify-content: center;
+}
+
+.searchForm{
+    width: 500px;
+    border-radius: 10px;
+    background-color: rgb(243, 236, 236);
+    border-width: 1px;
+}
+
+
+a {
+    text-decoration: none;
+    color:orangered;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
