@@ -63,8 +63,8 @@ class Category(db.Model):
     @staticmethod
     def convert_list_to_tree2(categories):
         """Converts category list into tree."""
-        root = TreeNodeHelper("root")
-        categ_nodes = dict([(cat.id, TreeNodeHelper(cat.id)) for cat in categories])
+        root = TreeNodeHelper()
+        categ_nodes = dict([(cat.id, TreeNodeHelper(cat)) for cat in categories])
         while categories:
             child = categories.pop()
             parent_id = child.parent
@@ -77,10 +77,18 @@ class Category(db.Model):
 
 
 class TreeNodeHelper(dict):
-    # I have no idea why this works.
+    """Serializable node representation of a category."""
     # https://stackoverflow.com/questions/23595801/how-to-serialize-a-tree-class-object-structure-into-json-file-format
-    def __init__(self, name, children=None):
+    def __init__(self, category=None, children=None):
         super().__init__()
         self.__dict__ = self
-        self.name = name
+        if category:
+            self.id = category.id
+            self.page_tile = category.page_title
+            self.page_description = category.page_description
+            self.short_name = category.short_name
+            self.parent_id = category.parent
+        else:
+            self.id = None
+            self.short_name = "root"
         self.children = list(children) if children is not None else []
