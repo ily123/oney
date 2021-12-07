@@ -21,6 +21,8 @@ export function CategoryDropDown() {
   console.log(categories)
 
   return (
-    <div>TEST CATEGORY BAR</div>
+    <ul>
+      <li>test_cat</li>
+    </ul>
   )
 }
