@@ -23,7 +23,11 @@ export default function CategoryDropDown() {
   return (
     <ul className="CategorisList">
       {(root.children.slice(0, NUM_CATEG_TO_SHOW).map(category => {
-        return <li key={category.id}>{category.short_name}</li> 
+        return (
+          <li key={category.id}>
+            <NavLink to={`/category/${category.id}`}>{category.short_name}</NavLink>
+          </li> 
+        )
       }))}
     </ul>
   )

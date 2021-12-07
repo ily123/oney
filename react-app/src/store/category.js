@@ -1,8 +1,8 @@
-const SET_TREE = "category/SET_TREE";
+const SET_CATEGORY_TREE = "category/SET_CATEGORY_TREE";
 
 const setTree = (tree) => {
   return {
-    type: SET_TREE,
+    type: SET_CATEGORY_TREE,
     tree
   }
 }
@@ -21,7 +21,7 @@ const initialState = {
 }
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case SET_TREE: {
+    case SET_CATEGORY_TREE: {
       const { tree } = action
       return { ...state, tree } 
     }
