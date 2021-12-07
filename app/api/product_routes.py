@@ -11,3 +11,7 @@ def get_product(id):
     return product
   else:
     return {'message':'Product not found.'}
+
+# @product_routes.route('/<int:id>/edit', methods=['GET','POST'])
+# def update_product(id):
+  # { description, images, price, title } = req.body

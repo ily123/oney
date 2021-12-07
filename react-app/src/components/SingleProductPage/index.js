@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams} from 'react-router-dom';
 import {getOneProduct} from '../../store/product'
+import './singleProduct.css'
 
 function SingleProductPage(){
     const dispatch = useDispatch()
@@ -40,43 +41,50 @@ function SingleProductPage(){
 // console.log('!!!!!',Object.values(product[0]?.images[0])[0])
     return(
         <div>
-            <div>
-                {/* {productImgsArr?.map(imageUrl =>
+            <div className='mainImagesBox'>
+                <div className='smallImagesBox'>
+                    {images.length ?  
+                        images?.map(imageUrl =>
+                            <div key={imageUrl}>
+                                <img src={imageUrl} alt='product photos' className='smallImg'></img>
+                            </div>    
+                        ) : null
+                    }
+                </div>
+                <div className='largeImageBox'>
+                    {/* <img src={Object.values(product[0]?.images[0])[0]} alt='product photos' className='largeImage'></img> */}
+                    <img src={images[0]} alt='product photos' className='largeImage'></img>
+                </div>
+                <div className='itemInfoBox'>
                     <div>
-                        <img src={imageUrl} alt='product photos'></img>
-                    </div>    
-                )} */}
-                {images.length ?  
+                        <h1 className='productTitle descriptionDiv'>
+                            {product[0]?.title}
+                        </h1>
+                    </div>
+                    <div>
+                        <p className='productPrice'>${product[0]?.price}</p>
+                    </div>
+                    <div className='descriptionDiv'>
+                        <p className='descriptionTitle'>Description</p>
+                        <p className='productDescParagraph'>
+                            {product[0]?.description}
+                        </p>
+                        <div className='shippingInfo'>
+                            <p>Cost to ship: Free</p>
+                        </div>
+                    </div>
+                    <div>
+                        <button>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div className='reviewsAndDescriptionsDiv'>
+                <div className='reviewsDiv'>
+                    Reviews: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </div>
                 
-                images?.map(imageUrl =>
-                    <div>
-                        <img src={imageUrl} alt='product photos'></img>
-                    </div>    
-                )
-                : null
-                }
-            </div>
-            <div>
-                <img src={Object.values(product[0]?.images[0])[0]} alt='product photos'></img>
-            </div>
-            <div>
-                <div>
-                    {product[0]?.title}
-                </div>
-                <div>
-                    ${product[0]?.price}
-                </div>
-            </div>
-            <div>
-                <h3>Description</h3>
-                <p>
-                    {product[0]?.description}
-                </p>
-            </div>
-            <div>
-                <button>
-                    Add to Cart
-                </button>
             </div>
         </div>
     )
