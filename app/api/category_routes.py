@@ -9,6 +9,10 @@ category_routes = Blueprint('categories', __name__)
 @category_routes.route('/')
 def get_categories():
     """Returns category tree."""
-    categories = Category.query.all()
-    tree = Category.convert_list_to_tree2(categories)
-    return tree
+    try:
+        categories = Category.query.all()
+        tree = Category.convert_list_to_tree2(categories)
+        return tree
+    except Exception as error:
+        message = error.__repr__()
+        return {"error": "category GET failed", "message": message}
