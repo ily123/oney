@@ -32,10 +32,16 @@ function SingleProductPage(){
     const imageGroupsArr = prodImgsArr?.map((obj) => {
         return Object.values(obj)
     })
+    console.log('imageGroupsArr ',imageGroupsArr)
     // console.log('imageGroupsArr: ', imageGroupsArr)
     // get array of the second image in each grouping
     const images = imageGroupsArr?.map((arr) => {
-        return arr[1]
+        console.log('arr ',arr,'arr[0]: ',arr[1], 'arr[1]',arr[0])
+        if (arr.length > 2) {
+            return arr[1]
+        } else {
+            return arr[0]
+        }
     })
     
 // console.log('!!!!!',Object.values(product[0]?.images[0])[0])
