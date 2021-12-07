@@ -8,11 +8,10 @@ const setTree = (tree) => {
 }
 
 export const fetchCategoryTree = () => async (dispatch) => {
-  const response = await fetch('api/category/');
+  const response = await fetch('/api/categories/');
   if (response.ok) {
     const tree = await response.json()
     if (tree.errors) return
-    console.log(tree)
     dispatch(setTree(tree))
   }
 }
@@ -23,7 +22,8 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_TREE: {
-      return state
+      const { tree } = action
+      return { ...state, tree } 
     }
     default: {
       return state;
