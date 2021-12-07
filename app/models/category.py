@@ -40,3 +40,21 @@ class Category(db.Model):
     def convert_list_to_dict(categories):
         """Normalizes list of categories as a dictionary."""
         return dict([(cat.id, cat) for cat in categories])
+
+    @staticmethod
+    def convert_list_to_tree(categories):
+        """Convert category list into tree."""
+        root = []
+        categ_dict = self.convert_list_to_dict(categories)
+        while categories:
+            child = categories.pop()
+            parent_id = child.parent
+            if parent_id:
+                parent = categ_dict[parent_id]
+                try:
+                    parent.children.append(child)
+                except AttributeError:
+                    parent.children = [child]
+            else:
+                root.append(child)
+        return root
