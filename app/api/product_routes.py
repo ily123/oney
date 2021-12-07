@@ -8,6 +8,6 @@ def get_product(id):
   product = Product.query.get(id)
   if product:
     product = product.to_dict()
-    return {'product': product}
+    return product
   else:
     return {'message':'Product not found.'}

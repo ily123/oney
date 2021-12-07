@@ -8,14 +8,15 @@ function SingleProductPage(){
     const productObject = useSelector((state)=>state.product)
     const product = Object.values(productObject)
     const {productId} = useParams()
-
+    console.log("product-raw", productObject)
+    console.log("product-values", product)
     useEffect(()=>{
         dispatch(getOneProduct(productId))
-    },[dispatch])
+    }, [dispatch])
 
     return(
         <div>
-            {product[0].product.title}
+            {product[0]?.title}
         </div>
     )
 }
