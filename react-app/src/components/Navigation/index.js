@@ -2,7 +2,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
-import CategoryDropDown from '../CategoryDropDown';
+import CategoryDropDown from './CategoryDropDown';
 import './Navigation.css';
 
 const Navigation = () => {
