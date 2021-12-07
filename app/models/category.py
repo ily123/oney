@@ -29,4 +29,5 @@ class Category(db.Model):
         }
 
     def __str__(self):
-        print(json.dumps(self.to_dict(), indent=4, default=str))
+        """Prints category as a JSON string."""
+        return json.dumps(self.to_dict(), indent=4, default=str)
