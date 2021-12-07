@@ -11,7 +11,7 @@ def get_categories():
     """Returns category tree."""
     try:
         categories = Category.query.all()
-        tree = Category.convert_list_to_tree2(categories)
+        tree = Category.convert_list_to_tree(categories)
         return tree
     except Exception as error:
         message = error.__repr__()
