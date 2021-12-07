@@ -43,12 +43,14 @@ class Category(db.Model):
 
     @staticmethod
     def convert_list_to_tree(categories):
-        """Convert category list into tree."""
+        """Converts category list into tree."""
         root = []
-        categ_dict = self.convert_list_to_dict(categories)
+        categ_dict = Category.convert_list_to_dict(categories)
         while categories:
             child = categories.pop()
             parent_id = child.parent
+            print(child)
+            print(child.parent)
             if parent_id:
                 parent = categ_dict[parent_id]
                 try:
