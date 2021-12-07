@@ -9,6 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import SingleProductPage from './components/SingleProductPage';
+import { CategoryDropDown } from './components/CategoryDropDown';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -28,6 +29,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
+      <CategoryDropDown />
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
