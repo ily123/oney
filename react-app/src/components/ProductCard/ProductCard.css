@@ -1,0 +1,20 @@
+.product_card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    margin: 0 20px 20px 0;
+    padding: 10px;
+  }
+
+  .productPrice {
+      font-weight: bold;
+    }
+
+  .productImage {
+      width: 200px;
+      height: 200px;
+      margin: 10px 0 10px 0;
+  }
