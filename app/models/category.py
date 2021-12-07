@@ -36,35 +36,15 @@ class Category(db.Model):
         """Returns short string description of the category."""
         return "<Category {id} {name}>".format(id=self.id, name=self.short_name)
 
-    @staticmethod
-    def convert_list_to_dict(categories):
-        """Normalizes list of categories as a dictionary."""
-        return dict([(cat.id, cat) for cat in categories])
-
+    # to be consumed by React category component
     @staticmethod
     def convert_list_to_tree(categories):
         """Converts category list into tree."""
-        root = []
-        categ_dict = Category.convert_list_to_dict(categories)
-        while categories:
-            child = categories.pop()
-            parent_id = child.parent
-            if parent_id:
-                parent = categ_dict[parent_id]
-                try:
-                    parent.children.append(child)
-                except AttributeError:
-                    parent.children = [child]
-            else:
-                root.append(child)
-        return root
-
-    # to be consumed by React category component
-    @staticmethod
-    def convert_list_to_tree2(categories):
-        """Converts category list into tree."""
+        # initialize empty root node
         root = TreeNodeHelper()
+        # convert categories to nodes, and put nodes into a helper dict
         categ_nodes = dict([(cat.id, TreeNodeHelper(cat)) for cat in categories])
+        # go through each category, and link respective child/parent nodes
         while categories:
             child = categories.pop()
             parent_id = child.parent
@@ -72,6 +52,7 @@ class Category(db.Model):
                 parent = categ_nodes[parent_id]
                 parent.children.append(categ_nodes[child.id])
             else:
+                # a category that doesn't have a parent gets assigned to root
                 root.children.append(categ_nodes[child.id])
         return root
 
