@@ -10,7 +10,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import SingleProductPage from './components/SingleProductPage';
 import Top20Products from './components/Top20Products';
-import { CategoryDropDown } from './components/CategoryDropDown';
+import CategoryPage from './components/CategoryPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -30,7 +30,6 @@ function App() {
   return (
     <BrowserRouter>
       <Navigation />
-      <CategoryDropDown />
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
@@ -48,8 +47,10 @@ function App() {
           <SingleProductPage />
         </Route>
         <Route path='/' exact={true} >
-
           <Top20Products />
+        </Route>
+        <Route path='/category/:categoryId' exact={true} >
+          <CategoryPage />
         </Route>
       </Switch>
     </BrowserRouter>

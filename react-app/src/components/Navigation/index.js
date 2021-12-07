@@ -2,6 +2,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
+import CategoryDropDown from './CategoryDropDown';
 import './Navigation.css';
 
 const Navigation = () => {
@@ -42,7 +43,7 @@ const Navigation = () => {
           </li>
         </ul>
       </nav>
-      <div className="CategorisList"> Categories/sub Categories list</div>
+      <CategoryDropDown />
     </div>
   );
 }
