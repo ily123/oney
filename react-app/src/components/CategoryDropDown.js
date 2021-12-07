@@ -6,7 +6,7 @@ import { fetchCategoryTree } from '../store/category';
 export default function CategoryDropDown() { 
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch(); 
-  const categories = useSelector(state => state.category.tree)
+  const root = useSelector(state => state.category.tree)
 
 
   useEffect(() => {
@@ -17,16 +17,14 @@ export default function CategoryDropDown() {
     setLoaded(true);   
   }, [dispatch])
 
-  if (!loaded) return null;
-  console.log(categories)
-
+  if (!loaded || !root) return null;
+  
+  const NUM_CATEG_TO_SHOW = 9;
   return (
     <ul className="CategorisList">
-      <li>test_cat</li>
-      <li>test_cat</li>
-      <li>test_cat</li>
-      <li>test_cat</li>
-      <li>test_cat</li>
+      {(root.children.slice(0, NUM_CATEG_TO_SHOW).map(category => {
+        return <li key={category.id}>{category.short_name}</li> 
+      }))}
     </ul>
   )
 }
