@@ -1,5 +1,6 @@
 from .db import db
 from sqlalchemy.sql import func
+import json
 
 
 class Category(db.Model):
@@ -16,7 +17,6 @@ class Category(db.Model):
     # 1 category has many products
     products = db.relationship("Product", back_populates="category")
 
-
     def to_dict(self):
         return {
             'id': self.id,
@@ -27,3 +27,6 @@ class Category(db.Model):
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }
+
+    def __str__(self):
+        print(json.dumps(self.to_dict(), indent=4, default=str))
