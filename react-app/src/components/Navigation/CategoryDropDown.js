@@ -8,7 +8,6 @@ export default function CategoryDropDown() {
   const dispatch = useDispatch(); 
   const root = useSelector(state => state.category.tree)
 
-
   useEffect(() => {
     const loadData = async () => {
       await dispatch(fetchCategoryTree())
