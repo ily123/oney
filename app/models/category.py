@@ -29,5 +29,14 @@ class Category(db.Model):
         }
 
     def __str__(self):
-        """Prints category as a JSON string."""
+        """Returns category as a JSON string."""
         return json.dumps(self.to_dict(), indent=4, default=str)
+
+    def __repr__(self):
+        """Returns short string description of the category."""
+        return "<Category {id} {name}>".format(id=self.id, name=self.short_name)
+
+    @staticmethod
+    def convert_list_to_dict(categories):
+        """Normalizes list of categories as a dictionary."""
+        return dict([(cat.id, cat) for cat in categories])
