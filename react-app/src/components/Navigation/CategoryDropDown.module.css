@@ -1,0 +1,34 @@
+ul {
+  padding: 0;
+}
+.categoryList, .categoryList ul {
+  list-style-type: none;
+}
+.categoryList li a:hover {
+  text-decoration: none;
+}
+
+.categoryList {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.dropdownWrapper {
+  position: relative;
+}
+.dropdownWrapper .head {
+  font-size: 0.95em;
+  color: black;
+}
+.dropdownWrapper .menu {
+  position: absolute;
+  background-color: white;
+  border: 1px solid rgba(0,0,0, 0.1);
+  padding: 10px;
+  min-width: 150px;
+}
+.dropdownWrapper .menu .item a {
+  font-size: 0.9em;
+  color: black;
+}

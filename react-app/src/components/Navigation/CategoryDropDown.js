@@ -1,3 +1,4 @@
+import styles from './CategoryDropDown.module.css';
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,10 +21,10 @@ export default function CategoryDropDown() {
   
   const NUM_CATEG_TO_SHOW = 9;
   return (
-    <ul className="CategorisList">
+    <ul className={styles.categoryList}>
       {(root.children.slice(0, NUM_CATEG_TO_SHOW).map(category => {
         return (
-          <Menu key={category.id} category={category}/>
+          <li><Menu key={category.id} category={category}/></li>
         )
       }))}
     </ul>
@@ -36,14 +37,23 @@ function Menu({ category }) {
   const closeMenu = () => setShowMenu(false)
 
   return (
-    <ul onMouseOver={openMenu} onMouseLeave={closeMenu}>
-      <li><NavLink to={`/category/${category.id}`}>{category.short_name}</NavLink></li>
+    <div 
+      onMouseOver={openMenu} onMouseLeave={closeMenu}
+      className={styles.dropdownWrapper}
+    >
+      <NavLink className={styles.head} to={`/category/${category.id}`}>{category.short_name}</NavLink>
       {showMenu && (
-        <>
-          <NavLink to={`/category/${1}`}>{"test"}</NavLink>
-        </>
+        <ul className={styles.menu}>
+        {category.children.map(child => {
+          return (
+            <li className={styles.item}>
+              <NavLink to={`/category/${child.id}`}>{child.short_name}</NavLink>
+            </li>
+          )
+        })}
+        </ul>
       )}
-    </ul>
+    </div>
 
   )
 }
