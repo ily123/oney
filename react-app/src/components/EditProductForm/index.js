@@ -6,11 +6,12 @@ import { editAProduct, getOneProduct } from "../../store/product";
 
 const EditProductForm = () =>{
   const params = useParams();
-  const { id } = params;
-  const product = useSelector((state) => state.product[id])
-  const productObject = useSelector((state)=>state.product)
-  console.log('========= ',productObject)
-  const [title,setTitle] = useState(product?.title);
+  const { productId } = params;
+  const product = useSelector((state) => state?.product[productId])
+  
+  console.log('========= ', product)
+  const [title, setTitle] = useState(product?.title);
+  console.log('!!!!!!!!',product?.title)
   const [description,setDescription] = useState(product?.description)
   const [price, setPrice] = useState(product?.price)
   const [category, setCategory] = useState(product?.category)
@@ -27,6 +28,9 @@ const EditProductForm = () =>{
     history.push('/')
   }
 
+  useEffect(()=>{
+    dispatch(getOneProduct(productId))
+  }, [dispatch])
   // const handleBackToProduct = () => {
   //   history.push(`/products/${id}`)
   // }
@@ -46,11 +50,14 @@ const EditProductForm = () =>{
     // if (editedProduct) {
     // history.push(`/products/${editedProduct.id}`);
     // }
-    return dispatch(editAProduct(payload, id))
+
+    
+
+    return dispatch(editAProduct(payload, productId))
       .then((response) => {
         if (response.ok) {
           setErrors([]);
-          history.push(`/products/${id}`);
+          history.push(`/products/${productId}`);
         }
       })
       .catch(async (response) => {
@@ -61,9 +68,7 @@ const EditProductForm = () =>{
 
   let categories = [[68887312,"Fine Art"], [68887366, "Handmade Holiday Items"],[68887482,"Handmade jewelry"]]
 
-  useEffect(()=>{
-        dispatch(getOneProduct(id))
-  }, [dispatch])
+  
 
   if (!sessionUser) return (
     <Redirect to="/" />
@@ -73,7 +78,7 @@ const EditProductForm = () =>{
     <div className='EditProductDiv'>
       <h2>Edit your product details</h2>
       <div>
-        <NavLink to={`/products/${id}`} key={id}>Back</NavLink>
+        <NavLink to={`/products/${productId}`} key={productId}>Back</NavLink>
       </div>
       <form onSubmit={handleSubmit} >
         <ul className='loginErrorsList'>
