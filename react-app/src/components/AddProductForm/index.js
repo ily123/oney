@@ -34,7 +34,6 @@ const AddProductForm = () =>{
     }
     }
 
-    let categories = [[68887312,"Fine Art"], [68887366, "Handmade Holiday Items"],[68887482,"Handmade jewelry"]]
 
     return (
         <div className='add-Product-Div'>

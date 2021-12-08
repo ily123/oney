@@ -1,0 +1,11 @@
+.logoutButton{
+    border:none;
+    color: orangered;
+    background: none;
+    font-weight:bold;
+}
+
+.logoutButton:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+}

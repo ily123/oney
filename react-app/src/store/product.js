@@ -1,6 +1,7 @@
 const ONE_PRODUCT = 'products/ONE_PRODUCT';
 const TOP20_PRODUCTS = 'products/TOP20_PRODUCTS';
-const ADD_PRODUCT = 'products/ADD_PORDUCTS'
+const ADD_PRODUCT = 'products/ADD_PORDUCTS';
+const CLEAR = 'products/CLEAR'
 
 //action creator
 const loadProduct = (product) => ({
@@ -16,6 +17,10 @@ const getProducts = (products) => ({
 const addProducts = payload => ({
     type: ADD_PRODUCT,
     payload
+})
+
+export const clearProducts = () => ({
+    type: CLEAR
 })
 
 //thunk
@@ -52,7 +57,7 @@ const initialState = {}
 const productsReducer = (state=initialState, action) => {
     switch(action.type){
         case ONE_PRODUCT : {
-            const newState = {...state};
+            const newState = {}
             newState[action.product.id] = action.product
             return newState
         }
@@ -63,6 +68,9 @@ const productsReducer = (state=initialState, action) => {
         case ADD_PRODUCT:{
             const newState = {...state, [action.payload.id]:action.payload}
             return newState
+        }
+        case CLEAR:{
+            return {}
         }
         default :
             return state

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import {getTop20Products} from "../../store/product"
+import {getTop20Products,clearProducts} from "../../store/product"
 import ProductCard from '../ProductCard'
 import './Top20Products.css'
 
@@ -11,6 +11,7 @@ const Top20Products = () => {
 
     useEffect(()=>{
         dispatch(getTop20Products())
+        dispatch(clearProducts())
     },[dispatch])
 
     if (!products){
