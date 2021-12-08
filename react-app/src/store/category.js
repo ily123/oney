@@ -34,7 +34,8 @@ export const getCategoryProducts = (categoryId) => async (dispatch) => {
 }
 
 const initialState = {
-  tree: null
+  tree: null,
+  products: null
 }
 export default function reducer(state = initialState, action) {
   switch (action.type) {
