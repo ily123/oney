@@ -145,7 +145,7 @@ const EditProductForm = () =>{
   const [errors, setErrors] = useState([]);
 
   const sessionUser = useSelector((state) => state.session.user)
-  const user_id = sessionUser.id
+  const user_id = sessionUser?.id
 
   const dispatch = useDispatch();
   const history = useHistory();
