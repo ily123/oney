@@ -4,8 +4,12 @@ import { useParams} from 'react-router-dom';
 import {getOneProduct, clearProducts} from '../../store/product'
 import './singleProduct.css'
 
+import HideReviewForm from '../HideReviewForm';
+
+
 function SingleProductPage(){
     const dispatch = useDispatch()
+
     const productObject = useSelector((state)=>state.product)
 
     const {productId} = useParams()
@@ -17,7 +21,6 @@ function SingleProductPage(){
         dispatch(getOneProduct(productId))
         dispatch(clearProducts())
     }, [dispatch,productId])
-
 
     const product = Object.values(productObject)
     if (!product.length) return null
@@ -48,6 +51,7 @@ function SingleProductPage(){
 
 // console.log('!!!!!',Object.values(product[0]?.images[0])[0])
     return(
+
         <div>
             <div className='mainImagesBox'>
                 <div className='smallImagesBox'>
@@ -90,9 +94,8 @@ function SingleProductPage(){
             </div>
             <div className='reviewsAndDescriptionsDiv'>
                 <div className='reviewsDiv'>
-                    Reviews: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <HideReviewForm />
                 </div>
-
             </div>
         </div>
     )
