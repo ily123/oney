@@ -23,11 +23,27 @@ export default function CategoryDropDown() {
     <ul className="CategorisList">
       {(root.children.slice(0, NUM_CATEG_TO_SHOW).map(category => {
         return (
-          <li key={category.id}>
-            <NavLink to={`/category/${category.id}`}>{category.short_name}</NavLink>
-          </li> 
+          <Menu key={category.id} category={category}/>
         )
       }))}
     </ul>
+  )
+}
+
+function Menu({ category }) {
+  const [showMenu, setShowMenu] = useState(false)
+  const openMenu = () => setShowMenu(true)
+  const closeMenu = () => setShowMenu(false)
+
+  return (
+    <ul onMouseOver={openMenu} onMouseLeave={closeMenu}>
+      <li><NavLink to={`/category/${category.id}`}>{category.short_name}</NavLink></li>
+      {showMenu && (
+        <>
+          <NavLink to={`/category/${1}`}>{"test"}</NavLink>
+        </>
+      )}
+    </ul>
+
   )
 }
