@@ -9,7 +9,8 @@ function SingleProductPage(){
     const dispatch = useDispatch()
     const productObject = useSelector((state)=>state.product)
     const indProjObj = Object.values(productObject)[0]
-    
+    console.log('productObject: ',productObject)
+    console.log('indProjObj: ',indProjObj)
     const sessionUser = useSelector((state) => state.session.user);
 
     console.log('sessionUser: ', sessionUser)

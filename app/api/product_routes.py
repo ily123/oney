@@ -1,4 +1,5 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
+# from app.forms.edit_product_form import EditProductForm
 from app.models import Product, db
 
 product_routes = Blueprint('product', __name__)
@@ -12,10 +13,6 @@ def get_product(id):
   else:
     return {'message':'Product not found.'}
 
-# @product_routes.route('/<int:id>/edit', methods=['GET','POST'])
-# def update_product(id):
-  # { description, images, price, title } = req.body
-
 
 @product_routes.route('/top20',methods=['GET'])
 def get_top20_products():
@@ -26,9 +23,30 @@ def get_top20_products():
   else:
     return {'message': 'Top20 Products not found'}
 
+# @product_routes.route('/<int:id>/edit', methods=['GET','POST'])
+# def update_product(id):
+#   form = EditProductForm()
+#   form['csrf_token'].data = request.cookies['csrf_token']
+#   # product = Product.query.get(id)
+#   # if product:
+
+#   # { description, images, price, title } = req.body
+
 @product_routes.route('/<int:id>/delete', methods=['GET', 'DELETE'])
 def delete_product(id):
   product = Product.query.get(id)
-  db.session.delete(product)
-  db.session.commit()
-  return 'deleted'
+  if product:
+    db.session.delete(product)
+    db.session.commit()
+    return 'deleted'
+  else:
+    return '401'
+
+
+# @product_routes.route('/<int:id>/delete', methods=['GET', 'DELETE'])
+# def delete_product(id):
+#   product = Product.query.get(id)
+#   db.session.delete(product)
+#   db.session.commit()
+#   return 'deleted'
+  
