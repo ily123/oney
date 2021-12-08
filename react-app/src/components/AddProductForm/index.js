@@ -8,7 +8,7 @@ const AddProductForm = () =>{
     const [title,setTitle] = useState('');
     const [description,setDescription] = useState('')
     const [price, setPrice] = useState('')
-    const [category,setCategory] = useState('')
+    const [category,setCategory] = useState('68887312')
     const [image,setImage] = useState('')
 
 
@@ -28,12 +28,13 @@ const AddProductForm = () =>{
             category,
             image,
         }
-
     let createdProduct = await dispatch(addOneProduct(payload));
     if (createdProduct) {
     history.push(`/products/${createdProduct.id}`);
     }
     }
+
+    let categories = [[68887312,"Fine Art"], [68887366, "Handmade Holiday Items"],[68887482,"Handmade jewelry"]]
 
     return (
         <div className='add-Product-Div'>
