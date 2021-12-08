@@ -71,11 +71,6 @@ function SingleProductPage(){
                     <img src={images[0]} alt='product photos' className='largeImage'></img>
                 </div>
                 <div className='itemInfoBox'>
-                    <div className='deleteBtnDiv'>
-                        {sessionUser && sessionUser?.id === indProjObj?.user_id &&
-                            <button onClick={() => handleDelete(indProjObj?.id)} className='delButton'>Delete</button>
-                        }
-                    </div>
                     <div>
                         <h1 className='productTitle descriptionDiv'>
                             {product[0]?.title}
@@ -97,6 +92,11 @@ function SingleProductPage(){
                         <button>
                             Add to Cart
                         </button>
+                    </div>
+                    <div className='deleteBtnDiv'>
+                        {sessionUser && sessionUser?.id === indProjObj?.user_id &&
+                            <button onClick={() => handleDelete(indProjObj?.id)} className='delButton'>Delete Product</button>
+                        }
                     </div>
                 </div>
             </div>
