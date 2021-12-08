@@ -24,7 +24,7 @@ export const fetchCategoryTree = () => async (dispatch) => {
   }
 }
 
-export const getCategoryProducts = (categoryId) => async (dispatch) => {    
+export const fetchProductsForCategory = (categoryId) => async (dispatch) => {    
   const response = await fetch(`/api/categories/${categoryId}/products/`)                                            
   if (response.ok) {                                                                                                       
     const products = await response.json()                                                                                 

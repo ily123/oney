@@ -16,10 +16,10 @@ def get_categories():
         return tree
     except Exception as error:
         message = error.__repr__()
-        return {"error": "category GET failed", "message": message}
+        return {"errors": "category GET failed", "message": message}
 
 
-@category_routes.route('/<int:category_id>/products')
+@category_routes.route('/<int:category_id>/products/')
 def get_category_products(category_id):
     """Returns products associated with a category."""
     try:
@@ -31,4 +31,4 @@ def get_category_products(category_id):
         return {}
     except Exception as error:
         message = error.__repr__()
-        return {"error": "category/products GET failed", "message": message}
+        return {"errors": "category/products GET failed", "message": message}
