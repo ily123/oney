@@ -23,14 +23,31 @@ def get_top20_products():
   else:
     return {'message': 'Top20 Products not found'}
 
-# @product_routes.route('/<int:id>/edit', methods=['GET','POST'])
-# def update_product(id):
-#   form = EditProductForm()
-#   form['csrf_token'].data = request.cookies['csrf_token']
-#   # product = Product.query.get(id)
-#   # if product:
+@product_routes.route('/<int:id>/edit', methods=['GET','POST'])
+def update_product(id):
+  currentUser = current_user.to_dict()
+  form = EditProductForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  product = Product.query.get(id)
+  
+  if form.validate_on_submit():
+    product.title = form.data['title'],
+    product.description = form.data['description'],
+    product.price = form.data['price'],
+    product.category_id = int(form.data['category'])
+    product.images = [{"url_75x75": form.data['image'],
+                      "url_170x135": form.data['image'],
+                      "url_570xN": form.data['image'],
+                      "url_fullxfull": form.data['image']
+                      }],
+    product.user_id = currentUser['id']
 
-#   # { description, images, price, title } = req.body
+    db.session.commit()
+    return product.to_dict()
+  else:
+    return 'Bad data'
+
+
 
 @product_routes.route('/<int:id>/delete', methods=['GET', 'DELETE'])
 def delete_product(id):

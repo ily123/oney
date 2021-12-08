@@ -1,5 +1,6 @@
 const ONE_PRODUCT = 'products/ONE_PRODUCT';
 const TOP20_PRODUCTS = 'products/TOP20_PRODUCTS'
+const EDIT_PRODUCT = 'product/EDIT_PRODUCT'
 const DELETE_ONE_PRODUCT = 'products/DELETE_ONE_PRODUCT'
 
 //action creator
@@ -11,6 +12,12 @@ const loadProduct = (product) => ({
 const getProducts = (products) => ({
     type: TOP20_PRODUCTS,
     products
+})
+
+const editOneProduct = (product, productId) => ({
+    type: EDIT_PRODUCT,
+    product,
+    productId
 })
 
 const deleteAProduct = (product) => ({
@@ -32,6 +39,20 @@ export const getTop20Products = () => async (dispatch) => {
         const products = await response.json();
         dispatch(getProducts(products))
     }
+}
+
+export const editAProduct = (productToEdit, id) => async (dispatch) => {
+    const response = await fetch(`/api/products/${id}/edit`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify(productToEdit)
+    });
+
+    const product = await response.json();
+    dispatch(editOneProduct(product, id));
+    return product;
 }
 
 export const deleteProduct = (productId) => async (dispatch) => {
@@ -56,6 +77,17 @@ const productsReducer = (state=initialState, action) => {
         case TOP20_PRODUCTS : {
             const newState = action.products
             return newState
+        }
+        case EDIT_PRODUCT : {
+            if (!state[action.product]) {
+                const newState = {
+                    ...state, [action.product.id]: action.product
+                }
+                
+                return newState
+            }
+
+            return state
         }
         case DELETE_ONE_PRODUCT : {
             const newState = {...state};
