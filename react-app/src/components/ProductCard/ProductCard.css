@@ -18,3 +18,12 @@
       height: 200px;
       margin: 10px 0 10px 0;
   }
+
+.prod a {
+  text-decoration: none !important;
+}
+
+.prod:hover {
+  opacity: 1;
+  transform: scale(1.02);
+}

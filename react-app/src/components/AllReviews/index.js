@@ -14,7 +14,6 @@ const AllReviews = ({product}) => {
 
   const sessionUser = useSelector((state) => state.session);
 
-  const user_id = sessionUser?.user.id
   // console.log("sessionUser", sessionUser?.user.username)
   // const username = sessionUser?.user.username
 
@@ -45,14 +44,25 @@ const AllReviews = ({product}) => {
 
       // console.log("users map", users)
 
+      let user_id;
+      if(sessionUser) {
+        user_id = sessionUser?.user?.id
+      } else {
+        return null
+      }
 
       const getUserName = (user_id) => {
-        const usernameDisplay = users.filter(function(el){
+        const usernameDisplay = users?.filter(function(el){
           return el.id === user_id
          });
         //  console.log("try", user_id)
         //  console.log("tryThis", usernameDisplay[0].username)
+        if (usernameDisplay) {
          return usernameDisplay[0]?.username
+        }
+        else {
+          return null
+        }
       }
 
     return(
