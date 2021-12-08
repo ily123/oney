@@ -13,7 +13,7 @@ def get_categories():
     try:
         categories = Category.query.all()
         tree = Category.convert_list_to_tree(categories)
-        return tree
+        return tree # tree is already a dictionary
     except Exception as error:
         message = error.__repr__()
         return {"errors": "category GET failed", "message": message}
@@ -23,11 +23,25 @@ def get_categories():
 def get_category_products(category_id):
     """Returns products associated with a category."""
     try:
-        # for reference: https://stackoverflow.com/questions/8603088/sqlalchemy-in-clause
-        products = Product.query.filter(Product.category_id == category_id).all()
+        # our category structure is only 2 levels deep
+        # so in the request you will either recieve an id for a
+        # child category, in which case return items belonging to that child
+        # or a parent category, in which case collect all of its CHILDREN ids first,
+        # and return all items belonging to the children
+        categories = Category.query.all()
+        root = Category.convert_list_to_tree(categories)
+        parent_categories = dict([(child.id, child) for child in root.children])
+        if category_id in parent_categories.keys():
+            parent = parent_categories[category_id]
+            query_categories = [int(child.id) for child in parent.children]
+        else:
+            query_categories = [category_id]
+        # find products using "WHERE category_id in (x, y, z)" query
+        products = Product.query.filter(Product.category_id.in_(query_categories)).all()
         if products:
-            products = [p.to_dict() for p in products]
-            return {"products": products}
+            # normalize as id->product dict before sending
+            products = dict([(p.id, p.to_dict()) for p in products])
+            return products
         return {}
     except Exception as error:
         message = error.__repr__()

@@ -60,6 +60,9 @@ class Category(db.Model):
 class TreeNodeHelper(dict):
     """Serializable node representation of a category."""
     # https://stackoverflow.com/questions/23595801/how-to-serialize-a-tree-class-object-structure-into-json-file-format
+
+    nodes = {}
+
     def __init__(self, category=None, children=None):
         super().__init__()
         self.__dict__ = self
@@ -70,6 +73,6 @@ class TreeNodeHelper(dict):
             self.short_name = category.short_name
             self.parent_id = category.parent
         else:
-            self.id = None
+            self.id = "root"
             self.short_name = "root"
         self.children = list(children) if children is not None else []

@@ -45,7 +45,7 @@ export default function reducer(state = initialState, action) {
     }
     case SET_PRODUCTS: {
       const { products } = action
-      return { ...state, products: products }
+      return { ...state, products }
     }
     default: {
       return state;
