@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, NavLink } from 'react-router-dom';
 import {getOneProduct, deleteProduct} from '../../store/product'
 import './singleProduct.css'
 
@@ -93,6 +93,11 @@ function SingleProductPage(){
                         <button>
                             Add to Cart
                         </button>
+                    </div>
+                    <div>
+                        {sessionUser && sessionUser?.id === indProjObj?.user_id &&
+                            <NavLink to={`/products/${productId}/edit`} >Update</NavLink> 
+                        }
                     </div>
                     <div className='deleteBtnDiv'>
                         {sessionUser && sessionUser?.id === indProjObj?.user_id &&

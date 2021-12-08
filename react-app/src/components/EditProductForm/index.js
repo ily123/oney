@@ -7,27 +7,28 @@ import { editAProduct, getOneProduct } from "../../store/product";
 const EditProductForm = () =>{
   const params = useParams();
   const { productId } = params;
-  const product = useSelector((state) => state?.product[productId])
+  // const product = useSelector((state) => state?.product[productId])
+  const product = useSelector((state) => state?.product[productId] ? state?.product[productId] : "")
   
   console.log('========= ', product)
-  console.log('the title:', product?.title)
-  const [title, setTitle] = useState(product?.title);
-  console.log('!!!!!!!!',product?.title)
-  const [description, setDescription] = useState(product?.description);
-  const [price, setPrice] = useState(product?.price)
-  const [category, setCategory] = useState(product?.category_id)
+  // console.log('the title:', product?.title)
+  const [title, setTitle] = useState(product?.title ? product?.title : "");
+  // console.log('!!!!!!!!',product?.title)
+  const [description, setDescription] = useState(product.description ? product.description : "");
+  const [price, setPrice] = useState(product.price ? product.price : "")
+  const [category, setCategory] = useState(product.category_id ? product.category_id : "")
   // const [image, setImage] = useState(product?.image)
   const [errors, setErrors] = useState([]);
 
   const sessionUser = useSelector((state) => state.session.user)
-  const user_id = sessionUser.id
+  // const user_id = sessionUser.id
 
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleCancel = () => {
-    history.push('/')
-  }
+  // const handleCancel = () => {
+  //   history.push('/')
+  // }
 
   useEffect(()=>{
     dispatch(getOneProduct(productId))
@@ -35,6 +36,15 @@ const EditProductForm = () =>{
   // const handleBackToProduct = () => {
   //   history.push(`/products/${id}`)
   // }
+
+  useEffect(() => {
+    if (product) {
+      setTitle(product.title)
+      setDescription(product.description)
+      setPrice(product.price)
+      setCategory(product.category_id)
+    }
+  }, [dispatch, product])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -81,7 +91,7 @@ const EditProductForm = () =>{
     <div className='EditProductDiv'>
       <h2>Edit your product details</h2>
       <div>
-        <NavLink to={`/products/${productId}`} key={productId}>Back</NavLink>
+        <NavLink to={`/products/${productId}`} >Back</NavLink> 
       </div>
       <form onSubmit={handleSubmit} >
         <ul className='loginErrorsList'>
@@ -90,21 +100,19 @@ const EditProductForm = () =>{
         <label htmlFor='Title'>Title</label>
           <input
           onChange={(e)=>setTitle(e.target.value)}
-          defaultValue={product?.title}
-          // placeholder='Enter Product Title'
+          defaultValue={title}
           required
           />
         <label htmlFor='Description'>Description</label>
           <textarea
           onChange={(e)=>setDescription(e.target.value)}
-          defaultValue={product?.description}
-          // placeholder='Enter Product Description'
+          defaultValue={description}
           required
           />
         <label> Category </label>
         <select 
           onChange={(e)=>setCategory(e.target.value)}
-          defaultValue={product?.category_id}
+          defaultValue={category}
           >
           <option value= "68887312" >Fine Art</option>
           <option value= "68887366" >Handmade Holiday Items</option>
@@ -113,8 +121,7 @@ const EditProductForm = () =>{
         <label htmlFor='Price'>Price</label>
           <input
           onChange={(e)=>setPrice(e.target.value)}
-          defaultValue={product?.price}
-          // placeholder= "Price Per Product"
+          defaultValue={price}
           required
           type="number"
           min = "1"
@@ -131,9 +138,10 @@ const EditProductForm = () =>{
         <button className='submit-button' type='submit'>
           Submit
         </button>
-        <button className='submit-button' type='submit' onClick={()=>{handleCancel()}}>
+        <NavLink to={`/products/${productId}`} >Cancel</NavLink> 
+        {/* <button className='submit-button' type='submit' onClick={()=>{handleCancel()}}>
           Cancel
-        </button>
+        </button> */}
       </form>
     </div>
   )
