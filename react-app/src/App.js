@@ -11,6 +11,7 @@ import { authenticate } from './store/session';
 import SingleProductPage from './components/SingleProductPage';
 import Top20Products from './components/Top20Products';
 import { CategoryDropDown } from './components/CategoryDropDown';
+import AddProductForm from './components/AddProductForm'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -48,8 +49,10 @@ function App() {
           <SingleProductPage />
         </Route>
         <Route path='/' exact={true} >
-
           <Top20Products />
+        </Route>
+        <Route path='/new-product' exact={true}>
+          <AddProductForm />
         </Route>
       </Switch>
     </BrowserRouter>
