@@ -23,4 +23,5 @@ class EditProductForm(FlaskForm):
   description = TextAreaField('description', validators=[DataRequired()])
   price = DecimalField('price', validators=[DataRequired()])
   category = StringField('category', validators=[DataRequired()])
-  image = StringField('image')
+  # image = StringField('image')
+

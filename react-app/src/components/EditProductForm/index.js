@@ -10,12 +10,13 @@ const EditProductForm = () =>{
   const product = useSelector((state) => state?.product[productId])
   
   console.log('========= ', product)
+  console.log('the title:', product?.title)
   const [title, setTitle] = useState(product?.title);
   console.log('!!!!!!!!',product?.title)
-  const [description,setDescription] = useState(product?.description)
+  const [description, setDescription] = useState(product?.description);
   const [price, setPrice] = useState(product?.price)
-  const [category, setCategory] = useState(product?.category)
-  const [image, setImage] = useState(product?.image)
+  const [category, setCategory] = useState(product?.category_id)
+  // const [image, setImage] = useState(product?.image)
   const [errors, setErrors] = useState([]);
 
   const sessionUser = useSelector((state) => state.session.user)
@@ -30,7 +31,7 @@ const EditProductForm = () =>{
 
   useEffect(()=>{
     dispatch(getOneProduct(productId))
-  }, [dispatch])
+  }, [dispatch, productId])
   // const handleBackToProduct = () => {
   //   history.push(`/products/${id}`)
   // }
@@ -42,28 +43,30 @@ const EditProductForm = () =>{
       description,
       price,
       category,
-      image,
+      
     }
 
-    // let editedProduct = await dispatch((editAProduct)(payload));
+    let editedProduct = await dispatch((editAProduct(payload, productId)));
 
-    // if (editedProduct) {
-    // history.push(`/products/${editedProduct.id}`);
-    // }
+    if (editedProduct) {
+    history.push(`/products/${editedProduct.id}`);
+    }
+    // console.log('------->', product);
+    if (!product) return null;
+    // setDescription(product?.description)
+    // console.log('------->', product);
 
-    
-
-    return dispatch(editAProduct(payload, productId))
-      .then((response) => {
-        if (response.ok) {
-          setErrors([]);
-          history.push(`/products/${productId}`);
-        }
-      })
-      .catch(async (response) => {
-        const data = await response.json();
-        if (data && data.errors) setErrors(data.errors);
-      })
+    // return dispatch(editAProduct(payload, productId))
+    //   .then((response) => {
+    //     if (response.ok) {
+    //       setErrors([]);
+    //       history.push(`/products/${productId}`);
+    //     }
+    //   })
+    //   .catch(async (response) => {
+    //     const data = await response.json();
+    //     if (data && data.errors) setErrors(data.errors);
+    //   })
   }
 
   let categories = [[68887312,"Fine Art"], [68887366, "Handmade Holiday Items"],[68887482,"Handmade jewelry"]]
@@ -87,19 +90,22 @@ const EditProductForm = () =>{
         <label htmlFor='Title'>Title</label>
           <input
           onChange={(e)=>setTitle(e.target.value)}
-          value={title}
+          defaultValue={product?.title}
           // placeholder='Enter Product Title'
           required
           />
         <label htmlFor='Description'>Description</label>
           <textarea
           onChange={(e)=>setDescription(e.target.value)}
-          value={description}
+          defaultValue={product?.description}
           // placeholder='Enter Product Description'
           required
           />
         <label> Category </label>
-        <select onChange={(e)=>setCategory(e.target.value)}>
+        <select 
+          onChange={(e)=>setCategory(e.target.value)}
+          defaultValue={product?.category_id}
+          >
           <option value= "68887312" >Fine Art</option>
           <option value= "68887366" >Handmade Holiday Items</option>
           <option value="68887482">Handmade jewelry</option>
@@ -107,21 +113,21 @@ const EditProductForm = () =>{
         <label htmlFor='Price'>Price</label>
           <input
           onChange={(e)=>setPrice(e.target.value)}
-          value={price}
+          defaultValue={product?.price}
           // placeholder= "Price Per Product"
           required
           type="number"
           min = "1"
           max = "1000"
           />
-        <label htmlFor='Images'>Image(s)</label>
+        {/* <label htmlFor='Images'>Image(s)</label>
           <input
           onChange={(e)=>setImage(e.target.value)}
-          value={image}
+          defaultValue={product?.image}
           // placeholder= "Product Image URL"
           required
           type="url"
-          />
+          /> */}
         <button className='submit-button' type='submit'>
           Submit
         </button>

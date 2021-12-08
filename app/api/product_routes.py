@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify, request
-# from app.forms.edit_product_form import EditProductForm
+from app.forms import EditProductForm
 from app.models import Product, db
+from flask_login import current_user
+
 
 product_routes = Blueprint('product', __name__)
 
@@ -23,28 +25,32 @@ def get_top20_products():
   else:
     return {'message': 'Top20 Products not found'}
 
-@product_routes.route('/<int:id>/edit', methods=['GET','POST'])
+@product_routes.route('/<int:id>/edit', methods=['GET','PUT'])
 def update_product(id):
   currentUser = current_user.to_dict()
   form = EditProductForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   product = Product.query.get(id)
-  
+  print(form.validate_on_submit)
+  print(form.data)
   if form.validate_on_submit():
+    print('herrrrrrrrrreeeeee')
     product.title = form.data['title'],
     product.description = form.data['description'],
     product.price = form.data['price'],
     product.category_id = int(form.data['category'])
-    product.images = [{"url_75x75": form.data['image'],
-                      "url_170x135": form.data['image'],
-                      "url_570xN": form.data['image'],
-                      "url_fullxfull": form.data['image']
-                      }],
-    product.user_id = currentUser['id']
+    # product.images = [{"url_75x75": form.data['image'],
+    #                   "url_170x135": form.data['image'],
+    #                   "url_570xN": form.data['image'],
+    #                   "url_fullxfull": form.data['image']
+    #                   }],
+    # product.user_id = currentUser['id']
 
     db.session.commit()
     return product.to_dict()
   else:
+    print('hello there!')
+    print(form.errors)
     return 'Bad data'
 
 
