@@ -7,15 +7,20 @@ import { fetchProductsForCategory } from '../../store/category';
 export default function CategoryPage() {
   const { categoryId } = useParams();
   const dispatch = useDispatch();
-  //const useSelector = 
+  const products = useSelector(state => state.category.products)
 
   useEffect(() => {
     dispatch(fetchProductsForCategory(categoryId))
   }, [dispatch, categoryId])
 
+  if (!products) return null
+
   return (
     <div>
-      <h2>{`Category ${categoryId} items will go here.`}</h2>
+      <h2>{`Description for category ${categoryId} will go here.`}</h2>
+      {Object.values(products).map(product => {
+        return <ProductCard id={product.id} price={product.price} images={product.images} />
+      })}
     </div>
   )
 }
