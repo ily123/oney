@@ -49,9 +49,9 @@ function App() {
         <Route path='/products/:productId' exact={true}>
           <SingleProductPage />
         </Route>
-        <ProtectedRoute path='/products/:productId/reviews/:id' exact={true}>
+        <Route path='/products/:productId/reviews/:id' exact={true}>
           <EditOneReview />
-        </ProtectedRoute>
+        </Route>
         <Route path='/' exact={true} >
           <CategoryCard />
           <Top20Products />

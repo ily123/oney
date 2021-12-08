@@ -49,16 +49,14 @@ const AddProductForm = () =>{
                     <input
                     onChange={(e)=>setTitle(e.target.value)}
                     value={title}
-                    placeholder='Enter Product Title'
                     required
                     />
                 </div>
-                <div>
+                <div className="description_div">
                     <label>Product Description</label>
                     <textarea
                     onChange={(e)=>setDescription(e.target.value)}
                     value={description}
-                    placeholder='Enter Product Description'
                     required
                     />
                 </div>
@@ -71,11 +69,10 @@ const AddProductForm = () =>{
                 </select>
                 </div>
                 <div>
-                    <label>Product Price</label>
+                    <label>Price Per Product</label>
                     <input
                     onChange={(e)=>setPrice(e.target.value)}
                     value={price}
-                    placeholder= "Price Per Product"
                     required
                     type="number"
                     min = "1"
@@ -83,11 +80,10 @@ const AddProductForm = () =>{
                     />
                 </div>
                 <div>
-                    <label>Product Image</label>
+                    <label>Product Image URL</label>
                     <input
                     onChange={(e)=>setImage(e.target.value)}
                     value={image}
-                    placeholder= "Product Image URL"
                     required
                     type="url"
                     />
