@@ -9,14 +9,9 @@ function SingleProductPage(){
     const dispatch = useDispatch()
     const productObject = useSelector((state)=>state.product)
     const indProjObj = Object.values(productObject)[0]
-    // console.log('indProjObj: ',typeof indProjObj?.user_id);
-    // console.log('productObj: ', Object.values(productObject)[0])
+    
     const sessionUser = useSelector((state) => state.session.user);
-    // console.log(typeof sessionUser.id)
-    // console.log('------> ', sessionUser.id === indProjObj.user_Id)
-    // console.log('=========', sessionUser.id, indProjObj?.user_id)
-    // const user_id = sessionUser?.user.id
-    // console.log('user_id rec from kels: ', user_id)
+
     console.log('sessionUser: ', sessionUser)
     const {productId} = useParams()
 
@@ -51,7 +46,6 @@ function SingleProductPage(){
     // console.log('imageGroupsArr: ', imageGroupsArr)
     // get array of the second image in each grouping
     const images = imageGroupsArr?.map((arr) => {
-        // console.log('arr ',arr,'arr[0]: ',arr[1], 'arr[1]',arr[0])
         if (arr.length > 2) {
             return arr[1]
         } else {
