@@ -12,6 +12,7 @@ import SingleProductPage from './components/SingleProductPage';
 import EditOneReview from './components/EditOneReview';
 import Top20Products from './components/Top20Products';
 import CategoryPage from './components/CategoryPage';
+import Cart from './components/Cart';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -55,6 +56,9 @@ function App() {
         </Route>
         <Route path='/category/:categoryId' exact={true} >
           <CategoryPage />
+        </Route>
+        <Route path='/users/:userId/cart' exact={true} >
+          <Cart />
         </Route>
       </Switch>
     </BrowserRouter>

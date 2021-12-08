@@ -3,16 +3,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams} from 'react-router-dom';
 import {getOneProduct} from '../../store/product'
 import './singleProduct.css'
-
+import { useHistory } from 'react-router';
 import HideReviewForm from '../HideReviewForm';
-
+import { addToCart } from '../../store/cart';
 
 function SingleProductPage(){
     const dispatch = useDispatch()
+    const cartItem = {};
 
+    const history = useHistory();
     const productObject = useSelector((state)=>state.product)
 
     const {productId} = useParams()
+
+    const sessionUser = useSelector((state) => state.session);
+    const user_id = sessionUser?.user.id
 
     // console.log("product-raw", productObject)
     // console.log("product-values", product)
@@ -21,6 +26,7 @@ function SingleProductPage(){
         dispatch(getOneProduct(productId))
     }, [dispatch, productId])
 
+    // console.log("productId in single producePage", productId)
 
     const product = Object.values(productObject)
     if (!product.length) return null
@@ -48,6 +54,10 @@ function SingleProductPage(){
             return arr[0]
         }
     })
+
+    // const addToCart = (user_id) => {
+    //     history.push(`/users/${user_id}/cart`)
+    // }
 
 // console.log('!!!!!',Object.values(product[0]?.images[0])[0])
     return(
@@ -86,7 +96,11 @@ function SingleProductPage(){
                         </div>
                     </div>
                     <div>
-                        <button>
+
+                        <button
+                            className={(cartItem ? " selected" : "")}
+                            onClick={() => dispatch(addToCart(+productId))}
+                            >
                             Add to Cart
                         </button>
                     </div>
