@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from app.models import Product
+from app.models import Product, db
 
 product_routes = Blueprint('product', __name__)
 
@@ -15,6 +15,14 @@ def get_product(id):
 # @product_routes.route('/<int:id>/edit', methods=['GET','POST'])
 # def update_product(id):
   # { description, images, price, title } = req.body
+
+@product_routes.route('/<int:id>/delete', methods=['GET', 'DELETE'])
+def delete_product(id):
+  product = Product.query.get(id)
+  db.session.delete(product)
+  db.session.commit()
+  return 'deleted'
+
 
 @product_routes.route('/top20',methods=['GET'])
 def get_top20_products():

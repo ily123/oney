@@ -1,5 +1,6 @@
 const ONE_PRODUCT = 'products/ONE_PRODUCT';
 const TOP20_PRODUCTS = 'products/TOP20_PRODUCTS'
+const DELETE_ONE_PRODUCT = 'products/DELETE_ONE_PRODUCT'
 
 //action creator
 const loadProduct = (product) => ({
@@ -10,6 +11,11 @@ const loadProduct = (product) => ({
 const getProducts = (products) => ({
     type: TOP20_PRODUCTS,
     products
+})
+
+const deleteAProduct = (product) => ({
+    type: DELETE_ONE_PRODUCT,
+    product
 })
 
 //thunk
@@ -28,6 +34,16 @@ export const getTop20Products = () => async (dispatch) => {
     }
 }
 
+export const deleteProduct = (productId) => async (dispatch) => {
+    const response = await fetch(`/api/products/${productId}/delete`, {
+        method: 'DELETE',
+    });
+
+    if (response.ok) {
+        dispatch(deleteAProduct(productId))
+    }
+}
+
 const initialState = {}
 //reducer
 const productsReducer = (state=initialState, action) => {
@@ -40,6 +56,11 @@ const productsReducer = (state=initialState, action) => {
         case TOP20_PRODUCTS : {
             const newState = action.products
             return newState
+        }
+        case DELETE_ONE_PRODUCT : {
+            const newState = {...state};
+            delete newState[action.product];
+            return newState;
         }
         default :
             return state
