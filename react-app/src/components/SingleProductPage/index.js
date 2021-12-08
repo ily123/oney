@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import React, { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams} from 'react-router-dom';
-import {getOneProduct} from '../../store/product'
+import {getOneProduct, clearProducts} from '../../store/product'
 import './singleProduct.css'
 import { useHistory } from 'react-router';
 import HideReviewForm from '../HideReviewForm';
@@ -24,9 +24,8 @@ function SingleProductPage(){
 
     useEffect(()=>{
         dispatch(getOneProduct(productId))
-    }, [dispatch, productId])
-
-    // console.log("productId in single producePage", productId)
+        dispatch(clearProducts())
+    }, [dispatch,productId])
 
     const product = Object.values(productObject)
     if (!product.length) return null

@@ -11,8 +11,10 @@ import { authenticate } from './store/session';
 import SingleProductPage from './components/SingleProductPage';
 import EditOneReview from './components/EditOneReview';
 import Top20Products from './components/Top20Products';
+import AddProductForm from './components/AddProductForm'
 import CategoryPage from './components/CategoryPage';
 import Cart from './components/Cart';
+import CategoryCard from './components/CategoryCard';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -48,10 +50,11 @@ function App() {
         <Route path='/products/:productId' exact={true}>
           <SingleProductPage />
         </Route>
-        <ProtectedRoute path='/products/:productId/reviews/:id' exact={true}>
+        <Route path='/products/:productId/reviews/:id' exact={true}>
           <EditOneReview />
-        </ProtectedRoute>
+        </Route>
         <Route path='/' exact={true} >
+          <CategoryCard />
           <Top20Products />
         </Route>
         <Route path='/category/:categoryId' exact={true} >
@@ -60,6 +63,9 @@ function App() {
         <Route path='/users/:userId/cart' exact={true} >
           <Cart />
         </Route>
+        <ProtectedRoute path='/new-product' exact={true}>
+          <AddProductForm />
+        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );
