@@ -1,9 +1,15 @@
 const ONE_PRODUCT = 'products/ONE_PRODUCT';
+const TOP20_PRODUCTS = 'products/TOP20_PRODUCTS'
 
 //action creator
 const loadProduct = (product) => ({
     type: ONE_PRODUCT,
     product
+})
+
+const getProducts = (products) => ({
+    type: TOP20_PRODUCTS,
+    products
 })
 
 //thunk
@@ -14,6 +20,14 @@ export const getOneProduct = (id) => async (dispatch) => {
     dispatch(loadProduct(product))
 }
 
+export const getTop20Products = () => async (dispatch) => {
+    const response = await fetch('/api/products/top20');
+    if(response.ok){
+        const products = await response.json();
+        dispatch(getProducts(products))
+    }
+}
+
 const initialState = {}
 //reducer
 const productsReducer = (state=initialState, action) => {
@@ -21,6 +35,10 @@ const productsReducer = (state=initialState, action) => {
         case ONE_PRODUCT : {
             const newState = {...state};
             newState[action.product.id] = action.product
+            return newState
+        }
+        case TOP20_PRODUCTS : {
+            const newState = action.products
             return newState
         }
         default :

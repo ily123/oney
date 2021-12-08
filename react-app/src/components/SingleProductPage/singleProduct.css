@@ -1,0 +1,58 @@
+.smallImg {
+  height: 50px;
+  width: 50px;
+  border-radius: 3px;
+}
+
+.largeImage {
+  border-radius: 3px;
+  margin-left: 5px
+}
+
+.mainImagesBox {
+  display: flex;
+}
+/* itemInformation box */
+.itemInfoBox {
+  margin: 5px;
+}
+
+/* descripiton and reviews */
+.reviewsAndDescriptionsDiv {
+  display: flex;
+}
+
+/* description */
+.productTitle {
+  font-size: large;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.productPrice {
+  font-weight: bold;
+}
+
+.descriptionDiv {
+  width: 275px;
+  /* height: 500px; */
+}
+
+.descriptionTitle {
+  margin-top: 0px;
+}
+
+.productDescParagraph {
+  max-height: 200px;
+  overflow-y: scroll; 
+  overflow-x: hidden; 
+}
+
+.productDescParagraph::-webkit-scrollbar {
+  display: none;
+}
+
+/* reviews */
+.reviewsDiv {
+  /* max-width: 600px; */
+}
