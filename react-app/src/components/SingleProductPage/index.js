@@ -9,9 +9,12 @@ function SingleProductPage(){
     const dispatch = useDispatch()
     const productObject = useSelector((state)=>state.product)
     const indProjObj = Object.values(productObject)[0]
-    console.log('indProjObj: ',indProjObj?.user_id);
-    console.log('productObj: ', Object.values(productObject)[0])
+    // console.log('indProjObj: ',typeof indProjObj?.user_id);
+    // console.log('productObj: ', Object.values(productObject)[0])
     const sessionUser = useSelector((state) => state.session.user);
+    // console.log(typeof sessionUser.id)
+    // console.log('------> ', sessionUser.id === indProjObj.user_Id)
+    // console.log('=========', sessionUser.id, indProjObj?.user_id)
     // const user_id = sessionUser?.user.id
     // console.log('user_id rec from kels: ', user_id)
     console.log('sessionUser: ', sessionUser)
@@ -75,12 +78,10 @@ function SingleProductPage(){
                 </div>
                 <div className='itemInfoBox'>
                     <div className='deleteBtnDiv'>
-                    <button onClick={() => handleDelete(indProjObj?.id)} className='delButton'>Delete</button>
-                    {/* 1, 1 */}
-                    {sessionUser && sessionUser?.id === indProjObj?.user_Id &&
-                        <button onClick={() => handleDelete(indProjObj?.id)} className='delButton'>Delete</button>
-                    }
-                </div>
+                        {sessionUser && sessionUser?.id === indProjObj?.user_id &&
+                            <button onClick={() => handleDelete(indProjObj?.id)} className='delButton'>Delete</button>
+                        }
+                    </div>
                     <div>
                         <h1 className='productTitle descriptionDiv'>
                             {product[0]?.title}
