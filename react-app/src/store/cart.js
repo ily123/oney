@@ -68,11 +68,12 @@ export const closeCart = () => ({
 
 
 // thunk to get all cart items
-export const allCartItemsThunk = (user_id, id) => async(dispatch) => {
+export const allCartItemsThunk = (user_id) => async(dispatch) => {
 
-  if(id) {
-    const res = await fetch(`/api/users/${user_id}/carts/${id}`)
+  if(user_id) {
+    const res = await fetch(`/api/carts/${user_id}`)
     const cartItems = await res.json();
+    console.log("allCartItemsThunk", cartItems)
     dispatch(loadAllCartItems(cartItems, user_id))
   }
 
@@ -154,6 +155,15 @@ export default function cartReducer(state = { order: [], showCart: false }, acti
         ...state,
         showCart: false,
       };
+    case LOAD_ALL_CART_ITEMS: {
+      const newState = {...state};
+      // console.log("reducer review", action.reviews)
+      for (const[key,value] of Object.entries(action.cartItems)) {
+        newState[key] = value
+      }
+      // console.log("newState LOAD_REVIEWS", newState)
+      return newState
+    };
     default:
       return state;
   }

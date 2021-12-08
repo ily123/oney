@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { purchase, getCartItems } from '../../store/cart';
 import { useParams} from 'react-router-dom';
 import { getOneProduct } from "../../store/product";
+import { allCartItemsThunk } from "../../store/cart";
 
 // import CartItem from './CartItem';
 import CartItem from "../CartItem";
@@ -15,13 +16,28 @@ function Cart() {
   const {productId} = useParams()
 
   const productObject = useSelector((state)=>state.product)
-  const cartItems = useSelector(getCartItems);
-  console.log("cartItems", cartItems)
-  console.log("productObj", productObject)
+  // const cartItems = useSelector(getCartItems);
+  // console.log("cartItems", cartItems)
+  // console.log("productObj", productObject)
+
+  const cartItemsObj = useSelector((state)=>state?.cart)
+  const cartItems = Object?.values(cartItemsObj)
+  console.log("cartItems in cart component", cartItemsObj)
+
+
+  const sessionUser = useSelector((state) => state.session);
+  const user_id = sessionUser?.user.id
+  // console.log("sessionUser", sessionUser?.user.username)
+
+
 
   useEffect(()=>{
     dispatch(getOneProduct(productId))
 }, [dispatch, productId])
+
+  useEffect(() => {
+    dispatch(allCartItemsThunk(user_id))
+  }, [dispatch, user_id, cartItems.length])
 
 
 const product = Object.values(productObject)

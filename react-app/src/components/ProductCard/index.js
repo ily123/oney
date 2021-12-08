@@ -3,7 +3,7 @@ import './ProductCard.css'
 
 const ProductCard = ({id,price,images}) => {
 
-    console.log(images)
+    // console.log(images)
     let image = images[0]?.url_570xN
 
     if (image) {
