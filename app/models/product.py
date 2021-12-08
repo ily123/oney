@@ -1,5 +1,6 @@
 from .db import db
 from sqlalchemy.sql import func
+import html
 
 
 class Product(db.Model):
@@ -25,8 +26,8 @@ class Product(db.Model):
     def to_dict(self):
       return {
           'id': self.id,
-          'title': self.title,
-          'description': self.description,
+          'title': html.unescape(self.title),
+          'description': html.unescape(self.description),
           'price': float(self.price),
           'category_id': self.category_id,
           'images': self.images,
