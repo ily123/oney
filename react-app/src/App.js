@@ -9,6 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import SingleProductPage from './components/SingleProductPage';
+import EditOneReview from './components/EditOneReview';
 import Top20Products from './components/Top20Products';
 import CategoryPage from './components/CategoryPage';
 
@@ -46,6 +47,9 @@ function App() {
         <Route path='/products/:productId' exact={true}>
           <SingleProductPage />
         </Route>
+        <ProtectedRoute path='/products/:productId/reviews/:id' exact={true}>
+          <EditOneReview />
+        </ProtectedRoute>
         <Route path='/' exact={true} >
           <Top20Products />
         </Route>

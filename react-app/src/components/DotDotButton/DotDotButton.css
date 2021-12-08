@@ -1,0 +1,29 @@
+.review-dot-dot {
+  background-color: transparent;
+  border: none;
+}
+
+.review-dropdown {
+  position: absolute;
+  flex-direction: column;
+}
+
+
+.fa-edit, .fa-trash-alt {
+  color: white;
+}
+
+
+.review-dropdown {
+  position: absolute;
+  background-color: rgb(226, 153, 26);
+  width: min-content;
+  overflow: auto;
+  box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 20px !important;
+  display: flex;
+  align-items: center;
+}
