@@ -13,11 +13,21 @@ const UPDATE_COUNT = 'cart/updateCount';
 const PURCHASE = 'cart/purchase';
 const OPEN_CART = 'cart/openCart';
 const CLOSE_CART = 'cart/closeCart';
+const LOAD_ALL_CART_ITEMS = 'cart/loadAllCartItems';
 
+
+// action creator to add to cart
 export const addToCart = (id) => ({
   type: ADD_TO_CART,
   id,
 });
+
+// action creator to get all cart items
+const loadAllCartItems = (cartItems, user_id) => ({
+  type: LOAD_ALL_CART_ITEMS,
+  cartItems,
+  user_id
+})
 
 export const removeFromCart = (id) => ({
   type: REMOVE_FROM_CART,
@@ -46,6 +56,27 @@ export const openCart = () => ({
 export const closeCart = () => ({
   type: CLOSE_CART,
 });
+
+
+
+
+
+// thunk to add to cart
+// export const addToCartThunk = (id) => async(dispatch) => {
+//   const response = await fetch(`/api/users/${user_id}/carts/${id}`)
+// }
+
+
+// thunk to get all cart items
+export const allCartItemsThunk = (user_id, id) => async(dispatch) => {
+
+  if(id) {
+    const res = await fetch(`/api/users/${user_id}/carts/${id}`)
+    const cartItems = await res.json();
+    dispatch(loadAllCartItems(cartItems, user_id))
+  }
+
+}
 
 export default function cartReducer(state = { order: [], showCart: false }, action) {
   switch (action.type) {
