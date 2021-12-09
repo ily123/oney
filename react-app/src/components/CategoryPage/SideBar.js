@@ -2,10 +2,8 @@ import styles from './SideBar.module.css';
 import { NavLink } from 'react-router-dom';
 
 export default function SideBar({ categories, tree, categoryId }) {
-  console.log("i am here", categories)
-  console.log("i am here", categoryId)
   const currentCategory = categories[categoryId]
-
+  
   // if this is a top-level category render all other top-level categories
   // if lower-level, render siblings and go back button
   let renderCategories;
@@ -30,13 +28,4 @@ export default function SideBar({ categories, tree, categoryId }) {
       })}
     </ul>
   )
-     //   <ul className={styles.menu}>
-     //   {category.children.map(child => {
-     //     return (
-     //       <li key={child.id} className={styles.item}>
-     //         <NavLink to={`/category/${child.id}`}>{child.short_name}</NavLink>
-     //       </li>
-     //     )
-     //   })}
-     //   </ul>
 }
