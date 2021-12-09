@@ -49,16 +49,13 @@ const EditProductForm = () =>{
   useEffect(() => {
     const validationErrs = [];
     if(title.length < 3 || !title) validationErrs.push("A title is required")
-    console.log('this is the title: ', title)
     if(!description) validationErrs.push("A description is required")
     if(price > 1000 || price < 1) validationErrs.push("Price must be at least $1")
-    console.log('This is the price:', price)
     if(!category) validationErrs.push("Please select a category!")
 
     setErrors(validationErrs)
-    console.log('validationErrs: ',validationErrs)
   },[title,description,price,category])
-  console.log('errors: ',errors)
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -115,21 +112,21 @@ const EditProductForm = () =>{
         <label htmlFor='Title'>Title</label>
           <input
           onChange={(e)=>setTitle(e.target.value)}
-          defaultValue={title}
+          value={title}
           type="text"
           required
           />
         <label htmlFor='Description'>Description</label>
           <textarea
           onChange={(e)=>setDescription(e.target.value)}
-          defaultValue={description}
+          value={description}
           type="text"
           required
           />
         <label> Category </label>
         <select 
           onChange={(e)=>setCategory(e.target.value)}
-          defaultValue={category}
+          value={category}
           >
           <option value= "68887312" >Fine Art</option>
           <option value= "68887366" >Handmade Holiday Items</option>
@@ -138,7 +135,7 @@ const EditProductForm = () =>{
         <label htmlFor='Price'>Price</label>
           <input
           onChange={(e)=>setPrice(e.target.value)}
-          defaultValue={price}
+          value={price}
           required
           type="number"
           min = "1"
