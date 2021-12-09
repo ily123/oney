@@ -1,0 +1,35 @@
+.categoryPageWrapper {
+  max-width: 1500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sideBarCardAreaWrapper {
+  display: flex;
+}
+
+.cardArea {
+  max-width: 900px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  row-gap: 20px;
+}
+
+.categoryPageWrapper h2 {
+  font-family: "Roboto";
+  font-style: light;
+  font-weight: 300;
+  font-size: 2rem;
+  margin: 0;
+  padding-top: 20px;
+/*  background-color: var(--light-peach) */
+}
+.categoryPageWrapper p {
+  margin: 0;
+  font-size: 0.9rem;
+  padding: 20px;
+/* background-color: var(--light-peach); */
+  color: #595959;
+}
