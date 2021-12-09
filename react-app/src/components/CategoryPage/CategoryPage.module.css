@@ -1,5 +1,4 @@
 .categoryPageWrapper {
-  border: 1px blue solid;
   max-width: 1500px;
   display: flex;
   flex-direction: column;
@@ -11,7 +10,6 @@
 
 .cardArea {
   max-width: 900px;
-  border: 3px green solid;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -19,11 +17,19 @@
   row-gap: 20px;
 }
 
-.sideBar {
-  border: 1px red solid;
+.categoryPageWrapper h2 {
+  font-family: "Roboto";
+  font-style: light;
+  font-weight: 300;
+  font-size: 2rem;
+  margin: 0;
+  padding-top: 20px;
+/*  background-color: var(--light-peach) */
 }
-@media (max-width: 800px) {
-  .sideBar {
-    display: none;
-  }
+.categoryPageWrapper p {
+  margin: 0;
+  font-size: 0.9rem;
+  padding: 20px;
+/* background-color: var(--light-peach); */
+  color: #595959;
 }

@@ -10,24 +10,28 @@ export default function CategoryPage() {
   const { categoryId } = useParams();
   const dispatch = useDispatch();
   const products = useSelector(state => state.category.products)
-
+  const categories = useSelector(state => state.category.flat)
+  
   useEffect(() => {
     dispatch(fetchProductsForCategory(categoryId))
   }, [dispatch, categoryId])
 
-  if (!products) return null
+  if (!products || !categories) return null
+  const category = categories[categoryId];
 
   return (
     <div className={styles.categoryPageWrapper}>
-      <h2>{`Description for category ${categoryId} will go here.`}</h2>
+      <h2>{category.page_tile}</h2>
+      <p>{category.page_description}</p>
       <div className={styles.sideBarCardAreaWrapper}>
         <SideBar className={styles.sideBar} />
         <div className={styles.cardArea}>
           {Object.values(products).map(product => {
-            return <ProductCardXL product={product}/>
+            return <ProductCardXL key={product.id} product={product}/>
           })}
         </div>
       </div>
     </div>
   )
 }
+

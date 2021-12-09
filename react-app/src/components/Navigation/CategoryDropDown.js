@@ -18,21 +18,13 @@ export default function CategoryDropDown() {
   }, [dispatch])
 
   if (!loaded || !root) return null;
-  // there is 3 levels.
-  // root -> Big Categores -> Small caterogies
-  // we go through each Big Category inside root,
-  // and add its child categories to a list as an array
-  const flat_categories = root.children.map(category => [category, category.children]).flat(Infinity)
-  flat_categories.forEach(category => {
-    // console.log(`${category.id} ${category.short_name}`)
-  })
   
   const NUM_CATEG_TO_SHOW = 9;
   return (
     <ul className={styles.categoryList}>
       {(root.children.slice(0, NUM_CATEG_TO_SHOW).map(category => {
         return (
-          <li><Menu key={category.id} category={category}/></li>
+          <li key={category.id}><Menu category={category}/></li>
         )
       }))}
     </ul>
@@ -54,7 +46,7 @@ function Menu({ category }) {
         <ul className={styles.menu}>
         {category.children.map(child => {
           return (
-            <li className={styles.item}>
+            <li key={child.id} className={styles.item}>
               <NavLink to={`/category/${child.id}`}>{child.short_name}</NavLink>
             </li>
           )
