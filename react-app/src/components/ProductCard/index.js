@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const ProductCard = ({id,price,images}) => {
 
-    
+
     let image = images[0]?.url_570xN
 
     if (image) {

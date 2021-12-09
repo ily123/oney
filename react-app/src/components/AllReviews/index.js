@@ -27,6 +27,7 @@ const AllReviews = ({product}) => {
   // console.log("product_id", product_id)
     useEffect(()=>{
         dispatch(getReviews(product_id))
+        return () => clearInterval(getReviews(product_id));
     }, [dispatch, reviews.length, product_id])
 
     // console.log("user_id", user_id)
