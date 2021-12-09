@@ -1,11 +1,13 @@
 .sideBar {
   min-width: 200px;
-  font-family: "Roboto";
-  font-style: light;
-  font-weight: 300;
 }
 
 .sideBar a {
+  font-weight: normal;
+  min-width: 200px;
+  font-family: "Roboto";
+  font-style: light;
+  font-weight: 300;
   color: var(--text-color);
 }
 

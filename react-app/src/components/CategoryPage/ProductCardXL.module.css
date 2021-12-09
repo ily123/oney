@@ -26,15 +26,16 @@
   height: 70px;
   line-height: 35px; /* set this so text centers vertically */
   padding: 0px 15px;
-  font-size: 1.2em;
   text-align: center;
   border-radius: 0 0 10px 10px;
 }
 .card figcaption .productTitle {
   /* the lines to show are to get the "..." string on overflow */
+  font-size: 1.2rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: normal;
 }
 .card figcaption .productInfo {
   /* the lines to show are to get the "..." string on overflow */
@@ -44,7 +45,8 @@
   display: flex;
   justify-content: space-evenly;
   align-items:center;
-  font-size: 0.95em;
+  font-size: 1rem;
+  font-weight: normal;
 }
 
 
