@@ -53,27 +53,28 @@ const EditProductForm = () =>{
       description,
       price,
       category,
-      
     }
 
     let editedProduct = await dispatch((editAProduct(payload, productId)));
-
+    console.log('editedProduct: ',editedProduct)
     if (editedProduct) {
-    history.push(`/products/${editedProduct.id}`);
+      // setErrors(editedProduct)
+      history.push(`/products/${editedProduct.id}`);
     }
     // console.log('------->', product);
     if (!product) return null;
     // setDescription(product?.description)
     // console.log('------->', product);
-
-    // return dispatch(editAProduct(payload, productId))
+    // return await dispatch(editAProduct(payload, productId))
     //   .then((response) => {
-    //     if (response.ok) {
+    //     if (response) {
     //       setErrors([]);
+    //       console.log('hello there, I\'m here')
     //       history.push(`/products/${productId}`);
     //     }
     //   })
     //   .catch(async (response) => {
+    //     console.log('in errors block')
     //     const data = await response.json();
     //     if (data && data.errors) setErrors(data.errors);
     //   })
@@ -95,7 +96,7 @@ const EditProductForm = () =>{
       </div>
       <form onSubmit={handleSubmit} >
         <ul className='loginErrorsList'>
-          {errors.map((error, idx) => <li key={idx} className='loginErrors'>{error}</li>)}
+          {errors.map((error, idx) => <li key={idx} className='productErrors'>{error}</li>)}
         </ul>
         <label htmlFor='Title'>Title</label>
           <input
