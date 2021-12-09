@@ -62,8 +62,12 @@ function SingleProductPage(){
 
 // console.log('!!!!!',Object.values(product[0]?.images[0])[0])
     return(
-
         <div>
+            <div className='editBackBtnDiv'>
+                <NavLink to={`/`} 
+                className='editProdCancel singleProdBack'
+                >Back</NavLink> 
+            </div>
             <div className='mainImagesBox'>
                 <div className='smallImagesBox'>
                     {images.length ?
