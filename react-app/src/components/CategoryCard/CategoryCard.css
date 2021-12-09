@@ -1,0 +1,37 @@
+.categCard{
+    margin-left: 100px;
+    margin-right: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.categ_div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px 20px 0;
+    padding: 10px;
+  }
+
+  .categ_name {
+      color: black
+    }
+
+  .categ_image {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 10px 0 10px 0;
+  }
+
+.catge_effect a {
+  text-decoration: none !important;
+}
+
+.catge_effect:hover {
+  opacity: 1;
+  transform: scale(1.02);
+}

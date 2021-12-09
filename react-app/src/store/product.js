@@ -1,5 +1,7 @@
 const ONE_PRODUCT = 'products/ONE_PRODUCT';
-const TOP20_PRODUCTS = 'products/TOP20_PRODUCTS'
+const TOP20_PRODUCTS = 'products/TOP20_PRODUCTS';
+const ADD_PRODUCT = 'products/ADD_PORDUCTS';
+const CLEAR = 'products/CLEAR'
 
 //action creator
 const loadProduct = (product) => ({
@@ -10,6 +12,15 @@ const loadProduct = (product) => ({
 const getProducts = (products) => ({
     type: TOP20_PRODUCTS,
     products
+})
+
+const addProducts = payload => ({
+    type: ADD_PRODUCT,
+    payload
+})
+
+export const clearProducts = () => ({
+    type: CLEAR
 })
 
 //thunk
@@ -28,18 +39,38 @@ export const getTop20Products = () => async (dispatch) => {
     }
 }
 
+export const addOneProduct = (payload) => async(dispatch) => {
+    const response = await fetch('/api/products/new',{
+        method: "POST",
+        headers: {'Content-Type' : 'application/json'},
+        body: JSON.stringify(payload)
+    })
+    if(response.ok) {
+        const newProduct = await response.json();
+        dispatch(addProducts(newProduct))
+        return newProduct;
+    }
+}
+
 const initialState = {}
 //reducer
 const productsReducer = (state=initialState, action) => {
     switch(action.type){
         case ONE_PRODUCT : {
-            const newState = {...state};
+            const newState = {}
             newState[action.product.id] = action.product
             return newState
         }
         case TOP20_PRODUCTS : {
             const newState = action.products
             return newState
+        }
+        case ADD_PRODUCT:{
+            const newState = {...state, [action.payload.id]:action.payload}
+            return newState
+        }
+        case CLEAR:{
+            return {}
         }
         default :
             return state
