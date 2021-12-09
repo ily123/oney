@@ -18,6 +18,7 @@ ul {
   position: relative;
 }
 .dropdownWrapper .head {
+  font-weight: normal;
   font-size: 0.95em;
   color: black;
 }
@@ -29,6 +30,7 @@ ul {
   min-width: 150px;
 }
 .dropdownWrapper .menu .item a {
+  font-weight: normal;
   font-size: 0.9em;
   color: black;
 }
