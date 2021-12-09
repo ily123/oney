@@ -98,8 +98,10 @@ const EditProductForm = () =>{
 
   return (
     <div>
-      <div>
-        <NavLink to={`/products/${productId}`} >Back</NavLink> 
+      <div className='editBackBtnDiv'>
+        <NavLink to={`/products/${productId}`} 
+          className='editProdCancel editBackBtn'
+        >Back</NavLink> 
       </div>
       <div className='EditProductDivBox'>
         <div className='innerFormContent'>

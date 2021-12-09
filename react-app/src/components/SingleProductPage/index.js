@@ -13,11 +13,11 @@ function SingleProductPage(){
 
     const productObject = useSelector((state)=>state.product)
     const indProjObj = Object.values(productObject)[0]
-    console.log('productObject: ',productObject)
-    console.log('indProjObj: ',indProjObj)
+    // console.log('productObject: ',productObject)
+    // console.log('indProjObj: ',indProjObj)
     const sessionUser = useSelector((state) => state.session.user);
 
-    console.log('sessionUser: ', sessionUser)
+    // console.log('sessionUser: ', sessionUser)
 
     const {productId} = useParams()
 
@@ -97,18 +97,18 @@ function SingleProductPage(){
                         </div>
                     </div>
                     <div>
-                        <button>
+                        <button className='submitBtn' >
                             Add to Cart
                         </button>
                     </div>
-                    <div>
+                    <div className='singleProdBottomBtnsDiv'>
+                        <div className='singleProdUpdateDiv'>
+                            {sessionUser && sessionUser?.id === indProjObj?.user_id &&
+                                <NavLink to={`/products/${productId}/edit`} className='editProdCancel'>Update</NavLink> 
+                            }
+                        </div>
                         {sessionUser && sessionUser?.id === indProjObj?.user_id &&
-                            <NavLink to={`/products/${productId}/edit`} >Update</NavLink> 
-                        }
-                    </div>
-                    <div className='deleteBtnDiv'>
-                        {sessionUser && sessionUser?.id === indProjObj?.user_id &&
-                            <button onClick={() => handleDelete(indProjObj?.id)} className='delButton'>Delete Product</button>
+                            <button onClick={() => handleDelete(indProjObj?.id)} className='delButton editProdCancel'>Delete Product</button>
                         }
                     </div>
                 </div>
