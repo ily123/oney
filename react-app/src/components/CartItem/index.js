@@ -62,98 +62,52 @@ function CartItem({ item}) {
   let id = item.id // the id of the cart with the item
   let product_id = item.product_id
   // console.log("user_id before handleSubmit", user_id)
-  const handleSubmit = async(e) => {
-    e.preventDefault();
+  // const handleSubmit = async(e) => {
+  //   e.preventDefault();
 
-    const editItem = {
-      id, user_id, product_id, quantity
-    }
-    console.log("handlesubmit", editItem)
-    dispatch(updateCartThunk(editItem, id, user_id))
+  //   const editItem = {
+  //     id, user_id, product_id, quantity
+  //   }
+  //   console.log("handlesubmit", editItem)
+  //   dispatch(updateCartThunk(editItem, id, user_id))
+  // }
+
+
+  const editItem = {
+    id, user_id, product_id, quantity
   }
+
   return (
     <>
 
-{/*
-        <form className="submit-review" onSubmit={handleSubmit}>
-        <label>
-            <input
-              type="number"
-              placeholder="quantity"
-              value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
-            >
-             </input>
-        </label>
-        <button className="submit-cancel-review-button" type="submit" >+</button>
-
-        </form> */}
-
-
-
-
-
-    {/* { item.product_id?
-    <li className="cart-item">
       <div className="cart-item-header">
-        {
-          getProductTitle(item.product_id)
-        }
-        {
-          item.quantity
-        }
-      </div> */}
-
-      {/* <div className="cart-item-menu"> */}
-
-      <div className="cart-item-header">
-        {
-          getProductTitle(item.product_id)
-        }
-        {
-          item.quantity
-        }
+        {getProductTitle(item.product_id)}
+        {item.quantity}
       </div>
 {
       item.id?
 
-      <form className="submit-review" onSubmit={handleSubmit}>
+      <form
+      // onSubmit={handleSubmit}
+      >
+        <div className="cart-item-menu">
         <label>
             <input
+              className="cart-item"
               type="number"
               placeholder="quantity"
               value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
-            >
-             </input>
+              onChange={(e) => setQuantity(e.target.value + 1)}
+            />
+             {/* </input> */}
         </label>
-        <button className="submit-cancel-review-button" type="submit" >+</button>
-
-        </form>
-        : null}
-
-
-
-        {/* <input
-          type="number"
-          onChange={(e) => setQuantity(+e.target.value + 1)}
-          value={quantity}
-          // onBlur={(e) => dispatch(updateCount(+item["id"], +e.target.value, item, user_id))}
-          />
         <button
-          type="submit"
-          className="cart-item-button"
-          // onClick={() => dispatch(addToCart(item.id))}
-        >
-          +
-        </button> */}
-
-        {/* </form> */}
+        className="cart-item-button"
+          onClick={(e) => updateCartThunk(editItem, id, user_id)}
+        >+</button>
 
 
-
-
-        {/* <button
+        <button
           className="cart-item-button"
           onClick={() => dispatch(decrement(item.id))}
         >
@@ -164,11 +118,13 @@ function CartItem({ item}) {
           onClick={() => dispatch(removeFromCart(item.id))}
         >
           Remove
-        </button> */}
-      {/* </div> */}
+        </button>
+
+  </div>
+        </form>
+        : null}
 
 
-{/* </form> */}
       </>
   )
 }
