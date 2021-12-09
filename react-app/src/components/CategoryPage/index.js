@@ -24,7 +24,7 @@ export default function CategoryPage() {
       <h2>{category.page_tile}</h2>
       <p>{category.page_description}</p>
       <div className={styles.sideBarCardAreaWrapper}>
-        <SideBar className={styles.sideBar} />
+        <SideBar categories={categories} categoryId={categoryId}/>
         <div className={styles.cardArea}>
           {Object.values(products).map(product => {
             return <ProductCardXL key={product.id} product={product}/>
