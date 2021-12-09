@@ -22,12 +22,12 @@ function Cart() {
 
   const cartItemsObj = useSelector((state)=>state?.cart)
   const cartItems = Object?.values(cartItemsObj)
-  console.log("cartItems in cart component", cartItems[0].product_id)
+  // console.log("cartItems in cart component", cartItems)
 
 
   const sessionUser = useSelector((state) => state.session);
   const user_id = sessionUser?.user.id
-  console.log("user_id in component", user_id)
+  // console.log("user_id in component", user_id)
 
 
 
@@ -37,13 +37,14 @@ function Cart() {
 
   useEffect(() => {
     dispatch(allCartItemsThunk(user_id))
+    return () => clearInterval(allCartItemsThunk(user_id));
   }, [dispatch, user_id, cartItems.length])
 
 
 const product = Object.values(productObject)
 if (!product.length) return null
 
-console.log("product in cart", product)
+// console.log("product in cart", product)
 
 
   if (!cartItems || !cartItems.length) return (

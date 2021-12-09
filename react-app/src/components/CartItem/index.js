@@ -1,31 +1,29 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-
 import { removeFromCart, addToCart, decrement, updateCount } from '../../store/cart';
+import { updateCartThunk } from '../../store/cart';
 
-function CartItem({ item }) {
+function CartItem({ item}) {
   const dispatch = useDispatch();
-  const [count, setCount] = useState(item.count);
-
-
+  const [quantity, setQuantity] = useState(item.quantity);
   const [products, setProducts] = useState([])
-
   const sessionUser = useSelector((state) => state.session);
 
+  // console.log("cart item quanitty", quantity)
+  console.log("item in cartitem", item)
 
   useEffect(() => {
-    setCount(item.count);
-  }, [item.count]);
+    setQuantity(item.quantity);
+  }, [item.quantity]);
 
 
   // NOTE: so the cart.id doesn't have any meaning, we connect the user to their cart
   // by just using the user_id in the cart table
-
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(`/api/products/cart/${user_id}`)
       const productsList = await response.json()
-      console.log("productList", productsList)
+      // console.log("productList", productsList)
       setProducts(productsList);
     }
     fetchData();
@@ -40,13 +38,7 @@ function CartItem({ item }) {
 
   // console.log("products in cart component", products)
   const productsArray = Object?.values(products)
-  // console.log("products in cart component one ", productsArray[0].title)
-
-
-
-
   const getProductTitle = (item_id) => {
-
     const productTitle = productsArray.filter(function(el){
       return el.id === item_id
     });
@@ -58,26 +50,41 @@ function CartItem({ item }) {
     }
   }
 
+  let id = item.id // the id of the cart with the item
+  let product_id = item.product_id
+  // console.log("user_id before handleSubmit", user_id)
+  const handleSubmit = async(e) => {
+    e.preventDefault();
 
-  // item.product_id is where the product name should be defined
-
+    const editItem = {
+      user_id, product_id, quantity
+    }
+    dispatch(updateCartThunk(editItem, id, user_id))
+  }
   return (
+    <>
+     <form onSubmit={handleSubmit}>
+    { item.product_id?
     <li className="cart-item">
       <div className="cart-item-header">
-        {/* {item.product_id} */}
         {
           getProductTitle(item.product_id)
+        }
+        {
+          item.quantity
         }
       </div>
       <div className="cart-item-menu">
         <input
           type="number"
-          onChange={(e) => setCount(+e.target.value)}
-          onBlur={(e) => dispatch(updateCount(item.id, +e.target.value))}
-          value={count} />
+          onChange={(e) => setQuantity(+e.target.value)}
+          value={quantity}
+          // onBlur={(e) => dispatch(updateCount(+item["id"], +e.target.value, item, user_id))}
+          />
         <button
+          type="submit"
           className="cart-item-button"
-          onClick={() => dispatch(addToCart(+item.id))}
+          // onClick={() => dispatch(addToCart(item.id))}
         >
           +
         </button>
@@ -95,6 +102,10 @@ function CartItem({ item }) {
         </button>
       </div>
     </li>
+    : null
+      }
+</form>
+      </>
   )
 }
 

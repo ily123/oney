@@ -17,9 +17,9 @@ const LOAD_ALL_CART_ITEMS = 'cart/loadAllCartItems';
 
 
 // action creator to add to cart
-export const addToCart = (id) => ({
+export const addToCart = (newCartItem) => ({
   type: ADD_TO_CART,
-  id,
+  newCartItem,
 });
 
 // action creator to get all cart items
@@ -27,6 +27,12 @@ const loadAllCartItems = (cartItems, user_id) => ({
   type: LOAD_ALL_CART_ITEMS,
   cartItems,
   user_id
+})
+
+const editItemAction = (editedItem, id) => ({
+  type: ADD_TO_CART,
+  editedItem,
+  id
 })
 
 export const removeFromCart = (id) => ({
@@ -58,14 +64,52 @@ export const closeCart = () => ({
 });
 
 
-
-
-
 // thunk to add to cart
-// export const addToCartThunk = (id) => async(dispatch) => {
-//   const response = await fetch(`/api/users/${user_id}/carts/${id}`)
-// }
+export const addToCartThunk = (formData, user_id) => async (dispatch) => {
+  const response = await fetch(`/api/carts/${user_id}/items`, {
+    method: 'POST',
+    headers : {
+      'Content-Type': 'application/json',
+     },
+     body: JSON.stringify(
+      formData
+    )
+  });
+  try {
+    const newCartItem = await response.json();
+    dispatch(addToCart(newCartItem))
+    return newCartItem
 
+  } catch(error) {
+    console.log(error)
+  }
+
+}
+
+
+
+// thunk to update cart
+export const updateCartThunk = (editItem, id, user_id) => async(dispatch) => {
+
+  const response = await fetch(`/api/carts/${user_id}/items/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type':'application/json'
+  },
+    body: JSON.stringify(editItem)
+  });
+
+  console.log("editItem in thunk", editItem)
+
+
+  const editedItem = await response.json();
+
+  console.log("editedItem in thunk", editedItem)
+  dispatch(editItemAction(editedItem, id))
+  return editedItem
+
+
+}
 
 // thunk to get all cart items
 export const allCartItemsThunk = (user_id) => async(dispatch) => {
@@ -84,14 +128,14 @@ export default function cartReducer(state = { order: [], showCart: false }, acti
   switch (action.type) {
     case ADD_TO_CART: {
       const newState = {...state}
-      const newCount = state[action.id]?.count ? state[action.id].count + 1 : 1;
-      console.log("newCount??????????", newCount)
-      const newOrder = state.order.includes(action.id) ? state.order : [ ...state.order, action.id ];
+      const newCount = state[action.newCartItem.id]?.quantity ? state[action.newCartItem.id].quantity + 1 : 1;
+      console.log("newCount?????x?????", newCount)
+      const newOrder = state.order.includes(action.newCartItem.id) ? state.order : [ ...state.order, action.newCartItem.id ];
       console.log("newOrder", newOrder)
       newState.order = newOrder
       newState.showCart = true
-      newState[action.id] = {
-            id: action.id,
+      newState[action.newCartItem.id] = {
+            id: action.newCartItem.id,
             count: newCount}
       return newState
       // return {
