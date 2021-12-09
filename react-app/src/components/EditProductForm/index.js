@@ -10,7 +10,7 @@ const EditProductForm = () =>{
   // const product = useSelector((state) => state?.product[productId])
   const product = useSelector((state) => state?.product[productId] ? state?.product[productId] : "")
   
-  console.log('========= ', product)
+  // console.log('========= ', product)
   // console.log('the title:', product?.title)
   const [title, setTitle] = useState(product?.title ? product?.title : "");
   // console.log('!!!!!!!!',product?.title)
@@ -72,26 +72,12 @@ const EditProductForm = () =>{
       // setErrors(editedProduct)
       history.push(`/products/${editedProduct.id}`);
     }
-    // console.log('------->', product);
+
     if (!product) return null;
-    // setDescription(product?.description)
-    // console.log('------->', product);
-    // return await dispatch(editAProduct(payload, productId))
-    //   .then((response) => {
-    //     if (response) {
-    //       setErrors([]);
-    //       console.log('hello there, I\'m here')
-    //       history.push(`/products/${productId}`);
-    //     }
-    //   })
-    //   .catch(async (response) => {
-    //     console.log('in errors block')
-    //     const data = await response.json();
-    //     if (data && data.errors) setErrors(data.errors);
-    //   })
+
   }
 
-  let categories = [[68887312,"Fine Art"], [68887366, "Handmade Holiday Items"],[68887482,"Handmade jewelry"]]
+  // let categories = [[68887312,"Fine Art"], [68887366, "Handmade Holiday Items"],[68887482,"Handmade jewelry"]]
 
   
 
