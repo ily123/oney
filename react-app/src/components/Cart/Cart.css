@@ -55,4 +55,5 @@ input[type="number"] {
   transition: all 0.2s linear;
   background-color: whitesmoke;
   box-shadow: 0px 0 8px 1px lightgray;
+  z-index: 3;
 }

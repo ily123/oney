@@ -39,22 +39,24 @@ function CartItem({ item }) {
   }
 
   console.log("products in cart component", products)
+  const productsArray = Object?.values(products)
+  // console.log("products in cart component one ", productsArray[0].title)
 
-  
 
 
-  // const getProductTitle = (item_id) => {
 
-  //   const productTitle = products.filter(function(el){
-  //     return el.id === item_id
-  //   });
-  //   if (getProductTitle) {
-  //     return productTitle[0]?.title
-  //   }
-  //   else {
-  //     return null
-  //   }
-  // }
+  const getProductTitle = (item_id) => {
+
+    const productTitle = productsArray.filter(function(el){
+      return el.id === item_id
+    });
+    if (getProductTitle) {
+      return productTitle[0]?.title
+    }
+    else {
+      return null
+    }
+  }
 
 
   // item.product_id is where the product name should be defined
@@ -64,7 +66,7 @@ function CartItem({ item }) {
       <div className="cart-item-header">
         {/* {item.product_id} */}
         {
-          // getProductTitle(item.product_id)
+          getProductTitle(item.product_id)
         }
       </div>
       <div className="cart-item-menu">
