@@ -3,7 +3,10 @@
 
 <div align="center">👉👉👉 <a href="https://shoponey.herokuapp.com/">Live Website Deployed Here</div>
 
----
+## Screenshots of App in Action
+
+❌Will add screen shots once we are done❌
+
 ## Summary of main features
 
 [Oney](https://shoponey.herokuapp.com/) includes MVP functionality for the following features:
@@ -23,3 +26,18 @@
 	- Customers can check out their cart
 - ❌ Search ❌
 	- Users can search products by name and description
+
+## Tech details
+
+The app is a combination of a Python back-end, wrapped over a relational database, and a React front-end.
+
+- Database
+	- **PostgresQL** as the main (and only) data store
+	- **SQLAlchemy** for object mapping
+	- **Alembic** for easy migration management
+- Back-end API (Python)
+	- **Flask** with assorted libraries such as **WTForms**
+	- Served with **gunicorn** from a **Docker** container
+- Front-end client (JavaScript)
+	- UI is written in **React** using functional components
+	- **Redux** state management
