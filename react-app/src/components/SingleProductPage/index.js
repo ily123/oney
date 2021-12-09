@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useHistory, NavLink } from 'react-router-dom';
 import { getOneProduct, deleteProduct, clearProducts} from '../../store/product'
 import './singleProduct.css'
-
 import HideReviewForm from '../HideReviewForm';
-
+import { addToCart } from '../../store/cart';
 
 function SingleProductPage(){
     const history = useHistory();
     const dispatch = useDispatch()
+    const cartItem = {};
 
     const productObject = useSelector((state)=>state.product)
     const indProjObj = Object.values(productObject)[0]
@@ -20,6 +20,9 @@ function SingleProductPage(){
     // console.log('sessionUser: ', sessionUser)
 
     const {productId} = useParams()
+
+    // const sessionUser = useSelector((state) => state.session);
+    // const user_id = sessionUser?.id
 
     // console.log("product-raw", productObject)
     // console.log("product-values", product)
@@ -57,6 +60,7 @@ function SingleProductPage(){
     // console.log('imageGroupsArr: ', imageGroupsArr)
     // get array of the second image in each grouping
     const images = imageGroupsArr?.map((arr) => {
+        // console.log('arr ',arr,'arr[0]: ',arr[1], 'arr[1]',arr[0])
         if (arr.length > 2) {
             return arr[1]
         } else {
@@ -64,11 +68,15 @@ function SingleProductPage(){
         }
     })
 
+    // const addToCart = (user_id) => {
+    //     history.push(`/users/${user_id}/cart`)
+    // }
+
 // console.log('!!!!!',Object.values(product[0]?.images[0])[0])
     return(
         <div>
             <div className='editBackBtnDiv'>
-                <NavLink to={`/`} 
+                <NavLink to={`/`}
                 className='editProdCancel singleProdBack'
                 >Back to Main</NavLink> 
             </div>
@@ -107,15 +115,21 @@ function SingleProductPage(){
                     <div>
                         <div>
                             {sessionUser &&
-                                <button className='submitBtn' >
+                                // <button className='submitBtn' >
+                                //     Add to Cart
+                                // </button>
+                                <button id='addToCartBtn'
+                                    className={(cartItem ? " selected" : "")} 
+                                    onClick={() => dispatch(addToCart(+productId))}
+                                    >
                                     Add to Cart
                                 </button>
                             }
                         </div>
                         {!sessionUser &&
-                                <button onClick={() => handleAddCartNonUser()} className='submitBtn' >
-                                    Add to Cart
-                                </button>
+                            <button onClick={() => handleAddCartNonUser()} className='submitBtn' >
+                                Add to Cart
+                            </button>
                         }
                     </div>
                     <div className='singleProdBottomBtnsDiv'>

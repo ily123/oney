@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify, request
+from app.models import Product, db, Cart
+from app.forms import NewProductForm
 from app.forms import EditProductForm
-from app.models import Product, db
+
 from flask_login import current_user
 from app.forms import NewProductForm
 
@@ -72,7 +74,7 @@ def delete_product(id):
 #   db.session.delete(product)
 #   db.session.commit()
 #   return 'deleted'
-  
+
 @product_routes.route('/new', methods=['POST'])
 def add_new_product():
   currentUser = current_user.to_dict()
@@ -99,3 +101,16 @@ def add_new_product():
     return product.to_dict()
   else:
     return "Bad Data"
+
+
+
+# to get products in current user's cart
+@product_routes.route('/cart/<int:user_id>',methods=['GET'])
+def get_products_in_cart(user_id):
+  products = Product.query.filter(Product.id == Cart.product_id).all()
+  if products:
+    products = {p.id : p.to_dict() for p in products}
+    return products
+  else:
+    return {'message': 'items in cart not found'}
+# where product.id = cart's product_id

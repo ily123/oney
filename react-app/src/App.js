@@ -14,6 +14,7 @@ import EditOneReview from './components/EditOneReview';
 import Top20Products from './components/Top20Products';
 import AddProductForm from './components/AddProductForm'
 import CategoryPage from './components/CategoryPage';
+import Cart from './components/Cart';
 import CategoryCard from './components/CategoryCard';
 
 function App() {
@@ -63,6 +64,9 @@ function App() {
         <Route path='/category/:categoryId' exact={true} >
           <CategoryPage />
         </Route>
+        {/* <Route path='/users/:userId/cart' exact={true} >
+          <Cart />
+        </Route> */}
         <ProtectedRoute path='/new-product' exact={true}>
           <AddProductForm />
         </ProtectedRoute>
