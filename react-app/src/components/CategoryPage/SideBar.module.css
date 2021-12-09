@@ -1,9 +1,16 @@
 .sideBar {
-  border: 1px red solid;
   min-width: 200px;
   font-family: "Roboto";
-  font-style: thin;
-  font-weight: 100;
+  font-style: light;
+  font-weight: 300;
+}
+
+.sideBar a {
+  color: var(--text-color);
+}
+
+.sideBar .active {
+  color: var(--orange);
 }
 
 @media (max-width: 800px) {

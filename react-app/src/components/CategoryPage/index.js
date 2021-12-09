@@ -11,6 +11,7 @@ export default function CategoryPage() {
   const dispatch = useDispatch();
   const products = useSelector(state => state.category.products)
   const categories = useSelector(state => state.category.flat)
+  const tree = useSelector(state => state.category.tree)
   
   useEffect(() => {
     dispatch(fetchProductsForCategory(categoryId))
@@ -24,7 +25,7 @@ export default function CategoryPage() {
       <h2>{category.page_tile}</h2>
       <p>{category.page_description}</p>
       <div className={styles.sideBarCardAreaWrapper}>
-        <SideBar categories={categories} categoryId={categoryId}/>
+        <SideBar categories={categories} tree={tree} categoryId={categoryId} />
         <div className={styles.cardArea}>
           {Object.values(products).map(product => {
             return <ProductCardXL key={product.id} product={product}/>
