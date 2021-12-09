@@ -2,14 +2,28 @@
   border: 1px blue solid;
   max-width: 1500px;
   display: flex;
+  flex-direction: column;
+}
+
+.sideBarCardAreaWrapper {
+  display: flex;
 }
 
 .cardArea {
-  max-width: 1100px;
+  max-width: 900px;
   border: 3px green solid;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
   row-gap: 20px;
+}
+
+.sideBar {
+  border: 1px red solid;
+}
+@media (max-width: 800px) {
+  .sideBar {
+    display: none;
+  }
 }

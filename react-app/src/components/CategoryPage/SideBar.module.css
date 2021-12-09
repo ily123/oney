@@ -1,0 +1,10 @@
+.sideBar {
+  border: 1px red solid;
+  min-width: 200px;
+}
+
+@media (max-width: 800px) {
+  .sideBar {
+    display: none;
+  }
+}
