@@ -46,6 +46,20 @@ const EditProductForm = () =>{
     }
   }, [dispatch, product])
 
+  useEffect(() => {
+    const validationErrs = [];
+    if(title.length < 3 || !title) validationErrs.push("A title is required")
+    console.log('this is the title: ', title)
+    if(!description) validationErrs.push("A description is required")
+    if(price > 1000 || price < 1) validationErrs.push("Price must be at least $1")
+    console.log('This is the price:', price)
+    if(!category) validationErrs.push("Please select a category!")
+
+    setErrors(validationErrs)
+    console.log('validationErrs: ',validationErrs)
+  },[title,description,price,category])
+  console.log('errors: ',errors)
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = {
@@ -102,12 +116,14 @@ const EditProductForm = () =>{
           <input
           onChange={(e)=>setTitle(e.target.value)}
           defaultValue={title}
+          type="text"
           required
           />
         <label htmlFor='Description'>Description</label>
           <textarea
           onChange={(e)=>setDescription(e.target.value)}
           defaultValue={description}
+          type="text"
           required
           />
         <label> Category </label>
