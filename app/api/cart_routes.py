@@ -63,8 +63,8 @@ def delete_cart_item(user_id, id):
     cartItem = Cart.query.get(id)
     currentUser = current_user.to_dict()
     print("current userEdit-----------", currentUser['id'])
-    print(" review-----------", review.user_id)
-    if currentUser['id'] == cart_item.user_id:
+    print(" review-----------", cartItem.user_id)
+    if currentUser['id'] == cartItem.user_id:
       db.session.delete(cartItem)
       db.session.commit()
       return "deleted"

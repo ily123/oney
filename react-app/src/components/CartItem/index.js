@@ -90,6 +90,12 @@ function CartItem({ item}) {
     dispatch(updateCartThunk(editItem, id, user_id))
   }
 
+  const handleDeleteCartItem = async(e) => {
+    e.preventDefault();
+    dispatch(deleteCartItem(item.id, user_id));
+
+  }
+
 
   return (
     <>
@@ -126,7 +132,7 @@ function CartItem({ item}) {
 
             <button
               className="cart-item-button"
-              onClick={() => dispatch(deleteCartItem(item.id))}
+              onClick={handleDeleteCartItem}
             >
               Remove
             </button>

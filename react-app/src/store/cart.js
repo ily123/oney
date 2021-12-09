@@ -93,6 +93,8 @@ export const addToCartThunk = (formData, user_id) => async (dispatch) => {
 // thunk to remove an item in the cart completely
 export const deleteCartItem = (id, user_id) => async(dispatch) => {
 
+  console.log("hit delete thunk")
+
   const response = await fetch(`/api/carts/${user_id}/items/${id}`, {
     method: 'DELETE',
   });
