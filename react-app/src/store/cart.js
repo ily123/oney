@@ -90,8 +90,31 @@ export const addToCartThunk = (formData, user_id) => async (dispatch) => {
 }
 
 
+// thunk to decrement item in cart
+// export const decrementItemQuantityCartThunk = (editItem, id, user_id) => async(dispatch) => {
 
-// thunk to update cart
+//   const response = await fetch(`/api/carts/${user_id}/items/${id}`, {
+//     method: 'PUT',
+//     headers: {
+//       'Content-Type':'application/json'
+//   },
+//     body: JSON.stringify(editItem)
+//   });
+
+//   console.log("editItem in thunk", editItem)
+
+
+//   const editedItem = await response.json();
+
+//   console.log("editedItem in thunk", editedItem)
+//   dispatch(editItemAction(editedItem, id))
+//   return editedItem
+
+
+// }
+
+
+// thunk to update cart // works!! :)
 export const updateCartThunk = (editItem, id, user_id) => async(dispatch) => {
 
   const response = await fetch(`/api/carts/${user_id}/items/${id}`, {

@@ -62,7 +62,7 @@ function CartItem({ item}) {
   let id = item.id // the id of the cart with the item
   let product_id = item.product_id
   // console.log("user_id before handleSubmit", user_id)
-  const handleSubmit = async(e) => {
+  const handleIncreaseQuantity = async(e) => {
     e.preventDefault();
 
     await setQuantity(() => {
@@ -75,6 +75,24 @@ function CartItem({ item}) {
     console.log("handlesubmit", editItem, quantity)
     dispatch(updateCartThunk(editItem, id, user_id))
   }
+
+
+  const handleDecreaseQuantity = async(e) => {
+    e.preventDefault();
+
+    await setQuantity(() => {
+      return quantity -= 1
+    })
+
+     let editItem = {
+      id, user_id, product_id, quantity
+    }
+    console.log("handlesubmit", editItem, quantity)
+    dispatch(updateCartThunk(editItem, id, user_id))
+  }
+
+
+
 
 
 
@@ -92,6 +110,8 @@ function CartItem({ item}) {
       // onSubmit={handleSubmit}
       >
         <div className="cart-item-menu">
+
+
         <label>
             <input
               className="cart-item"
@@ -104,16 +124,32 @@ function CartItem({ item}) {
         </label>
         <button
         className="cart-item-button"
-          onClick={handleSubmit}
+          onClick={handleIncreaseQuantity}
         >+</button>
 
 
         <button
+        className="cart-item-button"
+          onClick={handleDecreaseQuantity}
+        >-</button>
+
+
+
+
+        {/* <button
           className="cart-item-button"
           onClick={() => dispatch(decrement(item.id))}
         >
           -
-        </button>
+        </button> */}
+
+
+
+
+
+
+
+
         <button
           className="cart-item-button"
           onClick={() => dispatch(removeFromCart(item.id))}
