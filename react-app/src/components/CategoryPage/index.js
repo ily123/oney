@@ -1,6 +1,6 @@
+import styles from './CategoryPage.module.css';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import ProductCard from '../ProductCard';
 import ProductCardXL from './ProductCardXL';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductsForCategory } from '../../store/category';
@@ -16,13 +16,14 @@ export default function CategoryPage() {
 
   if (!products) return null
 
-  //return <ProductCard id={product.id} price={product.price} images={product.images} />
   return (
-    <div>
+    <div className={styles.categoryPageWrapper}>
       <h2>{`Description for category ${categoryId} will go here.`}</h2>
-      {Object.values(products).map(product => {
-        return <ProductCardXL product={product}/>
-      })}
+      <div className={styles.cardArea}>
+        {Object.values(products).map(product => {
+          return <ProductCardXL product={product}/>
+        })}
+      </div>
     </div>
   )
 }

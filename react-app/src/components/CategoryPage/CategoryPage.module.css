@@ -1,0 +1,14 @@
+.categoryPageWrapper {
+  border: 1px blue solid;
+  max-width: 1500px;
+  display: flex;
+}
+
+.cardArea {
+  max-width: 1200px;
+  border: 3px green solid;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  row-gap: 20px;
+}
