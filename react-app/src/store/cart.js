@@ -42,10 +42,10 @@ export const removeFromCart = (id) => ({
   id,
 });
 
-export const decrement = (id) => ({
-  type: DECREMENT,
-  id,
-});
+// export const decrement = (id) => ({
+//   type: DECREMENT,
+//   id,
+// });
 
 export const updateCount = (id, count) => ({
   type: UPDATE_COUNT,
@@ -90,28 +90,18 @@ export const addToCartThunk = (formData, user_id) => async (dispatch) => {
 }
 
 
-// thunk to decrement item in cart
-// export const decrementItemQuantityCartThunk = (editItem, id, user_id) => async(dispatch) => {
+// thunk to remove an item in the cart completely
+export const deleteCartItem = (id, user_id) => async(dispatch) => {
 
-//   const response = await fetch(`/api/carts/${user_id}/items/${id}`, {
-//     method: 'PUT',
-//     headers: {
-//       'Content-Type':'application/json'
-//   },
-//     body: JSON.stringify(editItem)
-//   });
+  const response = await fetch(`/api/carts/${user_id}/items/${id}`, {
+    method: 'DELETE',
+  });
 
-//   console.log("editItem in thunk", editItem)
+  if(response.ok) {
+    dispatch(removeFromCart(id))
+  }
 
-
-//   const editedItem = await response.json();
-
-//   console.log("editedItem in thunk", editedItem)
-//   dispatch(editItemAction(editedItem, id))
-//   return editedItem
-
-
-// }
+}
 
 
 // thunk to update cart // works!! :)
@@ -182,24 +172,24 @@ export default function cartReducer(state = { order: [], showCart: false }, acti
       delete newState[action.id];
       return newState;
     }
-    case DECREMENT:
-      if (state[action.id].count > 1) {
-        const newCount = state[action.id].count - 1;
-        return {
-          ...state,
-          [action.id]: {
-            id: action.id,
-            count: newCount,
-          },
-        };
-      } else {
-        const index = state.order.indexOf(action.id);
-        const newOrder = [ ...state.order.slice(0, index), ...state.order.slice(index + 1) ];
+    // case DECREMENT:
+    //   if (state[action.id].count > 1) {
+    //     const newCount = state[action.id].count - 1;
+    //     return {
+    //       ...state,
+    //       [action.id]: {
+    //         id: action.id,
+    //         count: newCount,
+    //       },
+    //     };
+    //   } else {
+    //     const index = state.order.indexOf(action.id);
+    //     const newOrder = [ ...state.order.slice(0, index), ...state.order.slice(index + 1) ];
 
-        const newState = { ...state, order: newOrder };
-        delete newState[action.id];
-        return newState;
-      }
+    //     const newState = { ...state, order: newOrder };
+    //     delete newState[action.id];
+    //     return newState;
+    //   }
     case UPDATE_COUNT:
       if (action.count > 0) {
         return {

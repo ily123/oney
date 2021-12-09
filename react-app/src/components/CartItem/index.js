@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart, addToCart, decrement, updateCount } from '../../store/cart';
-import { updateCartThunk } from '../../store/cart';
+import { updateCartThunk, deleteCartItem } from '../../store/cart';
 
 function CartItem({ item}) {
   const dispatch = useDispatch();
@@ -92,74 +91,52 @@ function CartItem({ item}) {
   }
 
 
-
-
-
-
   return (
     <>
 
       <div className="cart-item-header">
         {getProductTitle(item.product_id)}
-        {item.quantity}
       </div>
-{
-      item.id?
+      {
+        item.id?
 
-      <form
-      // onSubmit={handleSubmit}
-      >
-        <div className="cart-item-menu">
+        <form>
+          <div className="cart-item-menu">
 
+            <label>
+                <input
+                  className="cart-item"
+                  type="number"
+                  placeholder="quantity"
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                />
+            </label>
 
-        <label>
-            <input
-              className="cart-item"
-              type="number"
-              placeholder="quantity"
-              value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
-            />
-             {/* </input> */}
-        </label>
-        <button
-        className="cart-item-button"
-          onClick={handleIncreaseQuantity}
-        >+</button>
+            <button
+            className="cart-item-button"
+              onClick={handleIncreaseQuantity}
+            >+
+            </button>
 
+            <button
+            className="cart-item-button"
+              onClick={handleDecreaseQuantity}
+            >-</button>
 
-        <button
-        className="cart-item-button"
-          onClick={handleDecreaseQuantity}
-        >-</button>
+            <button
+              className="cart-item-button"
+              onClick={() => dispatch(deleteCartItem(item.id))}
+            >
+              Remove
+            </button>
 
-
-
-
-        {/* <button
-          className="cart-item-button"
-          onClick={() => dispatch(decrement(item.id))}
-        >
-          -
-        </button> */}
-
-
-
-
-
-
-
-
-        <button
-          className="cart-item-button"
-          onClick={() => dispatch(removeFromCart(item.id))}
-        >
-          Remove
-        </button>
-
-  </div>
+          </div>
         </form>
-        : null}
+
+        : null
+      }
+
 
 
       </>
