@@ -38,7 +38,7 @@ function CartItem({ item }) {
     return null
   }
 
-  console.log("products in cart component", products)
+  // console.log("products in cart component", products)
   const productsArray = Object?.values(products)
   // console.log("products in cart component one ", productsArray[0].title)
 
