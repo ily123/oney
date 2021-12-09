@@ -1,21 +1,33 @@
 import React, { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams} from 'react-router-dom';
-import {getOneProduct, clearProducts} from '../../store/product'
+import { useParams, useHistory, NavLink } from 'react-router-dom';
+import { getOneProduct, deleteProduct, clearProducts} from '../../store/product'
 import './singleProduct.css'
 
 import HideReviewForm from '../HideReviewForm';
 
 
 function SingleProductPage(){
+    const history = useHistory();
     const dispatch = useDispatch()
 
     const productObject = useSelector((state)=>state.product)
+    const indProjObj = Object.values(productObject)[0]
+    // console.log('productObject: ',productObject)
+    // console.log('indProjObj: ',indProjObj)
+    const sessionUser = useSelector((state) => state.session.user);
+
+    // console.log('sessionUser: ', sessionUser)
 
     const {productId} = useParams()
 
     // console.log("product-raw", productObject)
     // console.log("product-values", product)
+
+    const handleDelete = async(productId) => {
+        await dispatch(deleteProduct(productId));
+        history.push('/')
+    }
 
     useEffect(()=>{
         dispatch(getOneProduct(productId))
@@ -30,18 +42,17 @@ function SingleProductPage(){
     // get the second item
     const productImgsObj = Object.values(productObject)[0]
     // console.log('productImgsObj: ',productImgsObj)
-    const prodImgsArr = Object.values(productImgsObj.images)
+    const prodImgsArr = Object.values(productImgsObj?.images)
     // console.log('prodImgsArr: ', prodImgsArr)
 
      // grouping of images
     const imageGroupsArr = prodImgsArr?.map((obj) => {
         return Object.values(obj)
     })
-    console.log('imageGroupsArr ',imageGroupsArr)
+    // console.log('imageGroupsArr ',imageGroupsArr)
     // console.log('imageGroupsArr: ', imageGroupsArr)
     // get array of the second image in each grouping
     const images = imageGroupsArr?.map((arr) => {
-        console.log('arr ',arr,'arr[0]: ',arr[1], 'arr[1]',arr[0])
         if (arr.length > 2) {
             return arr[1]
         } else {
@@ -51,8 +62,12 @@ function SingleProductPage(){
 
 // console.log('!!!!!',Object.values(product[0]?.images[0])[0])
     return(
-
         <div>
+            <div className='editBackBtnDiv'>
+                <NavLink to={`/`} 
+                className='editProdCancel singleProdBack'
+                >Back</NavLink> 
+            </div>
             <div className='mainImagesBox'>
                 <div className='smallImagesBox'>
                     {images.length ?
@@ -86,9 +101,19 @@ function SingleProductPage(){
                         </div>
                     </div>
                     <div>
-                        <button>
+                        <button className='submitBtn' >
                             Add to Cart
                         </button>
+                    </div>
+                    <div className='singleProdBottomBtnsDiv'>
+                        <div className='singleProdUpdateDiv'>
+                            {sessionUser && sessionUser?.id === indProjObj?.user_id &&
+                                <NavLink to={`/products/${productId}/edit`} className='editProdCancel'>Update</NavLink> 
+                            }
+                        </div>
+                        {sessionUser && sessionUser?.id === indProjObj?.user_id &&
+                            <button onClick={() => handleDelete(indProjObj?.id)} className='delButton editProdCancel'>Delete Product</button>
+                        }
                     </div>
                 </div>
             </div>
