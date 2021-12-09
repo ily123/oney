@@ -4,9 +4,9 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategoryTree } from '../../store/category';
 
-export default function CategoryDropDown() { 
+export default function CategoryDropDown() {
   const [loaded, setLoaded] = useState(false);
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
   const root = useSelector(state => state.category.tree)
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function CategoryDropDown() {
       await dispatch(fetchCategoryTree())
     }
     loadData();
-    setLoaded(true);   
+    setLoaded(true);
   }, [dispatch])
 
   if (!loaded || !root) return null;
@@ -26,13 +26,13 @@ export default function CategoryDropDown() {
   flat_categories.forEach(category => {
     // console.log(`${category.id} ${category.short_name}`)
   })
-  
+
   const NUM_CATEG_TO_SHOW = 9;
   return (
     <ul className={styles.categoryList}>
       {(root.children.slice(0, NUM_CATEG_TO_SHOW).map(category => {
         return (
-          <li><Menu key={category.id} category={category}/></li>
+          <li key={"navLiCategory-"+category.id}><Menu key={"navMenuCategory-"+category.id} category={category}/></li>
         )
       }))}
     </ul>
@@ -45,7 +45,7 @@ function Menu({ category }) {
   const closeMenu = () => setShowMenu(false)
 
   return (
-    <div 
+    <div
       onMouseOver={openMenu} onMouseLeave={closeMenu}
       className={styles.dropdownWrapper}
     >
