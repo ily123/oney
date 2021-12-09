@@ -174,24 +174,7 @@ export default function cartReducer(state = { order: [], showCart: false }, acti
       delete newState[action.id];
       return newState;
     }
-    // case DECREMENT:
-    //   if (state[action.id].count > 1) {
-    //     const newCount = state[action.id].count - 1;
-    //     return {
-    //       ...state,
-    //       [action.id]: {
-    //         id: action.id,
-    //         count: newCount,
-    //       },
-    //     };
-    //   } else {
-    //     const index = state.order.indexOf(action.id);
-    //     const newOrder = [ ...state.order.slice(0, index), ...state.order.slice(index + 1) ];
 
-    //     const newState = { ...state, order: newOrder };
-    //     delete newState[action.id];
-    //     return newState;
-    //   }
     case UPDATE_COUNT:
       if (action.count > 0) {
         return {
