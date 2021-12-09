@@ -5,6 +5,29 @@ import { editAProduct, getOneProduct } from "../../store/product";
 
 
 const EditProductForm = () =>{
+  const categoryTree = useSelector(state=>state.category.tree)
+
+    let categoryList = []
+    function generateAllCategories(category, path){
+        if (!category) return
+        let pathCopy = path.slice()
+        if (category.id !== "root" && category.id !== null) {
+            pathCopy.push(category.short_name)
+            categoryList.push(
+                {
+                    "id": category.id,
+                    "display_name": pathCopy.join('-')
+                }
+            )
+        }
+        let children = category.children
+        children.forEach(childCategory => {
+            generateAllCategories(childCategory,pathCopy)
+        });
+    }
+
+    generateAllCategories(categoryTree,[])
+
   const params = useParams();
   const { productId } = params;
   // const product = useSelector((state) => state?.product[productId])
@@ -54,7 +77,7 @@ const EditProductForm = () =>{
     if(!category) validationErrs.push("Please select a category!")
 
     setErrors(validationErrs)
-  },[title,description,price,category])
+  },[title, description, price, category])
 
 
   const handleSubmit = async (e) => {
@@ -110,6 +133,17 @@ const EditProductForm = () =>{
           required
           />
         <label> Category </label>
+          <select 
+            onChange={(e)=>setCategory(e.target.value)}
+            value={category}
+            >
+            {(categoryList.map(category => {
+              return (
+                <option key={"newProductFormCategory-"+category?.id} value={category.id}>{category.display_name}</option>
+              )
+            }))}
+          </select>
+        {/* <label> Category </label>
         <select 
           onChange={(e)=>setCategory(e.target.value)}
           value={category}
@@ -117,7 +151,7 @@ const EditProductForm = () =>{
           <option value= "68887312" >Fine Art</option>
           <option value= "68887366" >Handmade Holiday Items</option>
           <option value="68887482">Handmade jewelry</option>
-        </select>
+        </select> */}
         <label htmlFor='Price'>Price</label>
           <input
           onChange={(e)=>setPrice(e.target.value)}
