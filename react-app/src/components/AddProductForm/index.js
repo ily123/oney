@@ -6,15 +6,34 @@ import './AddProductForm.css'
 
 const AddProductForm = () =>{
 
-    const categoryTree = useSelector(state=>state.category)
-    console.log(categoryTree)
+    const categoryTree = useSelector(state=>state.category.tree)
+
+    let categoryList = []
+    function generateAllCategories(category, path){
+        if (!category) return
+        let pathCopy = path.slice()
+        if (category.id !== "root" && category.id !== null) {
+            pathCopy.push(category.short_name)
+            categoryList.push(
+                {
+                    "id": category.id,
+                    "display_name": pathCopy.join('-')
+                }
+            )
+        }
+        let children = category.children
+        children.forEach(childCategory => {
+            generateAllCategories(childCategory,pathCopy)
+        });
+    }
+
+    generateAllCategories(categoryTree,[])
 
     const [title,setTitle] = useState('');
     const [description,setDescription] = useState('')
     const [price, setPrice] = useState('')
-    const [category,setCategory] = useState('68887312')
+    const [category,setCategory] = useState(categoryList[0]?.id)
     const [image,setImage] = useState('')
-
 
 
     const dispatch = useDispatch();
@@ -63,9 +82,11 @@ const AddProductForm = () =>{
                 <div>
                 <label> Category </label>
                 <select onChange={(e)=>setCategory(e.target.value)}>
-                    <option value= "68887312" >Fine Art</option>
-                    <option value= "68887366" >Handmade Holiday Items</option>
-                    <option value="68887482">Handmade jewelry</option>
+                    {(categoryList.map(category => {
+                        return (
+                            <option key={"newProductFormCategory-"+category.id} value={category.id}>{category.display_name}</option>
+                        )
+                    }))}
                 </select>
                 </div>
                 <div>
