@@ -5,7 +5,7 @@ import { updateCartThunk } from '../../store/cart';
 
 function CartItem({ item}) {
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState(item.quantity);
+  let [quantity, setQuantity] = useState(item.quantity);
   const [products, setProducts] = useState([])
   const [rating, setRating] = useState('')
 
@@ -62,20 +62,21 @@ function CartItem({ item}) {
   let id = item.id // the id of the cart with the item
   let product_id = item.product_id
   // console.log("user_id before handleSubmit", user_id)
-  // const handleSubmit = async(e) => {
-  //   e.preventDefault();
+  const handleSubmit = async(e) => {
+    e.preventDefault();
 
-  //   const editItem = {
-  //     id, user_id, product_id, quantity
-  //   }
-  //   console.log("handlesubmit", editItem)
-  //   dispatch(updateCartThunk(editItem, id, user_id))
-  // }
+    await setQuantity(() => {
+      return quantity += 1
+    })
 
-
-  const editItem = {
-    id, user_id, product_id, quantity
+     let editItem = {
+      id, user_id, product_id, quantity
+    }
+    console.log("handlesubmit", editItem, quantity)
+    dispatch(updateCartThunk(editItem, id, user_id))
   }
+
+
 
   return (
     <>
@@ -97,13 +98,13 @@ function CartItem({ item}) {
               type="number"
               placeholder="quantity"
               value={quantity}
-              onChange={(e) => setQuantity(e.target.value + 1)}
+              onChange={(e) => setQuantity(e.target.value)}
             />
              {/* </input> */}
         </label>
         <button
         className="cart-item-button"
-          onClick={(e) => updateCartThunk(editItem, id, user_id)}
+          onClick={handleSubmit}
         >+</button>
 
 

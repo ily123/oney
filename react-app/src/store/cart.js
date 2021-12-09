@@ -30,9 +30,11 @@ const loadAllCartItems = (cartItems, user_id) => ({
 })
 
 const editItemAction = (editedItem, id) => ({
-  type: ADD_TO_CART,
+  type: UPDATE_COUNT,
+  payload: {
   editedItem,
   id
+  }
 })
 
 export const removeFromCart = (id) => ({
