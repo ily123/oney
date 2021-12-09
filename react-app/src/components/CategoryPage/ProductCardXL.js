@@ -15,7 +15,8 @@ export default function ProductCardXL({ product }) {
             {product.title}
           </div>
           <div className={styles.productInfo}> 
-            {product.title}
+            <span><i className="fas fa-heart"></i>{` ${product.num_favorers}`}</span>
+            <span>$4.99</span>
           </div>
         </figcaption>
       </figure>
