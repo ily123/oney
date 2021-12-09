@@ -15,7 +15,7 @@ const Navigation = () => {
     sessionLinks = (
       <ul className="nav2">
         <li>
-          <span className="hiUser"> Welcome {sessionUser.username} !! </span>
+          <span className="hiUser"> Welcome {sessionUser.username}! </span>
         </li>
         <li>
           <i className="fas fa-shopping-cart"></i>

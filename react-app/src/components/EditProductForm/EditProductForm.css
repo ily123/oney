@@ -82,8 +82,9 @@
 }
 
 .editProdCancel:hover {
-  color:rgb(87, 87, 87);
-  text-decoration: none;
+  /* color:rgb(87, 87, 87); */
+  /* text-decoration: none; */
+  /* color: orangered; */
 }
 
 .bottomButtons {
@@ -93,3 +94,4 @@
   padding: 10px;
   align-items: center;
 }
+

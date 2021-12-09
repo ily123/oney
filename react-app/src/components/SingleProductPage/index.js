@@ -29,6 +29,10 @@ function SingleProductPage(){
         history.push('/')
     }
 
+    const handleAddCartNonUser = async () => {
+        history.push('/login')
+    }
+
     useEffect(()=>{
         dispatch(getOneProduct(productId))
         dispatch(clearProducts())
@@ -66,7 +70,7 @@ function SingleProductPage(){
             <div className='editBackBtnDiv'>
                 <NavLink to={`/`} 
                 className='editProdCancel singleProdBack'
-                >Back</NavLink> 
+                >Back to Main</NavLink> 
             </div>
             <div className='mainImagesBox'>
                 <div className='smallImagesBox'>
@@ -101,18 +105,27 @@ function SingleProductPage(){
                         </div>
                     </div>
                     <div>
-                        <button className='submitBtn' >
-                            Add to Cart
-                        </button>
+                        <div>
+                            {sessionUser &&
+                                <button className='submitBtn' >
+                                    Add to Cart
+                                </button>
+                            }
+                        </div>
+                        {!sessionUser &&
+                                <button onClick={() => handleAddCartNonUser()} className='submitBtn' >
+                                    Add to Cart
+                                </button>
+                        }
                     </div>
                     <div className='singleProdBottomBtnsDiv'>
-                        <div className='singleProdUpdateDiv'>
+                        <div className='singleProdUpdateDiv updateProductBtnDiv'>
                             {sessionUser && sessionUser?.id === indProjObj?.user_id &&
-                                <NavLink to={`/products/${productId}/edit`} className='editProdCancel'>Update</NavLink> 
+                                <NavLink to={`/products/${productId}/edit`} className='updateProdButton'>Update</NavLink> 
                             }
                         </div>
                         {sessionUser && sessionUser?.id === indProjObj?.user_id &&
-                            <button onClick={() => handleDelete(indProjObj?.id)} className='delButton editProdCancel'>Delete Product</button>
+                            <button onClick={() => handleDelete(indProjObj?.id)} className='delButton '>Delete Product</button>
                         }
                     </div>
                 </div>
