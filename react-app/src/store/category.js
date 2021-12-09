@@ -1,9 +1,17 @@
 const SET_CATEGORY_TREE = "category/SET_CATEGORY_TREE";
+const SET_CATEGORIES = "category/SET_CATEGORIES";
 const SET_PRODUCTS = "category/UPDATE_PRODUCTS";
 
 const setTree = (tree) => {
   return {
     type: SET_CATEGORY_TREE,
+    tree
+  }
+}
+
+const setCategoriesNormalized = (tree) => {
+  return {
+    type: SET_CATEGORIES,
     tree
   }
 }
@@ -21,6 +29,7 @@ export const fetchCategoryTree = () => async (dispatch) => {
     const tree = await response.json()
     if (tree.errors) return
     dispatch(setTree(tree))
+    dispatch(setCategoriesNormalized(tree))
   }
 }
 
@@ -35,6 +44,7 @@ export const fetchProductsForCategory = (categoryId) => async (dispatch) => {
 
 const initialState = {
   tree: null,
+  flat: null,
   products: null
 }
 export default function reducer(state = initialState, action) {
@@ -42,6 +52,20 @@ export default function reducer(state = initialState, action) {
     case SET_CATEGORY_TREE: {
       const { tree } = action
       return { ...state, tree } 
+    }
+    case SET_CATEGORIES: {
+      const { tree } = action
+      // normalize category tree into key-val object
+      // this only works because there are just 2 levels 
+      // update to bfs later, or normalize on the backend
+      const flat = {}
+      tree.children.forEach(category => {
+        flat[category.id] = category
+        category.children.forEach(child_category => {
+          flat[child_category.id] = child_category
+        })
+      })
+      return { ...state, flat }
     }
     case SET_PRODUCTS: {
       const { products } = action
