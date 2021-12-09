@@ -1,134 +1,64 @@
-# Flask React Project
+# Oney
+[Oney](https://shoponey.herokuapp.com/) is a shopping web-app for handmade products. You can check out the web site by going to the link below.
 
-This is the starter for the Flask React project.
+<div align="center">👉👉👉 <a href="https://shoponey.herokuapp.com/">Live Website Deployed Here</div>
 
-## Getting started
+## Screenshots of App in Action
 
-1. Clone this repository (only this branch)
+❌Will add screen shots once we are done❌
 
-   ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
-   ```
+## Summary of main features
 
-2. Install dependencies
+[Oney](https://shoponey.herokuapp.com/) includes MVP functionality for the following features:
+- Product listing
+		- Customers can add, edit, and delete their own products to the shop
+		- Customers can browse other users' product listings
+- Product reviews
+	- Customers can leave product review
+	- Customers can edit or delete their own reviews
+	- Customers can read reviews left by other users
+-  Product / Category browser
+	- All products belong to one of 253 categories and sub-categories
+	- Customers can browse products within specific categories using the category browser
+- ❌ Shopping car // WORK IN PROGRESS ❌
+	- Customers can add products to their shopping cart
+	- The shopping cart persists between visits
+	- Customers can check out their cart
+- ❌ Search ❌
+	- Users can search products by name and description
 
-      ```bash
-      pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
-      ```
+## Documentation (see wiki)
+Detailed documentation with the database schema, back-end routes, front-end routes, user stores, and feature overview can be found in the [wiki](https://github.com/ily123/oney/wiki) 🔥🔥🔥
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
-4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
+## Tech details
 
-5. Get into your pipenv, migrate your database, seed your database, and run your flask app
+The app is a combination of a Python back-end, wrapped over a relational database, and a React front-end.
 
-   ```bash
-   pipenv shell
-   ```
+- Database
+	- **PostgresQL** as the main (and only) data store
+	- **SQLAlchemy** for object mapping
+	- **Alembic** for easy migration management
+- Back-end API (Python)
+	- **Flask** with assorted libraries such as **WTForms**
+	- Served with **gunicorn** from a **Docker** container
+- Front-end client (JavaScript)
+	- UI is written in **React** using functional components
+	- **Redux** state management
 
-   ```bash
-   flask db upgrade
-   ```
+## FAQ
 
-   ```bash
-   flask seed all
-   ```
+- Is this repo licenced?
+	- Nope, free use.
 
-   ```bash
-   flask run
-   ```
+## Contribution
 
-6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
 
-***
-*IMPORTANT!*
-   If you add any python dependencies to your pipfiles, you'll need to regenerate your requirements.txt before deployment.
-   You can do this by running:
+- [Suchitra Mohan](https://github.com/suchimohan)
+- [Ilya Novikov](https://github.com/ily123)
+- [Caroline Sarki](https://github.com/Chocoloco123)
+- [Kelsy Sry](https://github.com/kelseysry)
 
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
 
-*ALSO IMPORTANT!*
-   psycopg2-binary MUST remain a dev dependency because you can't install it on apline-linux.
-   There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
-***
+## Mock data credit
 
-## Deploy to Heroku
-
-1. Before you deploy, don't forget to run the following command in order to
-ensure that your production environment has all of your up-to-date
-dependencies. You only have to run this command when you have installed new
-Python packages since your last deployment, but if you aren't sure, it won't
-hurt to run it again.
-
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
-
-2. Create a new project on Heroku
-3. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres"
-4. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
-5. Run
-
-   ```bash
-   heroku login
-   ```
-
-6. Login to the heroku container registry
-
-   ```bash
-   heroku container:login
-   ```
-
-7. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.
-   This should be the full URL of your Heroku app: i.e. "https://flask-react-aa.herokuapp.com"
-8. Push your docker container to heroku from the root directory of your project.
-   (If you are using an M1 mac, follow [these steps below](#for-m1-mac-users) instead, then continue on to step 9.)
-   This will build the Dockerfile and push the image to your heroku container registry.
-
-   ```bash
-   heroku container:push web -a {NAME_OF_HEROKU_APP}
-   ```
-
-9. Release your docker container to heroku
-
-      ```bash
-      heroku container:release web -a {NAME_OF_HEROKU_APP}
-      ```
-
-10. set up your database
-
-      ```bash
-      heroku run -a {NAME_OF_HEROKU_APP} flask db upgrade
-      heroku run -a {NAME_OF_HEROKU_APP} flask seed all
-      ```
-
-11. Under Settings find "Config Vars" and add any additional/secret .env
-variables.
-
-12. profit
-
-### For M1 Mac users
-
-(Replaces **Step 8**)
-
-1. Build image with linux platform for heroku servers. Replace
-{NAME_OF_HEROKU_APP} with your own tag:
-
-   ```bash=
-   docker buildx build --platform linux/amd64 -t {NAME_OF_HEROKU_APP} .
-   ```
-
-2. Tag your app with the url for your apps registry. Make sure to use the name
-of your Heroku app in the url and tag name:
-
-   ```bash=2
-   docker tag {NAME_OF_HEROKU_APP} registry.heroku.com/{NAME_OF_HEROKU_APP}/web
-   ```
-
-3. Use docker to push the image to the Heroku container registry:
-
-   ```bash=3
-   docker push registry.heroku.com/{NAME_OF_HEROKU_APP}/web
-   ```
+The app is seeded with mock data from this [paper](http://vision.is.tohoku.ac.jp/~kyamagu/research/etsy-dataset/).
