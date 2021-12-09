@@ -5,9 +5,10 @@
 }
 
 .cardArea {
-  max-width: 1200px;
+  max-width: 1100px;
   border: 3px green solid;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
   row-gap: 20px;

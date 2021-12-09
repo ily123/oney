@@ -19,6 +19,7 @@ export default function CategoryPage() {
   return (
     <div className={styles.categoryPageWrapper}>
       <h2>{`Description for category ${categoryId} will go here.`}</h2>
+
       <div className={styles.cardArea}>
         {Object.values(products).map(product => {
           return <ProductCardXL product={product}/>
