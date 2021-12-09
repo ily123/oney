@@ -62,23 +62,28 @@
 
 .delButton {
   border: 0;
-  padding: 0;
+  padding: 5px;
   background-color: white;
   font-size: 16px;
   cursor: pointer;
+  text-decoration: underline;
 }
 
 .delButton:hover {
   color: red;
-  text-decoration: underline;
+  /* background-color: rgb(226, 225, 225);
+  border-radius: 15px; */
+  /* padding: 5px; */
+  /* text-decoration: none; */
 }
 
 .singleProdBottomBtnsDiv {
   /* margin: 10px; */
   margin-top: 10px;
-  padding: 5px;
+  /* padding: 5px; */
   /* border:  solid 1px; */
-  /* display: flex; */
+  display: flex;
+  align-items: center;
   /* justify-content: space-around; */
 }
 
@@ -108,13 +113,14 @@
   /* background-color: gray;
   border-radius: 10px; */
   padding: 5px;
-  text-decoration: none;
+  text-decoration: underline;
   font-weight: normal;
 }
 
 .updateProdButton:hover {
-  text-decoration: none;
+  color: gray;
+  /* text-decoration: none; */
   /* color: white; */
-  background-color: rgb(226, 225, 225);
-  border-radius: 10px;
+  /* background-color: rgb(226, 225, 225);
+  border-radius: 15px; */
 }
