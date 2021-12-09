@@ -27,6 +27,9 @@
 - ❌ Search ❌
 	- Users can search products by name and description
 
+## Documentation (see wiki)
+Detailed documentation with the database schema, back-end routes, front-end routes, user stores, and feature overview can be found in the [wiki](https://github.com/ily123/oney/wiki) 🔥🔥🔥
+
 ## Tech details
 
 The app is a combination of a Python back-end, wrapped over a relational database, and a React front-end.
@@ -41,3 +44,21 @@ The app is a combination of a Python back-end, wrapped over a relational databas
 - Front-end client (JavaScript)
 	- UI is written in **React** using functional components
 	- **Redux** state management
+
+## FAQ
+
+- Is this repo licenced?
+	- Nope, free use.
+
+## Contribution
+
+
+- [Suchitra Mohan](https://github.com/suchimohan)
+- [Ilya Novikov](https://github.com/ily123)
+- [Caroline Sarki](https://github.com/Chocoloco123)
+- [Kelsy Sry](https://github.com/kelseysry)
+
+
+## Mock data credit
+
+The app is seeded with mock data from this [paper](http://vision.is.tohoku.ac.jp/~kyamagu/research/etsy-dataset/).
