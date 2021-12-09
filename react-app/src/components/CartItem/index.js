@@ -7,13 +7,16 @@ function CartItem({ item}) {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(item.quantity);
   const [products, setProducts] = useState([])
+  const [rating, setRating] = useState('')
+
   const sessionUser = useSelector((state) => state.session);
 
   // console.log("cart item quanitty", quantity)
-  console.log("item in cartitem", item)
+  // console.log("item in cartitem", item)
 
   useEffect(() => {
     setQuantity(item.quantity);
+    return () => clearInterval(setQuantity(item.quantity));
   }, [item.quantity]);
 
 
@@ -36,6 +39,12 @@ function CartItem({ item}) {
     return null
   }
 
+  // if(item.id) {
+  //   return item
+  // } else {
+  //   return null
+  // }
+
   // console.log("products in cart component", products)
   const productsArray = Object?.values(products)
   const getProductTitle = (item_id) => {
@@ -57,14 +66,34 @@ function CartItem({ item}) {
     e.preventDefault();
 
     const editItem = {
-      user_id, product_id, quantity
+      id, user_id, product_id, quantity
     }
+    console.log("handlesubmit", editItem)
     dispatch(updateCartThunk(editItem, id, user_id))
   }
   return (
     <>
-     <form onSubmit={handleSubmit}>
-    { item.product_id?
+
+{/*
+        <form className="submit-review" onSubmit={handleSubmit}>
+        <label>
+            <input
+              type="number"
+              placeholder="quantity"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+            >
+             </input>
+        </label>
+        <button className="submit-cancel-review-button" type="submit" >+</button>
+
+        </form> */}
+
+
+
+
+
+    {/* { item.product_id?
     <li className="cart-item">
       <div className="cart-item-header">
         {
@@ -73,11 +102,41 @@ function CartItem({ item}) {
         {
           item.quantity
         }
+      </div> */}
+
+      {/* <div className="cart-item-menu"> */}
+
+      <div className="cart-item-header">
+        {
+          getProductTitle(item.product_id)
+        }
+        {
+          item.quantity
+        }
       </div>
-      <div className="cart-item-menu">
-        <input
+{
+      item.id?
+
+      <form className="submit-review" onSubmit={handleSubmit}>
+        <label>
+            <input
+              type="number"
+              placeholder="quantity"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+            >
+             </input>
+        </label>
+        <button className="submit-cancel-review-button" type="submit" >+</button>
+
+        </form>
+        : null}
+
+
+
+        {/* <input
           type="number"
-          onChange={(e) => setQuantity(+e.target.value)}
+          onChange={(e) => setQuantity(+e.target.value + 1)}
           value={quantity}
           // onBlur={(e) => dispatch(updateCount(+item["id"], +e.target.value, item, user_id))}
           />
@@ -87,8 +146,14 @@ function CartItem({ item}) {
           // onClick={() => dispatch(addToCart(item.id))}
         >
           +
-        </button>
-        <button
+        </button> */}
+
+        {/* </form> */}
+
+
+
+
+        {/* <button
           className="cart-item-button"
           onClick={() => dispatch(decrement(item.id))}
         >
@@ -99,12 +164,11 @@ function CartItem({ item}) {
           onClick={() => dispatch(removeFromCart(item.id))}
         >
           Remove
-        </button>
-      </div>
-    </li>
-    : null
-      }
-</form>
+        </button> */}
+      {/* </div> */}
+
+
+{/* </form> */}
       </>
   )
 }

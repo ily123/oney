@@ -77,6 +77,7 @@ export const addToCartThunk = (formData, user_id) => async (dispatch) => {
   });
   try {
     const newCartItem = await response.json();
+    console.log("newCartItem", newCartItem)
     dispatch(addToCart(newCartItem))
     return newCartItem
 
