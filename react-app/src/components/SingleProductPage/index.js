@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useHistory, NavLink } from 'react-router-dom';
-import {getOneProduct, deleteProduct} from '../../store/product'
+import { getOneProduct, deleteProduct, clearProducts} from '../../store/product'
 import './singleProduct.css'
+
+import HideReviewForm from '../HideReviewForm';
+
 
 function SingleProductPage(){
     const history = useHistory();
     const dispatch = useDispatch()
+
     const productObject = useSelector((state)=>state.product)
     const indProjObj = Object.values(productObject)[0]
     console.log('productObject: ',productObject)
@@ -14,6 +18,7 @@ function SingleProductPage(){
     const sessionUser = useSelector((state) => state.session.user);
 
     console.log('sessionUser: ', sessionUser)
+
     const {productId} = useParams()
 
     // console.log("product-raw", productObject)
@@ -26,14 +31,15 @@ function SingleProductPage(){
 
     useEffect(()=>{
         dispatch(getOneProduct(productId))
-    }, [dispatch])
+        dispatch(clearProducts())
+    }, [dispatch,productId])
 
     const product = Object.values(productObject)
     if (!product.length) return null
 
     // iterate through each object in the array (gets you an object)
     // turn it into an array of the object's values
-    // get the second item 
+    // get the second item
     const productImgsObj = Object.values(productObject)[0]
     // console.log('productImgsObj: ',productImgsObj)
     const prodImgsArr = Object.values(productImgsObj?.images)
@@ -53,17 +59,18 @@ function SingleProductPage(){
             return arr[0]
         }
     })
-    
+
 // console.log('!!!!!',Object.values(product[0]?.images[0])[0])
     return(
+
         <div>
             <div className='mainImagesBox'>
                 <div className='smallImagesBox'>
-                    {images.length ?  
+                    {images.length ?
                         images?.map(imageUrl =>
                             <div key={imageUrl}>
                                 <img src={imageUrl} alt='product photos' className='smallImg'></img>
-                            </div>    
+                            </div>
                         ) : null
                     }
                 </div>
@@ -108,9 +115,8 @@ function SingleProductPage(){
             </div>
             <div className='reviewsAndDescriptionsDiv'>
                 <div className='reviewsDiv'>
-                    Reviews: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <HideReviewForm />
                 </div>
-                
             </div>
         </div>
     )

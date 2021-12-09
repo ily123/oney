@@ -10,8 +10,11 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import SingleProductPage from './components/SingleProductPage';
 import EditProductForm from './components/EditProductForm';
+import EditOneReview from './components/EditOneReview';
 import Top20Products from './components/Top20Products';
+import AddProductForm from './components/AddProductForm'
 import CategoryPage from './components/CategoryPage';
+import CategoryCard from './components/CategoryCard';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -50,12 +53,19 @@ function App() {
         <ProtectedRoute path='/products/:productId/edit' exact={true}>
           <EditProductForm />
         </ProtectedRoute>
+        <Route path='/products/:productId/reviews/:id' exact={true}>
+          <EditOneReview />
+        </Route>
         <Route path='/' exact={true} >
+          <CategoryCard />
           <Top20Products />
         </Route>
         <Route path='/category/:categoryId' exact={true} >
           <CategoryPage />
         </Route>
+        <ProtectedRoute path='/new-product' exact={true}>
+          <AddProductForm />
+        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );

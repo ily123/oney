@@ -1,0 +1,92 @@
+
+.delete-review-button {
+  background-color: transparent;
+  border: none;
+  text-align: left;
+}
+
+.fa-trash-alt{
+  font-size: 18px;
+  padding-right: 5px;
+}
+
+.transparent-review-button {
+  background-color: transparent;
+  border: none;
+}
+
+.add-review-button {
+  background-color: rgb(226, 153, 26);
+  border-radius: 10px;
+  border: none;
+  padding: 10px 10px;
+  color: white;
+
+}
+
+.review-container {
+  box-sizing: border-box;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 500px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.userIcon-username-date {
+  display:flex;
+  align-items: center;
+}
+
+.review-padding {
+  padding-right: 10px;
+}
+
+.star-dot-dot {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between !important;
+  width: 300px;
+}
+
+.all-review-container {
+  padding-left: 30px;
+  padding-top: 30px;
+}
+
+ul {
+  padding-inline-start: 0px
+}
+
+.error {
+  padding-bottom: 5px;
+}
+
+.error li{
+padding: 10px 5px;
+font-family: Arial, Helvetica, sans-serif;
+font-size: small;
+color:crimson
+}
+
+.submit-review {
+  /* display: flex */
+  padding-right: 10px;
+}
+
+.submit-cancel-review-button {
+  background-color: rgb(226, 153, 26);
+  border-radius: 10px;
+  border: none;
+  padding: 10px 13px;
+  color: white;
+}
+
+.submit-review input {
+  margin-right: 10px;
+  padding: 10px 10px;
+}
