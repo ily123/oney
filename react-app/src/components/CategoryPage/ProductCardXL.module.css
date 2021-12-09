@@ -2,12 +2,16 @@
   margin: 0;
   padding: 0;
   width: 250px;
-  height: 330px;
+  height: 320px;
   margin: 10px;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
 }
+.card:hover {
+  box-shadow: 0 0 15px rgba(33,33,33,.2);
+}
+
 
 .card img {
   width: 100%;
@@ -16,9 +20,7 @@
   border-radius: 10px 10px 0 0;
 }
 
-.card:hover {
-  border: 1px red solid;
-}
+
 .card figcaption {
   background-color: var(--light-gray);
   height: 70px;
