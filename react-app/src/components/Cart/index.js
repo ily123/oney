@@ -22,12 +22,12 @@ function Cart() {
 
   const cartItemsObj = useSelector((state)=>state?.cart)
   const cartItems = Object?.values(cartItemsObj)
-  console.log("cartItems in cart component", cartItemsObj)
+  console.log("cartItems in cart component", cartItems[0].product_id)
 
 
   const sessionUser = useSelector((state) => state.session);
   const user_id = sessionUser?.user.id
-  // console.log("sessionUser", sessionUser?.user.username)
+  console.log("user_id in component", user_id)
 
 
 
@@ -56,7 +56,7 @@ console.log("product in cart", product)
     e.preventDefault();
     window.alert(
       "Purchased the following:\n" +
-      `${cartItems.map(item => `${item.count} of ${item.name}`).join('\n')}`
+      `${cartItems.map((item , idx)=> `${item.count} of ${item.name}`).join('\n')}`
     );
     dispatch(purchase());
   }

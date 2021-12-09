@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import CategoryDropDown from './CategoryDropDown';
@@ -94,9 +93,6 @@ const Navigation = () => {
       <CategoryDropDown />
     </div>
   );
-}
-
-export default Navigation;
 }
 
 export default Navigation;

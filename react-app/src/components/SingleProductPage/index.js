@@ -17,7 +17,7 @@ function SingleProductPage(){
     const {productId} = useParams()
 
     const sessionUser = useSelector((state) => state.session);
-    const user_id = sessionUser?.user.id
+    const user_id = sessionUser?.user?.id
 
     // console.log("product-raw", productObject)
     // console.log("product-values", product)

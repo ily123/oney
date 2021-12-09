@@ -71,6 +71,7 @@ export const closeCart = () => ({
 export const allCartItemsThunk = (user_id) => async(dispatch) => {
 
   if(user_id) {
+    console.log("user_id in thunk", user_id)
     const res = await fetch(`/api/carts/${user_id}`)
     const cartItems = await res.json();
     console.log("allCartItemsThunk", cartItems)

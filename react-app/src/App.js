@@ -60,9 +60,9 @@ function App() {
         <Route path='/category/:categoryId' exact={true} >
           <CategoryPage />
         </Route>
-        <Route path='/users/:userId/cart' exact={true} >
+        {/* <Route path='/users/:userId/cart' exact={true} >
           <Cart />
-        </Route>
+        </Route> */}
         <ProtectedRoute path='/new-product' exact={true}>
           <AddProductForm />
         </ProtectedRoute>
