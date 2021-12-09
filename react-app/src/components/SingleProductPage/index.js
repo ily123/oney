@@ -15,14 +15,14 @@ function SingleProductPage(){
     const indProjObj = Object.values(productObject)[0]
     // console.log('productObject: ',productObject)
     // console.log('indProjObj: ',indProjObj)
-    // const sessionUser = useSelector((state) => state.session.user);
+    const sessionUser = useSelector((state) => state.session.user);
 
     // console.log('sessionUser: ', sessionUser)
 
     const {productId} = useParams()
 
-    const sessionUser = useSelector((state) => state.session);
-    const user_id = sessionUser?.user.id
+    // const sessionUser = useSelector((state) => state.session);
+    const user_id = sessionUser?.id
 
     // console.log("product-raw", productObject)
     // console.log("product-values", product)
