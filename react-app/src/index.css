@@ -1,6 +1,12 @@
 :root {
   --text-color: #222222;
   --light-gray: #EAEAEA;
+  --light-peach: #F8EBE6;
+}
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900,100thin,300light);
+html, body, html * {
+  font-family: 'Roboto', sans-serif;
 }
 
 html {
