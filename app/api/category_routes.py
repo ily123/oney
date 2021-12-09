@@ -21,7 +21,7 @@ def get_categories():
 
 @category_routes.route('/<int:category_id>/products/')
 def get_category_products(category_id):
-    """Returns products associated with a category."""
+    """Returns all products associated with a category."""
     try:
         # our category structure is only 2 levels deep
         # so in the request you will either recieve an id for a
@@ -46,3 +46,17 @@ def get_category_products(category_id):
     except Exception as error:
         message = error.__repr__()
         return {"errors": "category/products GET failed", "message": message}
+
+@category_routes.route('/<int:category_id>/products/page/<int:page_number>')
+def get_category_products_paginated(category_id, page_number):
+    """Returns 12 products from a given category, for the given page number."""
+    print("I got here.")
+    PRODUCTS_PER_PAGE = 3
+    query_categories = [category_id];
+    products = Product.query \
+        .filter(Product.category_id.in_(query_categories)) \
+        .paginate(page_number, PRODUCTS_PER_PAGE, False).items
+    if products:
+        products = dict([(p.id, p.to_dict()) for p in products])
+        return products
+    return {}
