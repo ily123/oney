@@ -145,7 +145,7 @@ const reviewReducer = (state = initialState, action) => {
       const newState = {...state};
       delete newState[action.id];
       return newState
-    }
+    };
 
     default:
       return state;

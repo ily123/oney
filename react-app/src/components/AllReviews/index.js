@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 // import { useParams} from 'react-router-dom';
 import { getReviews } from "../../store/review";
 import DotDotButton from "../DotDotButton";
+import { clearReviews } from '../../store/review';
 import './AllReviews.css';
 
 
@@ -25,6 +26,9 @@ const AllReviews = ({product}) => {
   // console.log("product_id in all reviews", product[0]?.id)
 
   // console.log("product_id", product_id)
+
+  
+
     useEffect(()=>{
         dispatch(getReviews(product_id))
         return () => clearInterval(getReviews(product_id));

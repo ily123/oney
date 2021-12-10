@@ -151,6 +151,7 @@ export default function cartReducer(state = { order: [], showCart: false }, acti
   switch (action.type) {
     case ADD_TO_CART: {
 
+
       if(!state[action.newCartItem.id]) {
         const newState = {
           ...state,
@@ -162,29 +163,6 @@ export default function cartReducer(state = { order: [], showCart: false }, acti
         return newState
       }
     }
-
-      // const newCount = state[action.newCartItem.id]?.quantity? state[action.newCartItem.id].quantity + 1 : 1;
-      // console.log("newCount?????x?????", newCount)
-      // const newOrder = state.order.includes(action.newCartItem.id) ? state.order : [ ...state.order, action.newCartItem.id ];
-      // console.log("newOrder", newOrder)
-      // newState.order = newOrder
-      // newState.showCart = true
-      // newState[action.newCartItem.id] = {
-      //       id: action.newCartItem.id,
-      //       count: newCount}
-      // console.log("newState in cart reducer for add_to_cart", newState)
-      // return newState
-      // return {
-      //   ...state,
-      //   order: newOrder,
-      //   showCart: true,
-      //   [action.id]: {
-      //     id: action.id,
-      //     count: newCount,
-      //   },
-
-
-
 
     // case ADD_TO_CART: {
     //   const newState = {...state}
@@ -255,7 +233,7 @@ export default function cartReducer(state = { order: [], showCart: false }, acti
     };
     case CLEAR:{
       return {}
-  }
+    }
 
     default:
       return state;
