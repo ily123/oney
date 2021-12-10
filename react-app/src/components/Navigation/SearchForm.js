@@ -25,7 +25,6 @@ return (
     <form >
         <input className="searchForm"
             type="text"
-            name="searchKeyWord"
             placeholder="Search Products"
             value={searchKeyWord}
             onChange={(e)=>setSearchKeyWord(e.target.value)}
