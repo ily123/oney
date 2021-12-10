@@ -81,8 +81,6 @@ def add_new_product():
   currentUser = current_user.to_dict()
   form = NewProductForm()
   form['csrf_token'].data = request.cookies['csrf_token']
-  # print(".................", request.cookies['csrf_token'])
-  # print("Hiiiiiiiiiiiiiiiiiiii",form.validate_on_submit())
   if form.validate_on_submit():
     product = Product(
       title = form.data['title'],
@@ -98,7 +96,6 @@ def add_new_product():
     )
     db.session.add(product)
     db.session.commit()
-    # print("///////////////////", product.to_dict())
     return product.to_dict()
   else:
     return "Bad Data"
@@ -106,11 +103,7 @@ def add_new_product():
 
 @product_routes.route('/search/<tag>', methods=['GET'])
 def search_products(tag):
-  # text = request.json
-  # search = "%{}%".format(text)
-  # print(search)
   searchResult = Product.query.filter(Product.title.ilike(f'%{tag}%')).all()
-  # print(searchResult)
   if searchResult:
     result = {p.id : p.to_dict() for p in searchResult}
     return {
