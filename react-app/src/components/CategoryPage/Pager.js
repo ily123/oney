@@ -47,10 +47,9 @@ function PagerArrow({ props }) {
   )
 }
 
-// I was already feeling pretty baller with the double-ternary above,
-// but the function below is my crowning achievement.
-// This function calculates the proper
-// page numbers to display in the pagination slider, 
+// I was already feeling pretty baller with the triple-ternary above,
+// but the function below is the crowning achievement of my time at appAcademy.
+// This function calculates the proper page numbers to display in the pagination slider, 
 // given total number of pages, current page number, and size of pagination range
 function calculatePagerRange(pageNumber, totalPages) {
   const NUM_PAGES = 5 // number of pages visible in pager
