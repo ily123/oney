@@ -94,11 +94,17 @@ function CartItem({ item, count, setCount}) {
   const handleDeleteCartItem = async(e) => {
     e.preventDefault();
     dispatch(deleteCartItem(item.id, user_id));
+    setCount(count + 1)
     // dispatch(clearCartItems())
 
   }
 
 // grad the session user
+
+if(!item) {
+  return null 
+}
+
   return (
     <div className="each-cart-item-container">
 

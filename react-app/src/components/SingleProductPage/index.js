@@ -37,7 +37,7 @@ function SingleProductPage({count, setCount}){
     useEffect(() => {
         dispatch(allCartItemsThunk(user_id))
         return () => clearInterval(allCartItemsThunk(user_id));
-      }, [dispatch, user_id, Object.keys(cartItemsObj).length, cartItems.length, count])
+      }, [dispatch, user_id, cartItems.length, count, productId])
 
 
     const handleDelete = async(productId) => {
@@ -120,21 +120,6 @@ function SingleProductPage({count, setCount}){
     const handleAddToCart = async(e) => {
         e.preventDefault();
 
-
-
-    // add check this for existing cart items after
-
-        // if(checkCartItemQuantity(productId)) {
-        //     quantity = checkCartItemQuantity(productId)
-        //     // console.log("quantity", quantity)
-        //     await setQuantity(() => {
-        //         return quantity += 1
-        //     })
-        // } else {
-        //     await setQuantity(1)
-        // }
-
-
         setCount(count+1)
 
         let quantity =1
@@ -144,9 +129,14 @@ function SingleProductPage({count, setCount}){
             user_id, product_id,quantity
         }
 
-        dispatch(addToCartThunk(itemAddToCart, user_id))
-        console.log("itemAddToCart", itemAddToCart)
+        let waitAddProduct = await dispatch(addToCartThunk(itemAddToCart, user_id))
+        console.log("waitAddProduct", waitAddProduct)
+
+        if(waitAddProduct) {
             dispatch(openCart())
+
+
+        }
 
     }
 

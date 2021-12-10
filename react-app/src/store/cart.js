@@ -87,8 +87,9 @@ export const addToCartThunk = (item, user_id) => async (dispatch) => {
 
   try {
     const newCartItem = await response.json();
-    console.log("newCartItem", newCartItem)
-    dispatch(addToCart(newCartItem))
+    // console.log("newCartItem", newCartItem)
+    await dispatch(addToCart(newCartItem))
+    // dispatch(openCart())
 
     console.log("newCartItem in thunk", newCartItem)
     return newCartItem
@@ -192,42 +193,42 @@ export const allCartItemsThunk = (user_id) => async(dispatch) => {
 
 export default function cartReducer(state = { order: [], showCart: false }, action) {
   switch (action.type) {
-    case ADD_TO_CART: {
-
-      if(!state[action.newCartItem.id]) {
-        const newState = {
-          ...state,
-          [action.newCartItem.id]: action.newCartItem
-        }
-        newState.showCart = true
-        console.log("newState in cart reducer add_to_cart", action.newCartItem.created_at)
-
-        return newState
-      }
-    }
-
     // case ADD_TO_CART: {
-    //   const newState = {...state}
-    //   const newCount = state[action.newCartItem.id]?.quantity? state[action.newCartItem.id].quantity + 1 : 1;
-    //   console.log("newCount?????x?????", newCount)
-    //   const newOrder = state.order.includes(action.newCartItem.id) ? state.order : [ ...state.order, action.newCartItem.id ];
-    //   console.log("newOrder", newOrder)
-    //   newState.order = newOrder
-    //   newState.showCart = true
-    //   newState[action.newCartItem.id] = {
-    //         id: action.newCartItem.id,
-    //         count: newCount}
-    //   console.log("newState in cart reducer for add_to_cart", newState)
-    //   return newState
-    //   // return {
-    //   //   ...state,
-    //   //   order: newOrder,
-    //   //   showCart: true,
-    //   //   [action.id]: {
-    //   //     id: action.id,
-    //   //     count: newCount,
-    //   //   },
-    //   };
+
+    //   if(!state[action.newCartItem.id]) {
+    //     const newState = {
+    //       ...state,
+    //       [action.newCartItem.id]: action.newCartItem
+    //     }
+    //     newState.showCart = true
+    //     console.log("newState in cart reducer add_to_cart", action.newCartItem.created_at)
+
+    //     return newState
+    //   }
+    // }
+
+    case ADD_TO_CART: {
+      const newState = {...state}
+      const newCount = state[action.newCartItem.id]?.quantity? state[action.newCartItem.id].quantity + 1 : 1;
+      console.log("newCount?????x?????", newCount)
+      const newOrder = state.order.includes(action.newCartItem.id) ? state.order : [ ...state.order, action.newCartItem.id ];
+      console.log("newOrder", newOrder)
+      newState.order = newOrder
+      newState.showCart = true
+      newState[action.newCartItem.id] = {
+            id: action.newCartItem.id,
+            count: newCount}
+      console.log("newState in cart reducer for add_to_cart", newState)
+      return newState
+      // return {
+      //   ...state,
+      //   order: newOrder,
+      //   showCart: true,
+      //   [action.id]: {
+      //     id: action.id,
+      //     count: newCount,
+      //   },
+      };
 
     case REMOVE_FROM_CART: {
       const index = state.order.indexOf(action?.id);
