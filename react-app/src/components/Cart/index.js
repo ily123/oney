@@ -2,11 +2,11 @@ import User from "../User";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { purchase, getCartItems } from '../../store/cart';
+import { getCartItems } from '../../store/cart';
 import { useParams} from 'react-router-dom';
 import { getOneProduct } from "../../store/product";
 import { allCartItemsThunk } from "../../store/cart";
-import { clearCartItems } from "../../store/cart";
+import { deleteCartItem } from "../../store/cart";
 
 // import CartItem from './CartItem';
 import CartItem from "../CartItem";
@@ -30,9 +30,7 @@ function Cart() {
   const user_id = sessionUser?.user.id
   // console.log("user_id in component", user_id)
 
-  // useEffect(() => {
-  //   dispatch(clearCartItems())
-  // })
+
 
   useEffect(()=>{
     dispatch(getOneProduct(productId))
@@ -47,11 +45,10 @@ function Cart() {
 
 
 
-const product = Object.values(productObject)
-if (!product.length) return null
 
-// console.log("product in cart", product)
-
+  const products = Object.values(productObject)
+  if (!products.length) return null
+  // console.log("product in cart", products)
 
   if (!cartItems || !cartItems.length) return (
     <div className="cart">
@@ -59,13 +56,29 @@ if (!product.length) return null
     </div>
   );
 
+  const getProductTitle = async (item_id) => {
+    const productTitle = await products.filter(function(el){
+      return el.id === item_id
+    });
+    if (getProductTitle) {
+      console.log(getProductTitle)
+      return productTitle[0]?.title
+    }
+    else {
+      return "hello"
+    }
+  }
+
+
   const onSubmit = (e) => {
     e.preventDefault();
     window.alert(
       "Purchased the following:\n" +
-      `${cartItems.map((item , idx)=> `${item.count} of ${item.name}`).join('\n')}`
-    );
-    dispatch(purchase());
+      `${cartItems.map((item , idx)=>
+       `${item?.quantity} of ${getProductTitle(item.product_id)}`).join('\n')}`
+       );
+
+cartItems.map((item , idx)=> (dispatch(deleteCartItem(item.id, user_id))))
   }
 
   return (

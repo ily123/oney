@@ -106,8 +106,23 @@ export const deleteCartItem = (id, user_id) => async(dispatch) => {
   if(response.ok) {
     dispatch(removeFromCart(id))
   }
-
 }
+
+// // thunk to purchase items -> aka delete all items from cart and db
+// export const purchaseCart = (id, user_id) => async(dispatch) => {
+
+//   console.log("hit delete all cart items / purchase  thunk")
+
+//   const response = await fetch(`/api/carts/${user_id}/items/${id}`, {
+//     method: 'DELETE',
+//   });
+
+//   if(response.ok) {
+//     for(let i =0; i < cartItems.length; i++) {
+//       dispatch(removeFromCart(cartItem.id))
+//     }
+//   }
+// }
 
 
 // takes care of deleting and adding existing quantity of item
@@ -130,8 +145,6 @@ export const updateCartThunk = (editItem, id, user_id) => async(dispatch) => {
   console.log("editedItem in thunk", editedItem)
   dispatch(editItemAction(editedItem, id))
   return editedItem
-
-
 }
 
 // thunk to get all cart items
@@ -211,7 +224,13 @@ export default function cartReducer(state = { order: [], showCart: false }, acti
         return newState;
       }
     case PURCHASE:
-      return { order: [] };
+      const index = state.order.indexOf(action.id);
+      const newOrder = [ ...state.order.slice(0, index), ...state.order.slice(index + 1) ];
+
+      const newState = { ...state, order: newOrder };
+      delete newState[action.id];
+      return newState;
+      // return { order: [] };
     case OPEN_CART:
       return {
         ...state,
@@ -233,7 +252,7 @@ export default function cartReducer(state = { order: [], showCart: false }, acti
     };
     case CLEAR:{
       return {}
-    }
+  }
 
     default:
       return state;

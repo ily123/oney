@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { updateCartThunk, deleteCartItem } from '../../store/cart';
+import { clearCartItems } from '../../store/cart';
 
 function CartItem({ item}) {
   const dispatch = useDispatch();
@@ -92,6 +93,7 @@ function CartItem({ item}) {
   const handleDeleteCartItem = async(e) => {
     e.preventDefault();
     dispatch(deleteCartItem(item.id, user_id));
+    // dispatch(clearCartItems())
 
   }
 
