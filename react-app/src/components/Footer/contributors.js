@@ -2,8 +2,8 @@ const CONTRIBUTORS = [
   {
     name: "Suchitra Mohan",
     gh: "https://github.com/suchimohan",
-    linkd: "https://www.linkedin.com/in/ilyabnovikov",
-    email: "mailto:ibnovikov@gmail.com"
+    linkd: "https://www.linkedin.com/in/suchitra-mohan/",
+    email: "mailto:suchimohan91@gmail.com"
   },
   {
     name: "Ilya Novikov",
@@ -15,7 +15,7 @@ const CONTRIBUTORS = [
     name: "Caroline Sarkki",
     gh: "https://github.com/Chocoloco123",
     linkd: "https://www.linkedin.com/in/caroline-sarkki-2a5517126/",
-    email: "csarkki@gmail.com"
+    email: "mailto:csarkki@gmail.com"
   },
   {
     name: "Kelsey Sry",

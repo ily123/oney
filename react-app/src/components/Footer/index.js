@@ -12,7 +12,7 @@ export default function Footer () {
       </div>
       <div className={styles.contributors}>
         {CONTRIBUTORS.map(person =>{ 
-          return <PersonCard person={person} />
+          return <PersonCard key={"persoon_"+person.name} person={person} />
         })}
       </div>
     </footer>
