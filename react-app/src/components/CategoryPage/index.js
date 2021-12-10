@@ -7,14 +7,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductsForCategory } from '../../store/category';
 
 export default function CategoryPage() {
-  const { categoryId } = useParams();
+  const { categoryId, pageNumber } = useParams();
   const dispatch = useDispatch();
   const products = useSelector(state => state.category.products)
   const categories = useSelector(state => state.category.flat)
   const tree = useSelector(state => state.category.tree)
   
   useEffect(() => {
-    dispatch(fetchProductsForCategory(categoryId))
+    dispatch(fetchProductsForCategory(categoryId, pageNumber))
   }, [dispatch, categoryId])
 
   if (!products || !categories) return null
@@ -36,7 +36,7 @@ export default function CategoryPage() {
   )
 }
 
-export function CategoryPageRedirect() {
+export function CategoryPageRedirectToPageOne() {
   const { categoryId } = useParams();
   return <Redirect to={`/category/${categoryId}/page/1`} />
 }
