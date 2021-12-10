@@ -34,12 +34,13 @@ const SearchPage = () => {
                     Search Results For "{tag}"
                 </div>
                 <div className='searchProducts'>
-                    {products?.map(({id,price,images})=>(
+                    {products?.map(({id,price,images,title})=>(
                         <ProductCard
                             key={id}
                             id={id}
                             price={price}
                             images={images}
+                            title={title}
                         />
                     ))}
                 </div>

@@ -81,7 +81,7 @@ const AddProductForm = () =>{
                 </div>
                 <div>
                 <label> Category </label>
-                <select onChange={(e)=>setCategory(e.target.value)}>
+                <select required onChange={(e)=>setCategory(e.target.value)}>
                     {(categoryList.map(category => {
                         return (
                             <option key={"newProductFormCategory-"+category.id} value={category.id}>{category.display_name}</option>
@@ -98,6 +98,7 @@ const AddProductForm = () =>{
                     type="number"
                     min = "1"
                     max = "1000"
+                    Step = "0.01"
                     />
                 </div>
                 <div>
