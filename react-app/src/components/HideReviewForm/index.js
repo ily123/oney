@@ -21,6 +21,10 @@ function HideReviewForm(){
     const reviewsObj = useSelector((state) => state.review)
     const reviews = Object.values(reviewsObj)
 
+    const sessionUser = useSelector((state) => state.session.user);
+    const user_id = sessionUser?.id
+
+    // console.log("user_id", user_id)
 
     useEffect(()=>{
         dispatch(getOneProduct(productId))
@@ -44,34 +48,46 @@ function HideReviewForm(){
       }, [dispatch,reviews.length, product_id])
 
 
-  if(!reviews) {
-    return null;
-  }
+    if(!reviews) {
+      return null;
+    }
 
-  let reviewContent = null;
+    let writeReviewButton = null;
 
-  if(showReviewForm && reviews) {
-    reviewContent = (
-      <>
-        <ReviewForm reviews={reviews} hideForm={() => setShowReviewForm(false)} hideButton={() => setHideReviewButton(false)}/>
-      </>
-    )
-  }
-
-    return(
-        <div className="all-review-container">
-          {!hideReviewButton &&
+    if(user_id) {
+      writeReviewButton = (
+        !hideReviewButton &&
           <button className="add-review-button"
           onClick={() => {setShowReviewForm(true);  setHideReviewButton(true)
           }}>
           <i className="fas fa-star"></i>&nbsp;&nbsp;Write a Review &nbsp;&nbsp;<i className="fas fa-star"></i></button>
+      )
 
-          }
+    } else {
+      return <AllReviews product={product}/>
+    }
+
+
+  let reviewContent = null;
+
+    if(showReviewForm && reviews) {
+      reviewContent = (
+        <>
+          <ReviewForm reviews={reviews} hideForm={() => setShowReviewForm(false)} hideButton={() => setHideReviewButton(false)}/>
+        </>
+      )
+    }
+
+    return(
+      <>
+        <div className="all-review-container">
+          {writeReviewButton}
           <div>
           {reviewContent}
           <AllReviews product={product}/>
           </div>
         </div>
+        </>
     )
 }
 
