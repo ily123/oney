@@ -8,6 +8,7 @@ function CartItem({ item, count, setCount}) {
   const dispatch = useDispatch();
   let [quantity, setQuantity] = useState(item.quantity);
   const [products, setProducts] = useState([])
+  const [errors, setErrors] = useState([]);
 
   const sessionUser = useSelector((state) => state.session);
 
@@ -102,7 +103,7 @@ function CartItem({ item, count, setCount}) {
 // grad the session user
 
 if(!item) {
-  return null 
+  return null
 }
 
   return (

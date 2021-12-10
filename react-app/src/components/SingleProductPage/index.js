@@ -120,6 +120,7 @@ function SingleProductPage({count, setCount, open, setOpen}){
     const handleAddToCart = async(e) => {
         e.preventDefault();
 
+
         setCount(count+1)
 
         setOpen(true)
@@ -135,7 +136,7 @@ function SingleProductPage({count, setCount, open, setOpen}){
         console.log("waitAddProduct", waitAddProduct)
 
         if(waitAddProduct) {
-            dispatch(openCart())
+            dispatch(allCartItemsThunk(user_id)).then(()=>dispatch(openCart())).then(()=>dispatch(allCartItemsThunk(user_id)))
 
 
         }
