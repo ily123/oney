@@ -1,13 +1,19 @@
 
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import CategoryDropDown from './CategoryDropDown';
 import './Navigation.css';
 import SearchForm from './SearchForm'
+import { useDispatch, useSelector } from 'react-redux';
+
+import { openCart, closeCart } from '../../store/cart';
+import Cart from "../Cart";
 
 const Navigation = () => {
+  const dispatch = useDispatch();
+  const showCart = useSelector((state) => state.cart.showCart);
+
   const sessionUser = useSelector(state=>state.session.user)
   // console.log("User://////////", sessionUser.id)
 
@@ -15,12 +21,15 @@ const Navigation = () => {
   let sessionLinks;
   if(sessionUser) {
     sessionLinks = (
+    <>
       <ul className="nav2">
         <li>
           <span className="hiUser"> Welcome {sessionUser.username} !! </span>
         </li>
         <li>
+          <button className="checkout-button" onClick={() => dispatch(openCart())}>
           <i className="fas fa-shopping-cart"></i>
+          </button>
         </li>
         <li>
           <NavLink to="/new-product">Sell Product</NavLink>
@@ -29,6 +38,21 @@ const Navigation = () => {
           <LogoutButton />
         </li>
       </ul>
+
+      <div
+        className="sidebar"
+        style={showCart ? { transform: 'translateX(-100%)' } : {}}
+        >
+        <div className="sidebar-header">
+        <button className="arrow-button" onClick={() => dispatch(closeCart())}>
+        <i className="fas fa-arrow-right"></i>
+        </button>
+        </div>
+        <Cart />
+      </div>
+    </>
+
+
     )
   } else {
     sessionLinks = (

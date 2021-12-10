@@ -1,7 +1,9 @@
 .headerDiv{
     margin-left: 100px;
     margin-right: 100px;
-    border-bottom: solid lightgray
+    border-bottom: solid lightgray;
+    z-index: 1;
+
 }
 
 .navigation{
