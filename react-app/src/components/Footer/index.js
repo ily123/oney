@@ -1,31 +1,5 @@
 import styles from './Footer.module.css';
-
-const CONTRIBUTORS = [
-  {
-    name: "Ilya Novikov",
-    gh: "https://github.com/ily123/",
-    linkd: "https://www.linkedin.com/in/ilyabnovikov",
-    email: "mailto:ibnovikov@gmail.com"
-  },
-  {
-    name: "Ilya Novikov",
-    gh: "https://github.com/ily123/",
-    linkd: "https://www.linkedin.com/in/ilyabnovikov",
-    email: "mailto:ibnovikov@gmail.com"
-  },
-  {
-    name: "Ilya Novikov",
-    gh: "https://github.com/ily123/",
-    linkd: "https://www.linkedin.com/in/ilyabnovikov",
-    email: "mailto:ibnovikov@gmail.com"
-  },
-  {
-    name: "Ilya Novikov",
-    gh: "https://github.com/ily123/",
-    linkd: "https://www.linkedin.com/in/ilyabnovikov",
-    email: "mailto:ibnovikov@gmail.com"
-  },
-]
+import CONTRIBUTORS from './contributors';
 
 export default function Footer () {
   return (
@@ -60,6 +34,4 @@ function PersonCard ({ person }) {
       </div>
     </div>
   )
-
-
 }
