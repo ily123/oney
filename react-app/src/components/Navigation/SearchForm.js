@@ -16,7 +16,7 @@ const handleKeyPress = async (e) =>{
         e.preventDefault();
         let resultFromSearch = await dispatch(search(searchKeyWord));
         if (resultFromSearch) {
-            history.push('/search')
+            history.push(`/search/${searchKeyWord}`)
         }
     }
 }
@@ -25,7 +25,6 @@ return (
     <form >
         <input className="searchForm"
             type="text"
-            name="searchKeyWord"
             placeholder="Search Products"
             value={searchKeyWord}
             onChange={(e)=>setSearchKeyWord(e.target.value)}

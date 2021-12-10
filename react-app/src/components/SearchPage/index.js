@@ -1,24 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-// import { search } from "../../store/search"
+import React, { useEffect } from "react";
+import { search } from "../../store/search"
 import ProductCard from '../ProductCard'
 import './SearchPage.css'
+import {useParams} from 'react-router-dom';
 
 const SearchPage = () => {
     const searchResults = useSelector((state)=>state.searchResults)
     const dispatch = useDispatch();
 
-    const tag = searchResults?.searchTag
+    const {tag} = useParams()
 
-    // useEffect((tag)=>{
-    //     dispatch(search(tag))
-    // },[dispatch,tag])
+    useEffect(()=>{
+        dispatch(search(tag))
+    },[dispatch,tag])
 
-
+    //on first load the state will be empty
     if(!searchResults?.products) {
-        return (
-            <h2>Search For A Product</h2>
-        )
+       return null
     }
     const products = Object.values(searchResults?.products)
 
