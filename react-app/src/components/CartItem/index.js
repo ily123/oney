@@ -6,7 +6,6 @@ function CartItem({ item}) {
   const dispatch = useDispatch();
   let [quantity, setQuantity] = useState(item.quantity);
   const [products, setProducts] = useState([])
-  const [rating, setRating] = useState('')
 
   const sessionUser = useSelector((state) => state.session);
 

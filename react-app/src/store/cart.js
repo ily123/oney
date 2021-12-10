@@ -65,22 +65,26 @@ export const closeCart = () => ({
   type: CLOSE_CART,
 });
 
-
 // thunk to add to cart
-export const addToCartThunk = (formData, user_id) => async (dispatch) => {
+export const addToCartThunk = (item, user_id) => async (dispatch) => {
   const response = await fetch(`/api/carts/${user_id}/items`, {
     method: 'POST',
     headers : {
       'Content-Type': 'application/json',
      },
      body: JSON.stringify(
-      formData
+      item
     )
   });
+  console.log("item in thunk", item)
+  console.log("user_id in thunk", user_id)
+
   try {
     const newCartItem = await response.json();
     console.log("newCartItem", newCartItem)
     dispatch(addToCart(newCartItem))
+
+    console.log("newCartItem in thunk", newCartItem)
     return newCartItem
 
   } catch(error) {
@@ -88,7 +92,6 @@ export const addToCartThunk = (formData, user_id) => async (dispatch) => {
   }
 
 }
-
 
 // thunk to remove an item in the cart completely
 export const deleteCartItem = (id, user_id) => async(dispatch) => {
