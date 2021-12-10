@@ -4,8 +4,8 @@ import CONTRIBUTORS from './contributors';
 export default function Footer () {
   return (
     <footer>
-      <div>made by</div>
-      <div>
+      <div className={styles.madeby}>Oney was made by</div>
+      <div className={styles.contributors}>
         {CONTRIBUTORS.map(person =>{ 
           return <PersonCard person={person} />
         })}
@@ -17,11 +17,11 @@ export default function Footer () {
 function PersonCard ({ person }) {
   const { name, gh, linkd, email } = person;
   return (
-    <div>
+    <div className={styles.personCard}>
       <div className='my-name'>
         { name }
       </div>
-      <div className="social-media-links">
+      <div className={styles.socialMediaLinks}>
         <a target="_blank" href={gh} rel="noreferrer">
           <i className="fab fa-github-square"/>
         </a>

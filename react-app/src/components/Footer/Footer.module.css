@@ -4,4 +4,28 @@ footer {
   min-height: 100px;
   width: 100%;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.madeby {
+  padding-bottom: 20px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.contributors {
+  display: flex;
+  column-gap: 30px;
+}
+
+.personCard {
+  font-size: 1rem;
+}
+
+.socialMediaLinks {
+  display: flex;
+  justify-content: center;
 }
