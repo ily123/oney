@@ -86,9 +86,9 @@ cartItems.map((item , idx)=> (dispatch(deleteCartItem(item.id, user_id))))
       <ul>
         {cartItems.map(item => <CartItem key={item} item={item}/>)}
       </ul>
-      <hr />
+      {/* <hr /> */}
       <form onSubmit={onSubmit}>
-        <button type="submit">Purchase</button>
+        <button className="purchase-button" type="submit">Purchase <i class="fas fa-shopping-cart"></i></button>
       </form>
     </div>
   )

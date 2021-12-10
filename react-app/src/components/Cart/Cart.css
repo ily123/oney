@@ -6,20 +6,25 @@
 .cart-item-button {
   min-width: 24px;
   height: 24px;
-  background-color: white;
   margin-left: 8px;
+  border: none;
 }
 
 .cart-item {
   display: flex;
   flex-direction: column;
-  margin-bottom: 24px;
+  /* margin-bottom: 24px; */
   width: min-content;
 }
 
 .cart-item input {
-  width: 32px;
+  width: 15px !important;
   height: 24px;
+}
+
+.cart-item {
+  width: 50px !important;
+
 }
 
 .cart-item-menu {
@@ -54,8 +59,60 @@ input[type="number"] {
   width: 300px;
   right: -300px;
   transition: all 0.2s linear;
-  background-color: whitesmoke;
-  box-shadow: 0px 0 8px 1px lightgray;
+  /* background-color: #e8d5a8; */
+  background-color: rgb(239, 239, 239);
+  box-shadow: 0px 0 15px 1px lightgray;
   z-index: 3;
   overflow-y:auto;
+  color: black;
+}
+
+
+
+.fa-trash-alt {
+  color: rgb(226, 153, 26) !important;
+}
+
+.purchase-button {
+  background-color: rgb(226, 153, 26);
+  border-radius: 10px;
+  border: none;
+  padding: 10px 10px !important;
+  color: white;
+
+
+}
+
+
+
+hr {
+  border: none;
+  border-top: 5px solid #e1d9c5;
+  color: #e6e6e6;
+  overflow: visible;
+  text-align: center;
+  height: 5px;
+  padding: 0px 0px !important;
+
+}
+
+.each-cart-item-container {
+  padding: 8px 8px !important;
+}
+
+.arrow-button{
+  background-color: none !important;
+  padding: 20px 20px;
+  border: none;
+}
+
+.fa-arrow-right {
+  color: rgb(226, 153, 26);
+  font-size: 30px;
+}
+
+.fa-minus-square, .fa-plus-square{
+  color: rgb(226, 153, 26) !important;
+  font-size: 20px;
+
 }

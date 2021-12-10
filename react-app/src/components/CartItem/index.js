@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { updateCartThunk, deleteCartItem } from '../../store/cart';
 import { clearCartItems } from '../../store/cart';
+import './CartItem.css';
 
 function CartItem({ item}) {
   const dispatch = useDispatch();
@@ -99,14 +100,14 @@ function CartItem({ item}) {
 
 
   return (
-    <>
+    <div className="each-cart-item-container">
 
       <div className="cart-item-header">
         {getProductTitle(item.product_id)}
       </div>
       {
         item.id?
-
+        <>
         <form>
           <div className="cart-item-menu">
 
@@ -117,36 +118,41 @@ function CartItem({ item}) {
                   placeholder="quantity"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
-                />
+                /> 
             </label>
 
             <button
             className="cart-item-button"
               onClick={handleIncreaseQuantity}
-            >+
+            >
+              <i class="fas fa-plus-square"></i>
             </button>
 
             <button
             className="cart-item-button"
               onClick={handleDecreaseQuantity}
-            >-</button>
+            >
+              <i class="fas fa-minus-square"></i>
+            </button>
 
             <button
               className="cart-item-button"
               onClick={handleDeleteCartItem}
             >
-              Remove
+              <i class="fas fa-trash-alt"></i>
             </button>
 
           </div>
         </form>
+        <hr></hr>
+        </>
 
         : null
       }
 
 
 
-      </>
+      </div>
   )
 }
 
