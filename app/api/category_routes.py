@@ -1,6 +1,6 @@
 from flask import Blueprint
-from app.models import Category
-from app.models import Product
+from sqlalchemy import func
+from app.models import Category, Product
 import json
 
 
@@ -13,18 +13,28 @@ def get_categories():
     try:
         categories = Category.query.all()
         tree = Category.convert_list_to_tree(categories)
+        product_counts = count_number_of_products_by_category()
+        # attach product counts onto every category
+        tree.populate_counts(product_counts)
+
         return tree # tree is already a dictionary
     except Exception as error:
         message = error.__repr__()
         return {"errors": "category GET failed", "message": message}
 
+def count_number_of_products_by_category():
+    """Groups products by category id and returns count."""
+    count = Product.query \
+        .with_entities(Product.category_id, func.count(Product.id)) \
+        .group_by(Product.category_id).all()
+    return dict(count)
 
 @category_routes.route('/<int:category_id>/products/')
 def get_category_products(category_id):
     """Returns all products associated with a category, including sub-categories."""
     try:
         # if the category has children, we need to include children in the search
-        query_categories = get_category_ids_to_include_in_query(query_id)
+        query_categories = get_category_ids_to_include_in_query(category_id)
         products = Product.query.filter(Product.category_id.in_(query_categories)).all()
         if products:
             products = dict([(p.id, p.to_dict()) for p in products])
