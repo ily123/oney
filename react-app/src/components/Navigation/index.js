@@ -5,10 +5,12 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import CategoryDropDown from './CategoryDropDown';
 import './Navigation.css';
+import SearchForm from './SearchForm'
 
 const Navigation = () => {
   const sessionUser = useSelector(state=>state.session.user)
   // console.log("User://////////", sessionUser.id)
+
 
   let sessionLinks;
   if(sessionUser) {
@@ -45,6 +47,7 @@ const Navigation = () => {
     )
   }
 
+
   return (
     <div className="headerDiv">
       <nav>
@@ -57,9 +60,7 @@ const Navigation = () => {
             </div>
           </li>
           <li>
-            <form >
-              <input className="searchForm" placeholder="Search Products"></input>
-            </form>
+            <SearchForm />
           </li>
           <li>
             {sessionLinks}
