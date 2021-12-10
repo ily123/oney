@@ -98,7 +98,6 @@ const AddProductForm = () =>{
                     type="number"
                     min = "1"
                     max = "1000"
-                    step= "0.01"
                     />
                 </div>
                 <div>
