@@ -4,7 +4,7 @@ import { updateCartThunk, deleteCartItem } from '../../store/cart';
 import { clearCartItems } from '../../store/cart';
 import './CartItem.css';
 
-function CartItem({ item}) {
+function CartItem({ item, count, setCount}) {
   const dispatch = useDispatch();
   let [quantity, setQuantity] = useState(item.quantity);
   const [products, setProducts] = useState([])
@@ -16,8 +16,8 @@ function CartItem({ item}) {
 
   useEffect(() => {
     setQuantity(item.quantity);
-    return () => clearInterval(setQuantity(item.quantity));
-  }, [item.quantity]);
+     return () => clearInterval(setQuantity(item.quantity));
+  }, [item.quantity, count]);
 
 
   // NOTE: so the cart.id doesn't have any meaning, we connect the user to their cart
@@ -30,7 +30,7 @@ function CartItem({ item}) {
       setProducts(productsList);
     }
     fetchData();
-  },[])
+  },[count])
 
   let user_id;
   if(sessionUser) {
@@ -106,7 +106,7 @@ function CartItem({ item}) {
         {getProductTitle(item.product_id)}
       </div>
       {
-        item.id && user_id == item.user_id && 
+        item.id && user_id == item.user_id &&
         <>
         <form>
           <div className="cart-item-menu">

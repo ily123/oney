@@ -35,7 +35,7 @@ function SingleProductPage({count, setCount}){
     useEffect(() => {
         dispatch(allCartItemsThunk(user_id))
         return () => clearInterval(allCartItemsThunk(user_id));
-      }, [dispatch, user_id, Object.keys(cartItemsObj).length, cartItems.length])
+      }, [dispatch, user_id, Object.keys(cartItemsObj).length, cartItems.length, count])
 
 
     const handleDelete = async(productId) => {
@@ -47,6 +47,7 @@ function SingleProductPage({count, setCount}){
         dispatch(getOneProduct(productId))
         dispatch(clearProducts())
     }, [dispatch,productId])
+
 
     const product = Object.values(productObject)
     if (!product.length) return null

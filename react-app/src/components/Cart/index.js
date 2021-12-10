@@ -2,7 +2,7 @@ import User from "../User";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { getCartItems } from '../../store/cart';
+import { clearCartItems, getCartItems } from '../../store/cart';
 import { useParams} from 'react-router-dom';
 import { getOneProduct } from "../../store/product";
 import { allCartItemsThunk } from "../../store/cart";
@@ -33,19 +33,27 @@ function Cart({count, setCount}) {
   // console.log("user_id in component", user_id)
 
   useEffect(()=>{
-    dispatch(getOneProduct(productId))
-}, [dispatch, productId])
+    dispatch(getOneProduct(productId));
+    return () => clearInterval(getOneProduct(productId));
+}, [dispatch, productId, count, cartItems.length])
 
   useEffect(() => {
     dispatch(allCartItemsThunk(user_id))
+    // dispatch(clearCartItems())
+    
     return () => clearInterval(allCartItemsThunk(user_id));
-  }, [dispatch, user_id, count])
+  }, [dispatch, user_id, count, cartItems.length])
+
+  // useEffect(() => {
+  //   dispatch(clearCartItems())
+
+  // },[dispatch])
 
   const products = Object.values(productObject)
   if (!products.length) return null
   // console.log("product in cart", products)
 
-  if (!cartItems || cartItems.length === 1) return (
+  if (!cartItems || cartItems.length <=2 ) return (
     <div className="cart">
       No items in the cart. Start selecting items to purchase.
     </div>
@@ -67,9 +75,10 @@ function Cart({count, setCount}) {
   const onSubmit = (e) => {
     e.preventDefault();
     window.alert(
-      "Purchased the following:\n" +
-      `${cartItems.map((item , idx)=>
-       `${item?.quantity} of ${getProductTitle(item.product_id)}`).join('\n')}`
+      "Thank you for purchasing! Your items will arrive in 2 business days."
+      // "Purchased the following:\n" +
+      // `${cartItems.map((item , idx)=>
+      //  `${item?.quantity} of ${getProductTitle(item.product_id)}`).join('\n')}`
        );
 
       cartItems.map((item , idx)=> (dispatch(purchaseCart(item.id, user_id))))
@@ -78,7 +87,7 @@ function Cart({count, setCount}) {
   return (
     <div className="cart">
       <ul>
-        {cartItems.map(item => <CartItem key={item} item={item}/>)}
+        {cartItems.map(item => <CartItem key={item} item={item} count={count} setCount={setCount}/>)}
       </ul>
       {/* <hr /> */}
       <form onSubmit={onSubmit}>
