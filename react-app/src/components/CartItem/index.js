@@ -98,7 +98,7 @@ function CartItem({ item}) {
 
   }
 
-
+// grad the session user
   return (
     <div className="each-cart-item-container">
 
@@ -106,7 +106,7 @@ function CartItem({ item}) {
         {getProductTitle(item.product_id)}
       </div>
       {
-        item.id?
+        item.id && user_id == item.user_id &&
         <>
         <form>
           <div className="cart-item-menu">
@@ -118,7 +118,7 @@ function CartItem({ item}) {
                   placeholder="quantity"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
-                /> 
+                />
             </label>
 
             <button
@@ -147,7 +147,7 @@ function CartItem({ item}) {
         <hr></hr>
         </>
 
-        : null
+      
       }
 
 
