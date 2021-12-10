@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, { useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useHistory, NavLink } from 'react-router-dom';
 import { getOneProduct, deleteProduct, clearProducts} from '../../store/product'
@@ -13,23 +13,25 @@ function SingleProductPage(){
 
     const productObject = useSelector((state)=>state.product)
     const indProjObj = Object.values(productObject)[0]
-    // console.log('productObject: ',productObject)
+    console.log('productObject: ',productObject)
+    const productImgsObj = Object.values(productObject)[0]
+    console.log('productImgsObj',productImgsObj)
     // console.log('indProjObj: ',indProjObj)
     const sessionUser = useSelector((state) => state.session.user);
 
-    // console.log('sessionUser: ', sessionUser)
+    const [largeSelectedImg, setLargeSelectedImg] = useState(0);
+    const[imageIdName, setImageIdName] = useState();
 
     const {productId} = useParams()
 
-    // const sessionUser = useSelector((state) => state.session);
-    const user_id = sessionUser?.id
-
-    // console.log("product-raw", productObject)
-    // console.log("product-values", product)
 
     const handleDelete = async(productId) => {
         await dispatch(deleteProduct(productId));
         history.push('/')
+    }
+
+    const handleAddCartNonUser = async () => {
+        history.push('/login')
     }
 
     useEffect(()=>{
@@ -40,22 +42,16 @@ function SingleProductPage(){
     const product = Object.values(productObject)
     if (!product.length) return null
 
-    // iterate through each object in the array (gets you an object)
-    // turn it into an array of the object's values
-    // get the second item
-    const productImgsObj = Object.values(productObject)[0]
-    // console.log('productImgsObj: ',productImgsObj)
     const prodImgsArr = Object.values(productImgsObj?.images)
-    // console.log('prodImgsArr: ', prodImgsArr)
+    console.log('prodImgsArr: ', prodImgsArr)
 
      // grouping of images
     const imageGroupsArr = prodImgsArr?.map((obj) => {
         return Object.values(obj)
     })
-    // console.log('imageGroupsArr ',imageGroupsArr)
-    // console.log('imageGroupsArr: ', imageGroupsArr)
+    
     // get array of the second image in each grouping
-    const images = imageGroupsArr?.map((arr) => {
+    let images = imageGroupsArr?.map((arr) => {
         // console.log('arr ',arr,'arr[0]: ',arr[1], 'arr[1]',arr[0])
         if (arr.length > 2) {
             return arr[1]
@@ -64,31 +60,31 @@ function SingleProductPage(){
         }
     })
 
-    // const addToCart = (user_id) => {
-    //     history.push(`/users/${user_id}/cart`)
+    // let clickedPhoto;
+    // function imageClick(e) {
+    //     images.foreach(image => image.style.opacity = .3)
     // }
 
-// console.log('!!!!!',Object.values(product[0]?.images[0])[0])
     return(
         <div>
             <div className='editBackBtnDiv'>
                 <NavLink to={`/`}
                 className='editProdCancel singleProdBack'
-                >Back</NavLink>
+                >Back to Main</NavLink> 
             </div>
             <div className='mainImagesBox'>
                 <div className='smallImagesBox'>
                     {images.length ?
-                        images?.map(imageUrl =>
-                            <div key={imageUrl}>
-                                <img src={imageUrl} alt='product photos' className='smallImg'></img>
+                        images?.map((imageUrl, idx) =>
+                            <div key={idx}>
+                                <img src={imageUrl} alt='product photos' className='smallImg' 
+                                onClick={() => setLargeSelectedImg(idx)}></img>
                             </div>
                         ) : null
                     }
                 </div>
                 <div className='largeImageBox'>
-                    {/* <img src={Object.values(product[0]?.images[0])[0]} alt='product photos' className='largeImage'></img> */}
-                    <img src={images[0]} alt='product photos' className='largeImage'></img>
+                    <img src={images[largeSelectedImg]} alt='product photos' id='largeImage' className='largeImage'></img>
                 </div>
                 <div className='itemInfoBox'>
                     <div>
@@ -109,25 +105,33 @@ function SingleProductPage(){
                         </div>
                     </div>
                     <div>
-
-                        {/* <button
-                        >
-                        </button> */}
-                        <button className='submitBtn'
-                            className={(cartItem ? " selected" : "")}
-                            onClick={() => dispatch(addToCart(+productId))}
-                            >
-                            Add to Cart
-                        </button>
+                        <div>
+                            {sessionUser &&
+                                // <button className='submitBtn' >
+                                //     Add to Cart
+                                // </button>
+                                <button id='addToCartBtn'
+                                    className={(cartItem ? " selected" : "")} 
+                                    onClick={() => dispatch(addToCart(+productId))}
+                                    >
+                                    Add to Cart
+                                </button>
+                            }
+                        </div>
+                        {!sessionUser &&
+                            <button onClick={() => handleAddCartNonUser()} className='submitBtn' >
+                                Add to Cart
+                            </button>
+                        }
                     </div>
                     <div className='singleProdBottomBtnsDiv'>
-                        <div className='singleProdUpdateDiv'>
+                        <div className='singleProdUpdateDiv updateProductBtnDiv'>
                             {sessionUser && sessionUser?.id === indProjObj?.user_id &&
-                                <NavLink to={`/products/${productId}/edit`} className='editProdCancel'>Update</NavLink>
+                                <NavLink to={`/products/${productId}/edit`} className='updateProdButton'>Update</NavLink> 
                             }
                         </div>
                         {sessionUser && sessionUser?.id === indProjObj?.user_id &&
-                            <button onClick={() => handleDelete(indProjObj?.id)} className='delButton editProdCancel'>Delete Product</button>
+                            <button onClick={() => handleDelete(indProjObj?.id)} className='delButton '>Delete Product</button>
                         }
                     </div>
                 </div>

@@ -62,3 +62,7 @@ label {
     align-items: center;
     margin-bottom: 30px;
 }
+
+.errorItem {
+    color: red
+}
