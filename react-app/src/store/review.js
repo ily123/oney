@@ -2,7 +2,12 @@ const LOAD_REVIEWS = "review/LOAD_REVIEWS";
 const ADD_ONE = "review/ADD_ONE"
 const EDIT_ONE_REVIEW = "review/EDIT_ONE_REVIEW"
 const REMOVE_REVIEW = "review/REMOVE_REVIEW"
+const CLEAR = 'review/CLEAR'
 
+
+export const clearReviews = () => ({
+  type: CLEAR
+})
 
 // action creator to delete on review
 const removeOneReview = (id) => ({
@@ -146,7 +151,9 @@ const reviewReducer = (state = initialState, action) => {
       delete newState[action.id];
       return newState
     };
-
+    case CLEAR:{
+      return {}
+    };
     default:
       return state;
   }
