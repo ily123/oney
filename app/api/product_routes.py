@@ -104,22 +104,23 @@ def add_new_product():
     return "Bad Data"
 
 
-@product_routes.route('/search', methods=['GET','POST'])
-def search_products():
-  text = request.json
+@product_routes.route('/search/<tag>', methods=['GET'])
+def search_products(tag):
+  # text = request.json
   # search = "%{}%".format(text)
   # print(search)
-  searchResult = Product.query.filter(Product.title.ilike(f'%{text}%')).all()
+  searchResult = Product.query.filter(Product.title.ilike(f'%{tag}%')).all()
   # print(searchResult)
   if searchResult:
     result = {p.id : p.to_dict() for p in searchResult}
     return {
               "products" : result,
-              "searchTag" : text
+              "searchTag" : tag
           }
   else:
     return { "products" : {},
-              "searchTag" : text}
+              "searchTag" : tag}
+
 
 # to get products in current user's cart
 @product_routes.route('/cart/<int:user_id>',methods=['GET'])

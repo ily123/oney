@@ -71,7 +71,7 @@ function App() {
         <ProtectedRoute path='/new-product' exact={true}>
           <AddProductForm />
         </ProtectedRoute>
-        <Route path='/search' exact={true} >
+        <Route path='/search/:tag' exact={true} >
           <SearchPage />
         </Route>
       </Switch>
