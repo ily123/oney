@@ -1,0 +1,7 @@
+footer {
+  margin-top: auto;
+  border: 1px red solid;
+  min-height: 100px;
+  width: 100%;
+  display: flex;
+}

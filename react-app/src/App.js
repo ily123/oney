@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import Navigation from './components/Navigation';
+import Footer from './components/Footer';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
@@ -36,6 +37,7 @@ function App() {
   return (
     <BrowserRouter>
       <Navigation />
+      <main>
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
@@ -78,6 +80,8 @@ function App() {
           <SearchPage />
         </Route>
       </Switch>
+      </main>
+      <Footer />
     </BrowserRouter>
   );
 }
