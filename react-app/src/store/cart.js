@@ -230,7 +230,7 @@ export default function cartReducer(state = { order: [], showCart: false }, acti
     //   };
 
     case REMOVE_FROM_CART: {
-      const index = state.order.indexOf(action.id);
+      const index = state.order.indexOf(action?.id);
       const newOrder = [ ...state.order.slice(0, index), ...state.order.slice(index + 1) ];
 
       const newState = { ...state, order: newOrder };
