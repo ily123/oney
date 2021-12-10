@@ -24,12 +24,13 @@ const Top20Products = () => {
                     Our top picks for you
                 </div>
                 <div className='topProducts'>
-                    {products?.map(({id,price,images})=>(
+                    {products?.map(({id,price,images,title})=>(
                         <ProductCard
                             key={id}
                             id={id}
                             price={price}
                             images={images}
+                            title={title}
                         />
                     ))}
                 </div>
