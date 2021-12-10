@@ -11,7 +11,7 @@ const ProductCard = ({id,price,images,title}) => {
             <div className="prod">
                 <NavLink to={`/products/${id}`}>
                     <div className='product_card'>
-                        <img className= 'productImage' src={image} alt=""/>
+                        <img className= 'productImage' src={image} alt="Product Photo"/>
                         <span className='productTitle'>{title}</span>
                         <span className='productPrice'>${price}</span>
                     </div>

@@ -21,7 +21,7 @@ const CategoryCard = () => {
                             <div key={"cardDetails-"+cardDetails.id} className="catge_effect">
                                 <NavLink to={"/category/"+cardDetails.id}>
                                     <div className='categ_div'>
-                                        <img className= 'categ_image' src={cardDetails.image} alt=""/>
+                                        <img className= 'categ_image' src={cardDetails.image} alt="Photo"/>
                                         <span className='categ_name'>{cardDetails.title}</span>
                                     </div>
                                 </NavLink>
