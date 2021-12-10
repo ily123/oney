@@ -4,6 +4,17 @@
   border-radius: 3px;
 }
 
+.smallImg:hover {
+  opacity: 0.50;
+}
+
+/* #smallImgClicked {
+  height: 50px;
+  width: 50px;
+  border-radius: 3px;
+  opacity: 0.50;
+} */
+
 .largeImage {
   border-radius: 3px;
   margin-left: 5px

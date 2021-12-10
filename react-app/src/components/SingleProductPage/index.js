@@ -20,6 +20,7 @@ function SingleProductPage(){
     const sessionUser = useSelector((state) => state.session.user);
 
     const [largeSelectedImg, setLargeSelectedImg] = useState(0);
+    const[imageIdName, setImageIdName] = useState();
 
     const {productId} = useParams()
 
@@ -40,7 +41,7 @@ function SingleProductPage(){
 
     const product = Object.values(productObject)
     if (!product.length) return null
-   
+
     const prodImgsArr = Object.values(productImgsObj?.images)
     console.log('prodImgsArr: ', prodImgsArr)
 
@@ -58,6 +59,11 @@ function SingleProductPage(){
             return arr[0]
         }
     })
+
+    // let clickedPhoto;
+    // function imageClick(e) {
+    //     images.foreach(image => image.style.opacity = .3)
+    // }
 
     return(
         <div>
