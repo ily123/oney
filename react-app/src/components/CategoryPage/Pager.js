@@ -1,4 +1,5 @@
-import { Link, NavLink } from 'react-router-dom';
+import styles from './Pager.module.css';
+import { NavLink } from 'react-router-dom';
 
 export default function Pager({ pageNumber, category }) {
   // count number of products in category, including sub-categories
@@ -20,17 +21,20 @@ export default function Pager({ pageNumber, category }) {
   const totalPages = Math.ceil(productCount / PRODUCTS_PER_PAGE); 
   pageNumber = Number(pageNumber)
   return (
-    <div>
-      <ul>
-        <li><PagerArrow props={{category, pageNumber, totalPages, goLeft: true}} /></li>
+      <ul className={styles.pager}>
+        <li className={styles.arrow}><PagerArrow props={{category, pageNumber, totalPages, goLeft: true}} /></li>
         {(calculatePagerRange(pageNumber, totalPages).map(pageInPager => {
-          return <li key={pageInPager}><NavLink to={`/category/${category.id}/page/${pageInPager}`}>{pageInPager}</NavLink></li>
+          return (
+            <li key={pageInPager}>
+              <NavLink 
+                className={pageInPager===pageNumber ? styles.active : null}
+                to={`/category/${category.id}/page/${pageInPager}`}>{pageInPager}
+              </NavLink>
+            </li>
+          )
         }))}
         <li><PagerArrow props={{category, pageNumber, totalPages, goLeft: false}} /></li>
       </ul>
-      {totalPages} - {pageNumber}
-
-    </div> 
   )
 }
 
