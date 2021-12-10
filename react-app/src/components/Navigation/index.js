@@ -28,7 +28,7 @@ const Navigation = () => {
         </li>
         <li>
           <button className="checkout-button" onClick={() => dispatch(openCart())}>
-          <i className="fas fa-shopping-cart"></i>
+            <i className="fas fa-shopping-cart"></i>
           </button>
         </li>
         <li>
