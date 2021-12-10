@@ -6,11 +6,13 @@ import './singleProduct.css'
 import HideReviewForm from '../HideReviewForm';
 import { updateCartThunk,addToCartThunk, allCartItemsThunk } from '../../store/cart';
 
+import { openCart, closeCart } from '../../store/cart';
 
 function SingleProductPage({count, setCount}){
     const history = useHistory();
     const dispatch = useDispatch()
     const cartItem = {};
+    const showCart = useSelector((state) => state.cart.showCart);
 
     const productObject = useSelector((state)=>state.product)
     const indProjObj = Object.values(productObject)[0]
@@ -118,6 +120,8 @@ function SingleProductPage({count, setCount}){
     const handleAddToCart = async(e) => {
         e.preventDefault();
 
+
+
     // add check this for existing cart items after
 
         // if(checkCartItemQuantity(productId)) {
@@ -130,6 +134,7 @@ function SingleProductPage({count, setCount}){
         //     await setQuantity(1)
         // }
 
+
         setCount(count+1)
 
         let quantity =1
@@ -141,6 +146,8 @@ function SingleProductPage({count, setCount}){
 
         dispatch(addToCartThunk(itemAddToCart, user_id))
         console.log("itemAddToCart", itemAddToCart)
+            dispatch(openCart())
+
     }
 
     return(

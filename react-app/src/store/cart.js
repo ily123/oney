@@ -194,7 +194,6 @@ export default function cartReducer(state = { order: [], showCart: false }, acti
   switch (action.type) {
     case ADD_TO_CART: {
 
-
       if(!state[action.newCartItem.id]) {
         const newState = {
           ...state,
@@ -286,7 +285,7 @@ export default function cartReducer(state = { order: [], showCart: false }, acti
     case PURCHASE_FROM_CART: {
       return {}
     };
-    
+
     default:
       return state;
   }
