@@ -13,7 +13,7 @@ import { purchaseCart } from "../../store/cart";
 import CartItem from "../CartItem";
 import './Cart.css';
 
-function Cart({count, setCount}) {
+function Cart({count, setCount, open, setOpen}) {
   const dispatch = useDispatch();
   const {productId} = useParams()
 
@@ -35,14 +35,14 @@ function Cart({count, setCount}) {
   useEffect(()=>{
     dispatch(getOneProduct(productId));
     return () => clearInterval(getOneProduct(productId));
-}, [dispatch, productId, count, cartItems.length])
+}, [dispatch, productId, count, cartItems.length, open])
 
   useEffect(() => {
     dispatch(allCartItemsThunk(user_id))
     // dispatch(clearCartItems())
-    
+
     return () => clearInterval(allCartItemsThunk(user_id));
-  }, [dispatch, user_id, count, cartItems.length])
+  }, [dispatch, user_id, count, cartItems.length, open])
 
   // useEffect(() => {
   //   dispatch(clearCartItems())

@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { openCart, closeCart } from '../../store/cart';
 import Cart from "../Cart";
 
-const Navigation = ({count, setCount}) => {
+const Navigation = ({count, setCount, open, setOpen}) => {
   const dispatch = useDispatch();
   const showCart = useSelector((state) => state.cart.showCart);
 
@@ -46,7 +46,8 @@ const Navigation = ({count, setCount}) => {
         <i className="fas fa-arrow-right"></i>
         </button>
         </div>
-        <Cart count={count} setCount={setCount}/>
+        {open && <Cart count={count} setCount={setCount} open={open} setOpen={setOpen}/>}
+
       </div>
     </>
 

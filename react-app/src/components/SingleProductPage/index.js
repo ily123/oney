@@ -8,7 +8,7 @@ import { updateCartThunk,addToCartThunk, allCartItemsThunk } from '../../store/c
 
 import { openCart, closeCart } from '../../store/cart';
 
-function SingleProductPage({count, setCount}){
+function SingleProductPage({count, setCount, open, setOpen}){
     const history = useHistory();
     const dispatch = useDispatch()
     const cartItem = {};
@@ -37,7 +37,7 @@ function SingleProductPage({count, setCount}){
     useEffect(() => {
         dispatch(allCartItemsThunk(user_id))
         return () => clearInterval(allCartItemsThunk(user_id));
-      }, [dispatch, user_id, cartItems.length, count, productId])
+      }, [dispatch, user_id, cartItems.length, count, productId, open])
 
 
     const handleDelete = async(productId) => {
@@ -48,7 +48,7 @@ function SingleProductPage({count, setCount}){
     useEffect(()=>{
         dispatch(getOneProduct(productId))
         dispatch(clearProducts())
-    }, [dispatch,productId])
+    }, [dispatch,productId, open])
 
 
     const product = Object.values(productObject)
@@ -121,6 +121,8 @@ function SingleProductPage({count, setCount}){
         e.preventDefault();
 
         setCount(count+1)
+
+        setOpen(true)
 
         let quantity =1
 
