@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useParams, Redirect } from 'react-router-dom';
 import ProductCardXL from './ProductCardXL';
 import SideBar from './SideBar';
+import Pager from './Pager';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductsForCategory } from '../../store/category';
 
@@ -15,7 +16,7 @@ export default function CategoryPage() {
   
   useEffect(() => {
     dispatch(fetchProductsForCategory(categoryId, pageNumber))
-  }, [dispatch, categoryId])
+  }, [dispatch, categoryId, pageNumber])
 
   if (!products || !categories) return null
   const category = categories[categoryId];
@@ -32,6 +33,7 @@ export default function CategoryPage() {
           })}
         </div>
       </div>
+      <Pager pageNumber={pageNumber} category={category} />
     </div>
   )
 }
