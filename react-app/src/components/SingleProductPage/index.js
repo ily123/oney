@@ -7,7 +7,7 @@ import HideReviewForm from '../HideReviewForm';
 import { updateCartThunk,addToCartThunk, allCartItemsThunk } from '../../store/cart';
 
 
-function SingleProductPage(){
+function SingleProductPage({count, setCount}){
     const history = useHistory();
     const dispatch = useDispatch()
     const cartItem = {};
@@ -128,6 +128,8 @@ function SingleProductPage(){
         // } else {
         //     await setQuantity(1)
         // }
+
+        setCount(count+1)
 
         let quantity =1
 

@@ -7,14 +7,17 @@ import { useParams} from 'react-router-dom';
 import { getOneProduct } from "../../store/product";
 import { allCartItemsThunk } from "../../store/cart";
 import { deleteCartItem } from "../../store/cart";
+import { purchaseCart } from "../../store/cart";
 
 // import CartItem from './CartItem';
 import CartItem from "../CartItem";
 import './Cart.css';
 
-function Cart() {
+function Cart({count, setCount}) {
   const dispatch = useDispatch();
   const {productId} = useParams()
+
+
 
   const productObject = useSelector((state)=>state.product)
   // const cartItems = useSelector(getCartItems);
@@ -25,32 +28,24 @@ function Cart() {
   const cartItems = Object?.values(cartItemsObj)
   // console.log("cartItems in cart component", cartItems)
 
-
   const sessionUser = useSelector((state) => state.session);
   const user_id = sessionUser?.user.id
   // console.log("user_id in component", user_id)
-
-
 
   useEffect(()=>{
     dispatch(getOneProduct(productId))
 }, [dispatch, productId])
 
-
-
   useEffect(() => {
     dispatch(allCartItemsThunk(user_id))
     return () => clearInterval(allCartItemsThunk(user_id));
-  }, [dispatch, user_id, cartItems.length])
-
-
-
+  }, [dispatch, user_id, count])
 
   const products = Object.values(productObject)
   if (!products.length) return null
   // console.log("product in cart", products)
 
-  if (!cartItems || !cartItems.length) return (
+  if (!cartItems || cartItems.length === 1) return (
     <div className="cart">
       No items in the cart. Start selecting items to purchase.
     </div>
@@ -69,7 +64,6 @@ function Cart() {
     }
   }
 
-
   const onSubmit = (e) => {
     e.preventDefault();
     window.alert(
@@ -78,8 +72,8 @@ function Cart() {
        `${item?.quantity} of ${getProductTitle(item.product_id)}`).join('\n')}`
        );
 
-cartItems.map((item , idx)=> (dispatch(deleteCartItem(item.id, user_id))))
-  }
+      cartItems.map((item , idx)=> (dispatch(purchaseCart(item.id, user_id))))
+    }
 
   return (
     <div className="cart">

@@ -106,7 +106,7 @@ function CartItem({ item}) {
         {getProductTitle(item.product_id)}
       </div>
       {
-        item.id && user_id == item.user_id &&
+        item.id && user_id == item.user_id && 
         <>
         <form>
           <div className="cart-item-menu">
@@ -147,7 +147,7 @@ function CartItem({ item}) {
         <hr></hr>
         </>
 
-      
+
       }
 
 

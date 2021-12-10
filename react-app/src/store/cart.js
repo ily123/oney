@@ -14,7 +14,7 @@ const OPEN_CART = 'cart/openCart';
 const CLOSE_CART = 'cart/closeCart';
 const LOAD_ALL_CART_ITEMS = 'cart/loadAllCartItems';
 const CLEAR = 'cart/CLEAR'
-
+const PURCHASE_FROM_CART = 'cart/PURCHASE'
 
 export const clearCartItems = () => ({
   type: CLEAR
@@ -43,6 +43,11 @@ const editItemAction = (editedItem, id) => ({
 
 export const removeFromCart = (id) => ({
   type: REMOVE_FROM_CART,
+  id,
+});
+
+export const purchaseFromCart = (id) => ({
+  type: PURCHASE_FROM_CART,
   id,
 });
 
@@ -97,16 +102,41 @@ export const addToCartThunk = (item, user_id) => async (dispatch) => {
 // thunk to remove an item in the cart completely
 export const deleteCartItem = (id, user_id) => async(dispatch) => {
 
-  console.log("hit delete thunk")
+  console.log("hit delete thunk - item.id",id)
 
+  if(id) {
   const response = await fetch(`/api/carts/${user_id}/items/${id}`, {
     method: 'DELETE',
   });
 
+
   if(response.ok) {
     dispatch(removeFromCart(id))
   }
+} else {
+  return null
 }
+}
+
+
+export const purchaseCart = (id, user_id) => async(dispatch) => {
+
+  console.log("hit delete thunk - item.id",id)
+
+  if(id) {
+  const response = await fetch(`/api/carts/${user_id}/items/${id}`, {
+    method: 'DELETE',
+  });
+
+
+  if(response.ok) {
+    dispatch(purchaseFromCart(id))
+  }
+} else {
+  return null
+}
+}
+
 
 // // thunk to purchase items -> aka delete all items from cart and db
 // export const purchaseCart = (id, user_id) => async(dispatch) => {
@@ -223,13 +253,13 @@ export default function cartReducer(state = { order: [], showCart: false }, acti
         delete newState[action.id];
         return newState;
       }
-    case PURCHASE:
-      const index = state.order.indexOf(action.id);
-      const newOrder = [ ...state.order.slice(0, index), ...state.order.slice(index + 1) ];
+    // case PURCHASE:
+    //   const index = state.order.indexOf(action.id);
+    //   const newOrder = [ ...state.order.slice(0, index), ...state.order.slice(index + 1) ];
 
-      const newState = { ...state, order: newOrder };
-      delete newState[action.id];
-      return newState;
+    //   const newState = { ...state, order: newOrder };
+    //   delete newState[action.id];
+    //   return newState;
       // return { order: [] };
     case OPEN_CART:
       return {
@@ -252,8 +282,11 @@ export default function cartReducer(state = { order: [], showCart: false }, acti
     };
     case CLEAR:{
       return {}
-  }
-
+    };
+    case PURCHASE_FROM_CART: {
+      return {}
+    };
+    
     default:
       return state;
   }
