@@ -160,9 +160,10 @@ const EditProductForm = () =>{
                   onChange={(e)=>setPrice(e.target.value)}
                   value={price}
                   required
-                  type="number"
+                  type= "number"
                   min = "1"
                   max = "1000"
+                  step= "0.01"
                   />
               </div>
               {/* <label htmlFor='Images'>Image(s)</label>
