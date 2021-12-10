@@ -33,8 +33,8 @@ export const fetchCategoryTree = () => async (dispatch) => {
   }
 }
 
-export const fetchProductsForCategory = (categoryId) => async (dispatch) => {    
-  const response = await fetch(`/api/categories/${categoryId}/products/`)                                            
+export const fetchProductsForCategory = (categoryId, pageNumber) => async (dispatch) => {    
+  const response = await fetch(`/api/categories/${categoryId}/products/page/${pageNumber}`)                                            
   if (response.ok) {                                                                                                       
     const products = await response.json()                                                                                 
     if (products.errors) return

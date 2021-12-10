@@ -56,7 +56,7 @@ The app is a combination of a Python back-end, wrapped over a relational databas
 - [Suchitra Mohan](https://github.com/suchimohan)
 - [Ilya Novikov](https://github.com/ily123)
 - [Caroline Sarki](https://github.com/Chocoloco123)
-- [Kelsy Sry](https://github.com/kelseysry)
+- [Kelsey Sry](https://github.com/kelseysry)
 
 
 ## Mock data credit

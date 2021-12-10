@@ -13,9 +13,10 @@ import EditProductForm from './components/EditProductForm';
 import EditOneReview from './components/EditOneReview';
 import Top20Products from './components/Top20Products';
 import AddProductForm from './components/AddProductForm'
-import CategoryPage from './components/CategoryPage';
+import CategoryPage, { CategoryPageRedirectToPageOne } from './components/CategoryPage';
 import Cart from './components/Cart';
 import CategoryCard from './components/CategoryCard';
+import SearchPage from './components/SearchPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -42,12 +43,12 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
+        {/* <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <Route path='/products/:productId' exact={true}>
           <SingleProductPage />
         </Route>
@@ -62,6 +63,9 @@ function App() {
           <Top20Products />
         </Route>
         <Route path='/category/:categoryId' exact={true} >
+          <CategoryPageRedirectToPageOne />
+        </Route>
+        <Route path='/category/:categoryId/page/:pageNumber' exact={true} >
           <CategoryPage />
         </Route>
         {/* <Route path='/users/:userId/cart' exact={true} >
@@ -70,6 +74,9 @@ function App() {
         <ProtectedRoute path='/new-product' exact={true}>
           <AddProductForm />
         </ProtectedRoute>
+        <Route path='/search/:tag' exact={true} >
+          <SearchPage />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

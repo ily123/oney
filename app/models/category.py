@@ -72,7 +72,19 @@ class TreeNodeHelper(dict):
             self.page_description = category.page_description
             self.short_name = category.short_name
             self.parent_id = category.parent
+            self.product_count = 0
         else:
             self.id = "root"
             self.short_name = "root"
         self.children = list(children) if children is not None else []
+
+    def populate_counts(self, counts):
+        """Populates product count attribute of every node."""
+        queue = [self]
+        category_ids = set(counts.keys())
+        while queue:
+            node = queue.pop()
+            if node.id in category_ids:
+                node.product_count = counts[node.id]
+            if node.children:
+                queue.extend(node.children)

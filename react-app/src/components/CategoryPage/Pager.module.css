@@ -1,0 +1,38 @@
+.pager {
+  display: flex;
+  column-gap: 20px;
+  padding: 20px 0px;
+  justify-content: center;
+  margin-left: 200px;
+  line-height: 2rem;
+}
+
+.pager i {
+  color: var(--text-color);
+  font-size: 2rem;
+}
+.pager i:hover {
+  color: var(--orange);
+}
+
+.pager li {
+  min-width: 21px;
+  text-align: center;
+}
+.pager li a.active {
+  color: red;
+  color: var(--orange);
+}
+.pager li a {
+  color: var(--text-color);
+}
+.pager li a:hover {
+  color: var(--orange);
+}
+
+
+@media (max-width: 800px {
+  .pager {
+    margin: 0;
+  }
+}
