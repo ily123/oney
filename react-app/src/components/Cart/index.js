@@ -6,6 +6,7 @@ import { purchase, getCartItems } from '../../store/cart';
 import { useParams} from 'react-router-dom';
 import { getOneProduct } from "../../store/product";
 import { allCartItemsThunk } from "../../store/cart";
+import { clearCartItems } from "../../store/cart";
 
 // import CartItem from './CartItem';
 import CartItem from "../CartItem";
@@ -29,16 +30,21 @@ function Cart() {
   const user_id = sessionUser?.user.id
   // console.log("user_id in component", user_id)
 
-
+  // useEffect(() => {
+  //   dispatch(clearCartItems())
+  // })
 
   useEffect(()=>{
     dispatch(getOneProduct(productId))
 }, [dispatch, productId])
 
+
+
   useEffect(() => {
     dispatch(allCartItemsThunk(user_id))
     return () => clearInterval(allCartItemsThunk(user_id));
   }, [dispatch, user_id, cartItems.length])
+
 
 
 const product = Object.values(productObject)

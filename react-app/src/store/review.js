@@ -123,6 +123,8 @@ const reviewReducer = (state = initialState, action) => {
           [action.newReview.review.id]: action.newReview.review
           // because youre sending a key value pair back from the backend, return {"review":review.to_dict()}  when you dispatch that action.newReview is that key value pair.  needing to be dotted into one further
         }
+        console.log("newState in reviewReducer add_", newState)
+        console.log("action.newReview", action.newReview)
         return newState
       }
       // return state

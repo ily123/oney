@@ -47,7 +47,7 @@ def add_cart_item(user_id):
   if form.validate_on_submit():
     cart_item = Cart()
     form.populate_obj(cart_item)
-    print("cart_item------------------", cart_item)
+    print("cart_item------------------", cart_item.to_dict())
     db.session.add(cart_item)
     db.session.commit()
     return {"cart_item":cart_item.to_dict()}

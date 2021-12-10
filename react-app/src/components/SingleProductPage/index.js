@@ -4,7 +4,7 @@ import { useParams, useHistory, NavLink } from 'react-router-dom';
 import { getOneProduct, deleteProduct, clearProducts} from '../../store/product'
 import './singleProduct.css'
 import HideReviewForm from '../HideReviewForm';
-import { addToCartThunk, allCartItemsThunk } from '../../store/cart';
+import { updateCartThunk,addToCartThunk, allCartItemsThunk } from '../../store/cart';
 
 
 function SingleProductPage(){
@@ -26,15 +26,16 @@ function SingleProductPage(){
 
     const cartItemsObj = useSelector((state)=>state?.cart)
     const cartItems = Object?.values(cartItemsObj)
+
     console.log("users cart items", cartItems)
-    let [quantity, setQuantity] = useState(cartItems[0].quantity);
-    console.log("users cart items", cartItems[0].quantity)
+    let [quantity, setQuantity] = useState(cartItems[0]?.quantity);
+    // console.log("users cart items", cartItems[0]?.quantity)
 
 
     useEffect(() => {
         dispatch(allCartItemsThunk(user_id))
         return () => clearInterval(allCartItemsThunk(user_id));
-      }, [dispatch, user_id, cartItems.length])
+      }, [dispatch, user_id, Object.keys(cartItemsObj).length, cartItems.length])
 
 
     const handleDelete = async(productId) => {
@@ -79,7 +80,10 @@ function SingleProductPage(){
     // }
 
 // console.log('!!!!!',Object.values(product[0]?.images[0])[0])
-console.log("users cart items", cartItems[0].quantity)
+// console.log("users cart items", cartItems[0]?.quantity)
+
+
+
 
     const checkCartItemQuantity = (productId) => {
         const toBeCartItem = cartItems?.filter(function(el){
@@ -88,26 +92,48 @@ console.log("users cart items", cartItems[0].quantity)
 
             return el.product_id == productId
         });
-        if(toBeCartItem) {
-            console.log("toBeCartItem", toBeCartItem[0].quantity)
-            return toBeCartItem[0].quantity
+        if(toBeCartItem) { // item exists in user's card already  ->
+            // then we should be running an update
+            console.log("toBeCartItem", toBeCartItem[0]?.quantity)
+
+                 setQuantity(() => {
+                    return quantity += 1
+                })
+                console.log("quantity after set", quantity)
+                let id = toBeCartItem.id
+                let editItem = {
+                id, user_id, productId, quantity
+                }
+                // console.log("handlesubmit", editItem, quantity)
+                dispatch(updateCartThunk(editItem, id, user_id))
+            // await
+            // return toBeCartItem[0]?.quantity
         }
         else {
             return null
         }
     }
+
     const handleAddToCart = async(e) => {
         e.preventDefault();
 
-        if(checkCartItemQuantity(productId)) {
-            quantity = checkCartItemQuantity(productId)
-            console.log("quantity", quantity)
-            await setQuantity(() => {
-                return quantity += 1
-            })
-        }
+    // add check this for existing cart items after
+
+        // if(checkCartItemQuantity(productId)) {
+        //     quantity = checkCartItemQuantity(productId)
+        //     // console.log("quantity", quantity)
+        //     await setQuantity(() => {
+        //         return quantity += 1
+        //     })
+        // } else {
+        //     await setQuantity(1)
+        // }
+
+        let quantity =1
+
+        let product_id = +productId
         const itemAddToCart = {
-            productId, user_id, quantity
+            user_id, product_id,quantity
         }
 
         dispatch(addToCartThunk(itemAddToCart, user_id))
@@ -154,6 +180,7 @@ console.log("users cart items", cartItems[0].quantity)
                         </div>
                     </div>
                     <div>
+
                         {/* <button
                         >
                         </button> */}
