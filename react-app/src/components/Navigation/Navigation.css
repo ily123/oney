@@ -2,6 +2,7 @@
     margin-left: 100px;
     margin-right: 100px;
     border-bottom: solid var(--light-gray) 1px;
+    z-index: 1;
 }
 
 .navigation{

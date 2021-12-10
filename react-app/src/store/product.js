@@ -89,8 +89,11 @@ export const addOneProduct = (payload) => async(dispatch) => {
     }
 }
 
-const initialState = {}
+
 //reducer
+
+const initialState = {}
+
 const productsReducer = (state=initialState, action) => {
     switch(action.type){
         case ONE_PRODUCT : {
@@ -107,7 +110,7 @@ const productsReducer = (state=initialState, action) => {
                 const newState = {
                     ...state, [action.product.id]: action.product
                 }
-                
+
                 return newState
             }
 

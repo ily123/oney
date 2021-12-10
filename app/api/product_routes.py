@@ -1,8 +1,11 @@
 from flask import Blueprint, jsonify, request
+from app.models import Product, db, Cart
+from app.forms import NewProductForm
 from app.forms import EditProductForm
-from app.models import Product, db
+
 from flask_login import current_user
 from app.forms import NewProductForm
+
 
 product_routes = Blueprint('product', __name__)
 
@@ -31,10 +34,10 @@ def update_product(id):
   form = EditProductForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   product = Product.query.get(id)
-  print(form.validate_on_submit)
-  print(form.data)
+  # print(form.validate_on_submit)
+  # print(form.data)
   if form.validate_on_submit():
-    print('herrrrrrrrrreeeeee')
+    # print('herrrrrrrrrreeeeee')
     product.title = form.data['title'],
     product.description = form.data['description'],
     product.price = form.data['price'],
@@ -49,8 +52,8 @@ def update_product(id):
     db.session.commit()
     return product.to_dict()
   else:
-    print('hello there!')
-    print(form.errors)
+    # print('hello there!')
+    # print(form.errors)
     return 'Bad data'
 
 
@@ -72,14 +75,14 @@ def delete_product(id):
 #   db.session.delete(product)
 #   db.session.commit()
 #   return 'deleted'
-  
+
 @product_routes.route('/new', methods=['POST'])
 def add_new_product():
   currentUser = current_user.to_dict()
   form = NewProductForm()
   form['csrf_token'].data = request.cookies['csrf_token']
-  print(".................", request.cookies['csrf_token'])
-  print("Hiiiiiiiiiiiiiiiiiiii",form.validate_on_submit())
+  # print(".................", request.cookies['csrf_token'])
+  # print("Hiiiiiiiiiiiiiiiiiiii",form.validate_on_submit())
   if form.validate_on_submit():
     product = Product(
       title = form.data['title'],
@@ -95,7 +98,37 @@ def add_new_product():
     )
     db.session.add(product)
     db.session.commit()
-    print("///////////////////", product.to_dict())
+    # print("///////////////////", product.to_dict())
     return product.to_dict()
   else:
     return "Bad Data"
+
+
+@product_routes.route('/search/<tag>', methods=['GET'])
+def search_products(tag):
+  # text = request.json
+  # search = "%{}%".format(text)
+  # print(search)
+  searchResult = Product.query.filter(Product.title.ilike(f'%{tag}%')).all()
+  # print(searchResult)
+  if searchResult:
+    result = {p.id : p.to_dict() for p in searchResult}
+    return {
+              "products" : result,
+              "searchTag" : tag
+          }
+  else:
+    return { "products" : {},
+              "searchTag" : tag}
+
+
+# to get products in current user's cart
+@product_routes.route('/cart/<int:user_id>',methods=['GET'])
+def get_products_in_cart(user_id):
+  products = Product.query.filter(Product.id == Cart.product_id).all()
+  if products:
+    products = {p.id : p.to_dict() for p in products}
+    return products
+  else:
+    return {'message': 'items in cart not found'}
+# where product.id = cart's product_id
