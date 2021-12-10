@@ -18,6 +18,7 @@
     flex-direction: row !important;
     justify-content: center !important;
     flex-wrap: wrap !important;
+    /* z-index: 2 !important; */
 }
 
 .categ_div {
