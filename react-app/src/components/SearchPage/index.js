@@ -22,8 +22,6 @@ const SearchPage = () => {
     const products = Object.values(searchResults?.products)
 
 
-    // console.log("tag is ===========",tag)
-
     if (!products.length){
         return (
             <h2>No products found for "{tag}"</h2>

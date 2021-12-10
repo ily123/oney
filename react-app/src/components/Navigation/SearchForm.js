@@ -11,7 +11,6 @@ const history = useHistory();
 const [searchKeyWord,setSearchKeyWord] = useState('')
 
 const handleKeyPress = async (e) =>{
-    // console.log(e)
     if (e.charCode === 13) {
         e.preventDefault();
         let resultFromSearch = await dispatch(search(searchKeyWord));

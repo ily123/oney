@@ -27,7 +27,6 @@
 a {
     text-decoration: none;
     color:orangered;
-    font-weight: bold;
 }
 
 a:hover{
@@ -40,13 +39,32 @@ a:hover{
     list-style: none;
     gap: 30px;
     justify-content: center;
+    margin-top: 10px;
 }
 
 .Oney {
-    font-weight: bolder;
+    margin-top: none;
+    padding-top: none;
+    font-weight:bolder;
+    font-size:2em !important
 }
 
 .hiUser{
     color:orangered;
-    font-weight: bold;
+}
+
+.fa-shopping-cart{
+    color: orangered;
+}
+
+.checkout-button{
+    border:none;
+    background: none;
+    width:30px;
+    height:20px
+}
+
+.checkout-button:hover {
+    background-color:lightgray;
+    border-radius: 50%;
 }
