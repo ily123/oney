@@ -16,11 +16,11 @@ def get_categories():
         product_counts = count_number_of_products_by_category()
         # attach product counts onto every category
         tree.populate_counts(product_counts)
-
         return tree # tree is already a dictionary
     except Exception as error:
         message = error.__repr__()
         return {"errors": "category GET failed", "message": message}
+
 
 def count_number_of_products_by_category():
     """Groups products by category id and returns count."""
@@ -28,6 +28,7 @@ def count_number_of_products_by_category():
         .with_entities(Product.category_id, func.count(Product.id)) \
         .group_by(Product.category_id).all()
     return dict(count)
+
 
 @category_routes.route('/<int:category_id>/products/')
 def get_category_products(category_id):

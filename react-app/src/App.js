@@ -13,7 +13,7 @@ import EditProductForm from './components/EditProductForm';
 import EditOneReview from './components/EditOneReview';
 import Top20Products from './components/Top20Products';
 import AddProductForm from './components/AddProductForm'
-import CategoryPage from './components/CategoryPage';
+import CategoryPage, { CategoryPageRedirect } from './components/CategoryPage';
 import CategoryCard from './components/CategoryCard';
 
 function App() {
@@ -61,6 +61,9 @@ function App() {
           <Top20Products />
         </Route>
         <Route path='/category/:categoryId' exact={true} >
+          <CategoryPageRedirect />
+        </Route>
+        <Route path='/category/:categoryId/page/:pageNumber' exact={true} >
           <CategoryPage />
         </Route>
         <ProtectedRoute path='/new-product' exact={true}>

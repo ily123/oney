@@ -1,6 +1,6 @@
 import styles from './CategoryPage.module.css';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 import ProductCardXL from './ProductCardXL';
 import SideBar from './SideBar';
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,3 +36,7 @@ export default function CategoryPage() {
   )
 }
 
+export function CategoryPageRedirect() {
+  const { categoryId } = useParams();
+  return <Redirect to={`/category/${categoryId}/page/1`} />
+}
