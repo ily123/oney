@@ -11,21 +11,34 @@ footer {
 }
 
 .madeby {
+  font-family: "Roboto";
+  font-style: light;
+  font-weight: 300;
   padding-bottom: 20px;
-  font-weight: bold;
+  font-size: 1.5rem;
   color: var(--text-color);
+}
+.madeby a {
+  color: var(--text-color);
+  margin-right: 3px;
 }
 
 .contributors {
   display: flex;
   column-gap: 30px;
+  font-style: light;
+  font-weight: 300;
+  font-size: 1.1rem;
 }
 
-.personCard {
-  font-size: 1rem;
-}
 
 .socialMediaLinks {
   display: flex;
+  column-gap: 3px;
   justify-content: center;
+  padding-top: 5px;
+}
+
+.socialMediaLinks a i {
+  font-size: 1.3rem;
 }
