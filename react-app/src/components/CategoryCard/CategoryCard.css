@@ -1,16 +1,16 @@
-.categ_parent_div{
+/* .categ_parent_div{
   position: relative !important;
   margin-top: 10px !important;
   width: 100% !important;
-}
+} */
 
-.bgcolor_div {
+/* .bgcolor_div {
   width: 100% !important;
   height: 70px !important;
   background-color: #FDEBD2 !important;
   z-index: -1 !important;
   position: absolute !important;
-}
+} */
 .categCard{
     margin-left: 100px !important;
     margin-right: 100px !important;
