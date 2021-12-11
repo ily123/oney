@@ -57,7 +57,6 @@ function App() {
         </ProtectedRoute> */}
         <Route path='/products/:productId' exact={true}>
           <SingleProductPage count={count} setCount ={setCount} open={open} setOpen={setOpen}/>
-
         </Route>
         <ProtectedRoute path='/products/:productId/edit' exact={true}>
           <EditProductForm />
@@ -67,7 +66,12 @@ function App() {
         </Route>
         <Route path='/' exact={true} >
           <CategoryCard />
+          <CategoryCard />
+          <CategoryCard />
           <Top20Products />
+          <CategoryCard />
+          <CategoryCard />
+          <CategoryCard />
         </Route>
         <Route path='/category/:categoryId' exact={true} >
           <CategoryPageRedirectToPageOne />

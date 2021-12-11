@@ -11,7 +11,8 @@ let cardDetailsList = [{"id" : 68887312, "image" : "https://media.istockphoto.co
                         ]
 
 const CategoryCard = () => {
-
+  
+  return <div className="categCard_test"> This is a test div</div>
   return (
     <div className="categCard">
       {(cardDetailsList.map(cardDetails =>{
