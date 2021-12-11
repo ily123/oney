@@ -1,16 +1,3 @@
-/* .categ_parent_div{
-  position: relative !important;
-  margin-top: 10px !important;
-  width: 100% !important;
-} */
-
-/* .bgcolor_div {
-  width: 100% !important;
-  height: 70px !important;
-  background-color: #FDEBD2 !important;
-  z-index: -1 !important;
-  position: absolute !important;
-} */
 .categCard{
     margin-left: 100px !important;
     margin-right: 100px !important;
@@ -18,7 +5,6 @@
     flex-direction: row !important;
     justify-content: center !important;
     flex-wrap: wrap !important;
-    /* z-index: 2 !important; */
 }
 
 .categ_div {
@@ -30,16 +16,16 @@
     padding: 20px 10px 10px 10px !important;
   }
 
-  .categ_name {
+.categ_name {
       color: black !important
-    }
+  }
 
-  .categ_image {
+.categ_image {
       width: 100px !important;
       height: 100px !important;
       border-radius: 50% !important;
       margin: 0 0 10px 0 !important;
-  }
+}
 
 .catge_effect a {
   text-decoration: none !important;

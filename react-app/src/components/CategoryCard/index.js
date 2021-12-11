@@ -13,25 +13,23 @@ let cardDetailsList = [{"id" : 68887312, "image" : "https://media.istockphoto.co
 const CategoryCard = () => {
 
         return (
-            <div className="categCard">
-                {(cardDetailsList.map(cardDetails =>{
-                    return (
-                        <div key={"cardDetails-"+cardDetails.id} className="catge_effect">
-                            <NavLink to={"/category/"+cardDetails.id}>
-                                <div className='categ_div'>
-                                    <img className= 'categ_image' src={cardDetails.image} alt="Photo"/>
-                                    <span className='categ_name'>{cardDetails.title}</span>
-                                </div>
-                            </NavLink>
-                        </div>
-                    )
-                }))}
-            </div>
+                <div className="categCard">
+                    {(cardDetailsList.map(cardDetails =>{
+                        return (
+                            <div key={"cardDetails-"+cardDetails.id} className="catge_effect">
+                                <NavLink to={"/category/"+cardDetails.id}>
+                                    <div className='categ_div'>
+                                        <img className= 'categ_image' src={cardDetails.image} alt="Photo"/>
+                                        <span className='categ_name'>{cardDetails.title}</span>
+                                    </div>
+                                </NavLink>
+                            </div>
+                        )
+                    }))}
+                </div>
         );
 }
 
-// <div className="categ_parent_div">
-                {/* <div className="bgcolor_div"></div> */}
- // </div>
+
 
 export default CategoryCard;
