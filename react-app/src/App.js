@@ -19,6 +19,8 @@ import Cart from './components/Cart';
 import CategoryCard from './components/CategoryCard';
 import SearchPage from './components/SearchPage';
 
+import TestComponent from './components/TEST_COMPONENT';
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -40,7 +42,7 @@ function App() {
   return (
     <BrowserRouter>
       <Navigation count={count} setCount ={setCount} open={open} setOpen={setOpen}/>
-
+      <TestComponent />
       <main>
       <Switch>
         <Route path='/login' exact={true}>
