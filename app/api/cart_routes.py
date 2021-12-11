@@ -38,19 +38,18 @@ def cart_item_detail(user_id, id):
 
 
 
-# route to create new cart item
 
-# post a review
+# route to create new cart item
 @cart_routes.route('/<int:user_id>/items', methods=['POST'])
-def add_cart_item(user_id, id):
+def add_cart_item(user_id):
   form = CartForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
-    cart_item = CartForm()
+    cart_item = Cart()
     form.populate_obj(cart_item)
+    print("cart_item------------------", cart_item.to_dict())
     db.session.add(cart_item)
     db.session.commit()
-    print("cart_item", cart_item.to_dict())
     return {"cart_item":cart_item.to_dict()}
   else:
     return "bad data"

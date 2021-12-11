@@ -6,4 +6,4 @@ from app.models import Cart
 class CartForm(FlaskForm):
     user_id = IntegerField('user_id', validators=[DataRequired()])
     product_id = IntegerField('product_id', validators=[DataRequired()])
-    quantity = IntegerField('quantity', validators=[DataRequired()])
+    quantity = IntegerField('quantity', validators=[DataRequired(), NumberRange(min=0, max=20, message='must have at least 0+ items')])

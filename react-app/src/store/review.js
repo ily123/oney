@@ -2,7 +2,12 @@ const LOAD_REVIEWS = "review/LOAD_REVIEWS";
 const ADD_ONE = "review/ADD_ONE"
 const EDIT_ONE_REVIEW = "review/EDIT_ONE_REVIEW"
 const REMOVE_REVIEW = "review/REMOVE_REVIEW"
+const CLEAR = 'review/CLEAR'
 
+
+export const clearReviews = () => ({
+  type: CLEAR
+})
 
 // action creator to delete on review
 const removeOneReview = (id) => ({
@@ -123,6 +128,8 @@ const reviewReducer = (state = initialState, action) => {
           [action.newReview.review.id]: action.newReview.review
           // because youre sending a key value pair back from the backend, return {"review":review.to_dict()}  when you dispatch that action.newReview is that key value pair.  needing to be dotted into one further
         }
+        console.log("newState in reviewReducer add_", newState)
+        console.log("action.newReview", action.newReview)
         return newState
       }
       // return state
@@ -143,8 +150,10 @@ const reviewReducer = (state = initialState, action) => {
       const newState = {...state};
       delete newState[action.id];
       return newState
-    }
-
+    };
+    case CLEAR:{
+      return {}
+    };
     default:
       return state;
   }

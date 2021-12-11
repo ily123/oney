@@ -23,6 +23,9 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
+  const [count, setCount] = useState(0);
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
@@ -36,7 +39,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navigation />
+      <Navigation count={count} setCount ={setCount} open={open} setOpen={setOpen}/>
+
       <main>
       <Switch>
         <Route path='/login' exact={true}>
@@ -52,7 +56,8 @@ function App() {
           <User />
         </ProtectedRoute> */}
         <Route path='/products/:productId' exact={true}>
-          <SingleProductPage />
+          <SingleProductPage count={count} setCount ={setCount} open={open} setOpen={setOpen}/>
+
         </Route>
         <ProtectedRoute path='/products/:productId/edit' exact={true}>
           <EditProductForm />

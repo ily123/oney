@@ -16,7 +16,7 @@ def create_review(product_id):
     form.populate_obj(review)
     db.session.add(review)
     db.session.commit()
-    print("review dict", review.to_dict())
+    print("review dict-------------", review.to_dict())
     return {"review":review.to_dict()}
   else:
     return "bad data"

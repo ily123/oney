@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { updateCartThunk, deleteCartItem } from '../../store/cart';
+import { clearCartItems } from '../../store/cart';
+import './CartItem.css';
 
-function CartItem({ item}) {
+function CartItem({ item, count, setCount}) {
   const dispatch = useDispatch();
   let [quantity, setQuantity] = useState(item.quantity);
   const [products, setProducts] = useState([])
-  const [rating, setRating] = useState('')
+  const [errors, setErrors] = useState([]);
 
   const sessionUser = useSelector((state) => state.session);
 
@@ -15,8 +17,8 @@ function CartItem({ item}) {
 
   useEffect(() => {
     setQuantity(item.quantity);
-    return () => clearInterval(setQuantity(item.quantity));
-  }, [item.quantity]);
+     return () => clearInterval(setQuantity(item.quantity));
+  }, [item.quantity, count]);
 
 
   // NOTE: so the cart.id doesn't have any meaning, we connect the user to their cart
@@ -29,7 +31,7 @@ function CartItem({ item}) {
       setProducts(productsList);
     }
     fetchData();
-  },[])
+  },[count])
 
   let user_id;
   if(sessionUser) {
@@ -93,19 +95,26 @@ function CartItem({ item}) {
   const handleDeleteCartItem = async(e) => {
     e.preventDefault();
     dispatch(deleteCartItem(item.id, user_id));
+    setCount(count + 1)
+    // dispatch(clearCartItems())
 
   }
 
+// grad the session user
+
+if(!item) {
+  return null
+}
 
   return (
-    <>
+    <div className="each-cart-item-container">
 
       <div className="cart-item-header">
         {getProductTitle(item.product_id)}
       </div>
       {
-        item.id?
-
+        item.id && user_id == item.user_id &&
+        <>
         <form>
           <div className="cart-item-menu">
 
@@ -122,30 +131,35 @@ function CartItem({ item}) {
             <button
             className="cart-item-button"
               onClick={handleIncreaseQuantity}
-            >+
+            >
+              <i class="fas fa-plus-square"></i>
             </button>
 
             <button
             className="cart-item-button"
               onClick={handleDecreaseQuantity}
-            >-</button>
+            >
+              <i class="fas fa-minus-square"></i>
+            </button>
 
             <button
               className="cart-item-button"
               onClick={handleDeleteCartItem}
             >
-              Remove
+              <i class="fas fa-trash-alt"></i>
             </button>
 
           </div>
         </form>
+        <hr></hr>
+        </>
 
-        : null
+
       }
 
 
 
-      </>
+      </div>
   )
 }
 
