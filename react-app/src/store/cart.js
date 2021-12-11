@@ -284,7 +284,7 @@ export default function cartReducer(state = { order: [], showCart: false }, acti
       return {}
     };
     case PURCHASE_FROM_CART: {
-      return {}
+      return { order: [], showCart: false }
     };
 
     default:

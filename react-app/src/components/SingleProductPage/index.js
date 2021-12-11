@@ -136,8 +136,7 @@ function SingleProductPage({count, setCount, open, setOpen}){
         console.log("waitAddProduct", waitAddProduct)
 
         if(waitAddProduct) {
-            dispatch(allCartItemsThunk(user_id)).then(()=>dispatch(openCart())).then(()=>dispatch(allCartItemsThunk(user_id)))
-
+            dispatch(allCartItemsThunk(user_id)).then(()=>dispatch(openCart()))
 
         }
 
