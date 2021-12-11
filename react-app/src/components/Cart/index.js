@@ -24,8 +24,8 @@ function Cart({count, setCount, open, setOpen}) {
   // console.log("cartItems", cartItems)
   // console.log("productObj", productObject)
 
-  const cartItemsObj = useSelector((state)=>state?.cart)
-  const cartItems = Object?.values(cartItemsObj)
+  const cartItemsObj = useSelector((state)=>state.cart)
+  const cartItems = Object.values(cartItemsObj)
   // console.log("cartItems in cart component", cartItems)
 
   const sessionUser = useSelector((state) => state.session);
@@ -87,7 +87,7 @@ function Cart({count, setCount, open, setOpen}) {
   return (
     <div className="cart">
       <ul>
-        {cartItems.map(item => <CartItem key={item} item={item} count={count} setCount={setCount}/>)}
+        {cartItems.map(item => item.id?  <CartItem key={item} item={item} count={count} setCount={setCount}/> :null )}
       </ul>
       {/* <hr /> */}
       <form onSubmit={onSubmit}>
