@@ -88,3 +88,24 @@ class TreeNodeHelper(dict):
                 node.product_count = counts[node.id]
             if node.children:
                 queue.extend(node.children)
+
+    def find_node(self, node_id):
+        """Returns node from tree by node id."""
+        queue = [self]
+        while queue:
+            node = queue.pop()
+            if node.id == node_id:
+                return node
+            if node.children:
+                queue.extend(node.children)
+
+    def get_child_ids(self):
+        """Returns ids for all children (including sub-children, etc) of the node."""
+        queue = self.children
+        child_ids = []
+        while queue:
+            node = queue.pop()
+            child_ids.append(node.id)
+            if node.children:
+                queue.extend(node.children)
+        return child_ids
