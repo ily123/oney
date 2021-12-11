@@ -15,7 +15,7 @@ export default function ProductCardXL({ product }) {
             {product.title}
           </div>
           <div className={styles.productInfo}> 
-            <span><i className="fas fa-heart"></i>{` ${product.num_favorers}`}</span>
+         {/*<span><i className="fas fa-heart"></i>{` ${product.num_favorers}`}</span> */}
             <span>{`$${product.price.toFixed(2)}`}</span>
           </div>
         </figcaption>

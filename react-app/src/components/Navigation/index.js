@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import CategoryDropDown from './CategoryDropDown';
 import './Navigation.css';
+import SearchForm from './SearchForm'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { openCart, closeCart } from '../../store/cart';
@@ -16,17 +17,18 @@ const Navigation = ({count, setCount, open, setOpen}) => {
   const sessionUser = useSelector(state=>state.session.user)
   // console.log("User://////////", sessionUser.id)
 
+
   let sessionLinks;
   if(sessionUser) {
     sessionLinks = (
     <>
       <ul className="nav2">
         <li>
-          <span className="hiUser"> Welcome {sessionUser.username} !! </span>
+          <span className="hiUser"> Welcome {sessionUser.username}! </span>
         </li>
         <li>
           <button className="checkout-button" onClick={() => dispatch(openCart())}>
-          <i className="fas fa-shopping-cart"></i>
+            <i className="fas fa-shopping-cart"></i>
           </button>
         </li>
         <li>
@@ -70,6 +72,7 @@ const Navigation = ({count, setCount, open, setOpen}) => {
     )
   }
 
+
   return (
     <div className="headerDiv">
       <nav>
@@ -82,9 +85,7 @@ const Navigation = ({count, setCount, open, setOpen}) => {
             </div>
           </li>
           <li>
-            <form >
-              <input className="searchForm" placeholder="Search Products"></input>
-            </form>
+            <SearchForm />
           </li>
           <li>
             {sessionLinks}

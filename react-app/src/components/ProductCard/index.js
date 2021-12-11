@@ -1,7 +1,7 @@
 import './ProductCard.css'
 import { NavLink } from 'react-router-dom';
 
-const ProductCard = ({id,price,images}) => {
+const ProductCard = ({id,price,images,title}) => {
 
 
     let image = images[0]?.url_570xN
@@ -11,7 +11,8 @@ const ProductCard = ({id,price,images}) => {
             <div className="prod">
                 <NavLink to={`/products/${id}`}>
                     <div className='product_card'>
-                        <img className= 'productImage' src={image} alt=""/>
+                        <img className= 'productImage' src={image} alt="Product Photo"/>
+                        <span className='productTitle'>{title}</span>
                         <span className='productPrice'>${price}</span>
                     </div>
                 </NavLink>

@@ -2,7 +2,7 @@
     border:none;
     color: orangered;
     background: none;
-    font-weight:bold;
+    font-size: medium;
 }
 
 .logoutButton:hover {
@@ -61,4 +61,8 @@ label {
     flex-direction: column;
     align-items: center;
     margin-bottom: 30px;
+}
+
+.errorItem {
+    color: red
 }

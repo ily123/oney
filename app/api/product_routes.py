@@ -6,6 +6,7 @@ from app.forms import EditProductForm
 from flask_login import current_user
 from app.forms import NewProductForm
 
+
 product_routes = Blueprint('product', __name__)
 
 @product_routes.route('/<int:id>', methods=['GET'])
@@ -33,10 +34,10 @@ def update_product(id):
   form = EditProductForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   product = Product.query.get(id)
-  print(form.validate_on_submit)
-  print(form.data)
+  # print(form.validate_on_submit)
+  # print(form.data)
   if form.validate_on_submit():
-    print('herrrrrrrrrreeeeee')
+    # print('herrrrrrrrrreeeeee')
     product.title = form.data['title'],
     product.description = form.data['description'],
     product.price = form.data['price'],
@@ -51,8 +52,8 @@ def update_product(id):
     db.session.commit()
     return product.to_dict()
   else:
-    print('hello there!')
-    print(form.errors)
+    # print('hello there!')
+    # print(form.errors)
     return 'Bad data'
 
 
@@ -80,8 +81,6 @@ def add_new_product():
   currentUser = current_user.to_dict()
   form = NewProductForm()
   form['csrf_token'].data = request.cookies['csrf_token']
-  print(".................", request.cookies['csrf_token'])
-  print("Hiiiiiiiiiiiiiiiiiiii",form.validate_on_submit())
   if form.validate_on_submit():
     product = Product(
       title = form.data['title'],
@@ -97,11 +96,23 @@ def add_new_product():
     )
     db.session.add(product)
     db.session.commit()
-    print("///////////////////", product.to_dict())
     return product.to_dict()
   else:
     return "Bad Data"
 
+
+@product_routes.route('/search/<tag>', methods=['GET'])
+def search_products(tag):
+  searchResult = Product.query.filter(Product.title.ilike(f'%{tag}%')).all()
+  if searchResult:
+    result = {p.id : p.to_dict() for p in searchResult}
+    return {
+              "products" : result,
+              "searchTag" : tag
+          }
+  else:
+    return { "products" : {},
+              "searchTag" : tag}
 
 
 # to get products in current user's cart

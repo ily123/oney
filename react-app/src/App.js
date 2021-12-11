@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import Navigation from './components/Navigation';
+import Footer from './components/Footer';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
@@ -13,9 +14,10 @@ import EditProductForm from './components/EditProductForm';
 import EditOneReview from './components/EditOneReview';
 import Top20Products from './components/Top20Products';
 import AddProductForm from './components/AddProductForm'
-import CategoryPage from './components/CategoryPage';
+import CategoryPage, { CategoryPageRedirectToPageOne } from './components/CategoryPage';
 import Cart from './components/Cart';
 import CategoryCard from './components/CategoryCard';
+import SearchPage from './components/SearchPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -38,6 +40,8 @@ function App() {
   return (
     <BrowserRouter>
       <Navigation count={count} setCount ={setCount} open={open} setOpen={setOpen}/>
+
+      <main>
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
@@ -45,12 +49,12 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
+        {/* <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <Route path='/products/:productId' exact={true}>
           <SingleProductPage count={count} setCount ={setCount} open={open} setOpen={setOpen}/>
 
@@ -66,6 +70,9 @@ function App() {
           <Top20Products />
         </Route>
         <Route path='/category/:categoryId' exact={true} >
+          <CategoryPageRedirectToPageOne />
+        </Route>
+        <Route path='/category/:categoryId/page/:pageNumber' exact={true} >
           <CategoryPage />
         </Route>
         {/* <Route path='/users/:userId/cart' exact={true} >
@@ -74,7 +81,12 @@ function App() {
         <ProtectedRoute path='/new-product' exact={true}>
           <AddProductForm />
         </ProtectedRoute>
+        <Route path='/search/:tag' exact={true} >
+          <SearchPage />
+        </Route>
       </Switch>
+      </main>
+      <Footer />
     </BrowserRouter>
   );
 }
