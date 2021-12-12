@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductsForCategory } from '../../store/category';
 
 export default function CategoryPage() {
-  let { categoryId, pageNumber } = useParams();
+  const { categoryId, pageNumber } = useParams();
   const dispatch = useDispatch();
   const products = useSelector(state => state.category.products)
   const categories = useSelector(state => state.category.flat)
@@ -21,9 +21,13 @@ export default function CategoryPage() {
     ))
   }, [dispatch, categoryId, pageNumber])
 
-  if (!products || !categories || !Object.keys(products).length) {
-    return categoryNotFoundError({ categoryId })
-  }
+  if (!categories || !products) return null
+
+  // display error message if category is not valid
+  // read this, then try again: https://redux.js.org/tutorials/essentials/part-5-async-logic
+  //if (!Object.keys(products).length) {
+  //  return categoryNotFoundError({ categoryId })
+  //}
 
   const category = categories[categoryId];
 
@@ -53,6 +57,7 @@ function categoryNotFoundError ({ categoryId }) {
     </div>
   )
 }
+
 export function CategoryPageRedirectToPageOne() {
   const { categoryId } = useParams();
   return <Redirect to={`/category/${categoryId}/page/1`} />
