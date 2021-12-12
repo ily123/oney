@@ -52,7 +52,7 @@ function DotDotButton({product_id, id}) {
             <NavLink to={`/products/${productId}/reviews/${id}`}><div className="dot-edit"></div><i className="fas fa-edit"></i></NavLink>
           </div>
           <div>
-            <button className="delete-review-button" onClick={() => {handleDeleteReview(productId, id)}}><i className="fas fa-trash-alt "></i></button>
+            <button className="delete-review-button" onClick={() => {handleDeleteReview(productId, id)}}><i className="fas fa-trash "></i></button>
           </div>
         </div>
       )}

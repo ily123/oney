@@ -9,8 +9,12 @@
 }
 
 
-.fa-edit, .fa-trash-alt {
+.fa-edit, .fa-trash {
   color: white;
+}
+
+.fa-trash {
+  font-size: 18px;
 }
 
 
@@ -25,5 +29,5 @@
   padding: 10px 15px;
   font-size: 20px !important;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 }
