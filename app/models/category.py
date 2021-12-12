@@ -71,13 +71,13 @@ class TreeNodeHelper(dict):
             self.page_tile = category.page_title
             self.page_description = category.page_description
             self.short_name = category.short_name
-            self.parent_id = category.parent
+            self.parent_id = category.parent if category.parent else "root"
         else:
             self.id = "root"
             self.short_name = "All items"
             self.page_tile = "All items in the store"
             self.page_description = "Select a product category on the left to explore!"
-            self.parent_id = ""
+            self.parent_id = None
 
         self.product_count = 0
         self.children = list(children) if children is not None else []
