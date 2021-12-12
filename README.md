@@ -10,7 +10,6 @@
 🔥Browse selected items and categories on the home page🔥
 ![homepage](https://raw.githubusercontent.com/ily123/oney/main/readme-gifs/1_home.gif)
 
----
 🔥Navigate through a list of 250+ product categories🔥
 ![categories](https://raw.githubusercontent.com/ily123/oney/main/readme-gifs/2_navigation.gif)
 
