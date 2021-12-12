@@ -11,7 +11,8 @@ ul {
 .categoryList {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
+  column-gap: 30px;
 }
 
 .dropdownWrapper {
