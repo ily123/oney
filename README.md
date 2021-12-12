@@ -12,7 +12,7 @@
 
 **Search for items using the search bar**
 
-**View specific items**
+**View specific items and read reviews!**
 
 **Add or remove items from the shopping cart & checkout!**
 
