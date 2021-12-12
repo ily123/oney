@@ -59,12 +59,12 @@ export default function reducer(state = initialState, action) {
       // this only works because there are just 2 levels 
       // update to bfs later, or normalize on the backend
       const flat = {}
-      tree.children.forEach(category => {
+      const queue = [tree]
+      while (queue.length) {
+        const category = queue.pop()
         flat[category.id] = category
-        category.children.forEach(child_category => {
-          flat[child_category.id] = child_category
-        })
-      })
+        queue.push(...category.children)
+      }
       return { ...state, flat }
     }
     case SET_PRODUCTS: {
