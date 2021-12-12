@@ -6,15 +6,19 @@
 ## Oney in Action
 
 **Browse selected items and categories on the home page**
+![homepage](https://raw.githubusercontent.com/ily123/oney/add-gifs-to-readme/readme-gifs/1_home.gif)
 
 **Navigate through a list of 250+ product categories**
 ![categories](https://raw.githubusercontent.com/ily123/oney/add-gifs-to-readme/readme-gifs/2_navigation.gif)
 
 **Search for items using the search bar**
+![searchbar](https://raw.githubusercontent.com/ily123/oney/add-gifs-to-readme/readme-gifs/3_search.gif)
 
 **View specific items and read reviews!**
+![product](https://raw.githubusercontent.com/ily123/oney/add-gifs-to-readme/readme-gifs/4_item_page.gif)
 
 **Add or remove items from the shopping cart & checkout!**
+![cart](https://raw.githubusercontent.com/ily123/oney/add-gifs-to-readme/readme-gifs/5_cart.gif)
 
 
 
