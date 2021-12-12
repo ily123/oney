@@ -15,10 +15,20 @@ export default function CategoryPage() {
   const tree = useSelector(state => state.category.tree)
   
   useEffect(() => {
-    dispatch(fetchProductsForCategory(categoryId, pageNumber))
+    dispatch(fetchProductsForCategory(
+      categoryId === "root" ? 0 : categoryId, // the backend only accepts ints, fix later
+      pageNumber
+    ))
   }, [dispatch, categoryId, pageNumber])
 
-  if (!products || !categories) return null
+  if (!categories || !products) return null
+
+  // display error message if category is not valid
+  // read this, then try again: https://redux.js.org/tutorials/essentials/part-5-async-logic
+  //if (!Object.keys(products).length) {
+  //  return categoryNotFoundError({ categoryId })
+  //}
+
   const category = categories[categoryId];
 
   return (
@@ -34,6 +44,16 @@ export default function CategoryPage() {
         </div>
       </div>
       <Pager pageNumber={pageNumber} category={category} />
+    </div>
+  )
+}
+
+function categoryNotFoundError ({ categoryId }) {
+  return (
+    <div className={styles.error_msg}>
+      <i className="fas fa-exclamation-triangle"></i>
+      <p>{`Category ${categoryId} does not exist, or has no items :(`}</p>
+      <i className="fas fa-exclamation-triangle"></i>
     </div>
   )
 }

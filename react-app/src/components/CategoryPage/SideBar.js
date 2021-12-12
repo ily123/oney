@@ -3,21 +3,13 @@ import { NavLink } from 'react-router-dom';
 
 export default function SideBar({ categories, tree, categoryId }) {
   const currentCategory = categories[categoryId]
+  const renderCategories = currentCategory.children;
   
-  // if this is a top-level category render all other top-level categories
-  // if lower-level, render siblings and go back button
-  let renderCategories;
-  if (currentCategory.parent_id) {
-    renderCategories = categories[currentCategory.parent_id].children;
-  } else {
-    renderCategories = tree.children;
-  }
-  console.log(renderCategories)
   return (
     <ul className={styles.sideBar}>
       {
         currentCategory.parent_id 
-        ? <li key="lol"><NavLink to={`/category/69150455`}>{`< Back`}</NavLink></li>
+        ? <GoBackToParentCategoryLink parentCategory={categories[currentCategory.parent_id]} />
         : null
       }
       {renderCategories.map(category => {
@@ -27,5 +19,15 @@ export default function SideBar({ categories, tree, categoryId }) {
         </li>
       })}
     </ul>
+  )
+}
+
+function GoBackToParentCategoryLink({ parentCategory }) {
+  return (
+    <li key="back">
+      <NavLink to={`/category/${parentCategory.id}`}>
+        {`< Back (${parentCategory.short_name})`}
+      </NavLink>
+    </li>
   )
 }

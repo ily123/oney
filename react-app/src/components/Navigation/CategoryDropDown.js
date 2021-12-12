@@ -5,21 +5,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategoryTree } from '../../store/category';
 
 export default function CategoryDropDown() {
-    const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
     const root = useSelector(state => state.category.tree)
 
     useEffect(() => {
-        const loadData = async () => {
-            await dispatch(fetchCategoryTree())
-        }
-        loadData();
-        setLoaded(true);
+      dispatch(fetchCategoryTree())
     }, [dispatch])
 
-    if (!loaded || !root) return null;
+    if (!root) return null;
 
-    const NUM_CATEG_TO_SHOW = 9;
+    const NUM_CATEG_TO_SHOW = 8; // plus root!
     return (
         <ul className={styles.categoryList}>
             {(root.children.slice(0, NUM_CATEG_TO_SHOW).map(category => {
@@ -27,6 +22,7 @@ export default function CategoryDropDown() {
                     <li key={category.id}><Menu category={category} /></li>
                 )
             }))}
+            <li key="root"><Menu category={root} /></li>
         </ul>
     )
 }

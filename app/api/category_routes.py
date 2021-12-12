@@ -66,17 +66,20 @@ def get_category_products_paginated(category_id, page_number):
 
 def get_category_ids_to_include_in_query(category_id):
     """Given a category id, returns list of all children and self."""
-    # our category structure is only 2 levels deep
-    # so in the request you will either recieve an id for a
-    # child category, in which case return items belonging to that child
-    # or a parent category, in which case collect all of its CHILDREN ids first,
-    # and return all items belonging to the children and the category itself
-    # note: should have included children as a column in the db!
+    # there is a bit of a snafu with root id. It's a string ("root"), but
+    # the backend route only accepts integers. So let's pretend that when FE asks
+    # for category with id of int("0") that it's asking for "root". Fix later.
+    if category_id == 0: category_id = "root"
+
+    # get category tree
     categories = Category.query.all()
     root = Category.convert_list_to_tree(categories)
-    parent_categories = dict([(child.id, child) for child in root.children])
-    query_categories = [category_id]
-    if category_id in parent_categories.keys():
-        parent = parent_categories[category_id]
-        query_categories.extend([int(child.id) for child in parent.children])
-    return query_categories
+    # in the tree, find the category the user asked for, and collect its children ids
+    category_node = root.find_node(category_id)
+    children_ids = category_node.get_child_ids() # includes terminal nodes
+
+    # some parent categories have items on them,
+    # so push the target category id into the list as well
+    # unless it's "root", "root" is imaginary
+    if category_id != "root": children_ids.append(category_id)
+    return children_ids

@@ -71,11 +71,15 @@ class TreeNodeHelper(dict):
             self.page_tile = category.page_title
             self.page_description = category.page_description
             self.short_name = category.short_name
-            self.parent_id = category.parent
-            self.product_count = 0
+            self.parent_id = category.parent if category.parent else "root"
         else:
             self.id = "root"
-            self.short_name = "root"
+            self.short_name = "All items"
+            self.page_tile = "All items in the store"
+            self.page_description = "Select a product category on the left to explore!"
+            self.parent_id = None
+
+        self.product_count = 0
         self.children = list(children) if children is not None else []
 
     def populate_counts(self, counts):
@@ -88,3 +92,24 @@ class TreeNodeHelper(dict):
                 node.product_count = counts[node.id]
             if node.children:
                 queue.extend(node.children)
+
+    def find_node(self, node_id):
+        """Returns node from tree by node id."""
+        queue = [self]
+        while queue:
+            node = queue.pop()
+            if node.id == node_id:
+                return node
+            if node.children:
+                queue.extend(node.children)
+
+    def get_child_ids(self):
+        """Returns ids for all children (including sub-children, etc) of the node."""
+        queue = self.children
+        child_ids = []
+        while queue:
+            node = queue.pop()
+            child_ids.append(node.id)
+            if node.children:
+                queue.extend(node.children)
+        return child_ids

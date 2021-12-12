@@ -6,6 +6,7 @@
 
 .sideBarCardAreaWrapper {
   display: flex;
+  justify-content: flex-start;
 }
 
 .cardArea {
@@ -32,4 +33,16 @@
   padding: 20px;
 /* background-color: var(--light-peach); */
   color: #595959;
+}
+
+
+.error_msg {
+  color: red;
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  column-gap: 20px;
+}
+.error_msg p {
+  margin: 0;
 }
