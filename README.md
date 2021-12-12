@@ -3,9 +3,23 @@
 
 <div align="center">👉👉👉 <a href="https://shoponey.herokuapp.com/">Live Website Deployed Here</div>
 
-## Screenshots of App in Action
+## Oney in Action
 
-❌Will add screen shots once we are done❌
+**Browse selected items and categories on the home page**
+
+**Navigate through a list of 250+ product categories**
+![categories](https://raw.githubusercontent.com/ily123/oney/add-gifs-to-readme/readme-gifs/2_navigation.gif)
+
+**Search for items using the search bar**
+
+**View specific items**
+
+**Add or remove items from the shopping cart & checkout!**
+
+
+
+
+
 
 ## Summary of main features
 
