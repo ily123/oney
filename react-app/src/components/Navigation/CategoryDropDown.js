@@ -14,7 +14,7 @@ export default function CategoryDropDown() {
 
     if (!root) return null;
 
-    const NUM_CATEG_TO_SHOW = 9;
+    const NUM_CATEG_TO_SHOW = 7; // plus root!
     return (
         <ul className={styles.categoryList}>
             {(root.children.slice(0, NUM_CATEG_TO_SHOW).map(category => {
@@ -22,6 +22,7 @@ export default function CategoryDropDown() {
                     <li key={category.id}><Menu category={category} /></li>
                 )
             }))}
+            <li key="root"><Menu category={root} /></li>
         </ul>
     )
 }

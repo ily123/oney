@@ -74,7 +74,7 @@ class TreeNodeHelper(dict):
             self.parent_id = category.parent
         else:
             self.id = "root"
-            self.short_name = "root"
+            self.short_name = "All items"
             self.page_tile = "All items in the store"
             self.page_description = "Select a product category on the left to explore!"
             self.parent_id = ""
