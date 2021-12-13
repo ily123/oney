@@ -19,6 +19,8 @@
 .largeImage {
   border-radius: 3px;
   margin-left: 5px;
+  max-width: 570px;
+  max-height: 570px;
   height: 100%;
   width: 100%;
 }

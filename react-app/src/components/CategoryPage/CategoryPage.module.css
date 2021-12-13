@@ -4,6 +4,12 @@
   flex-direction: column;
 }
 
+@media screen and (min-width: 1300px) {
+  .categoryPageWrapper {
+    min-width: 1100px;
+  }
+}
+
 .sideBarCardAreaWrapper {
   display: flex;
   justify-content: flex-start;
