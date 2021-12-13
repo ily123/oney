@@ -171,7 +171,7 @@ function SingleProductPage({count, setCount, open, setOpen}){
                 </div>
                 <div className='itemInfoBox'>
                     <div>
-                        <h1 className='productTitle descriptionDiv'>
+                        <h1 className='productTitle1 descriptionDiv'>
                             {product[0]?.title}
                         </h1>
                     </div>
