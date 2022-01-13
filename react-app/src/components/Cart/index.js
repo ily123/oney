@@ -91,7 +91,7 @@ function Cart({count, setCount, open, setOpen}) {
       </ul>
       {/* <hr /> */}
       <form onSubmit={onSubmit}>
-        <button className="purchase-button" type="submit">Purchase <i class="fas fa-shopping-cart"></i></button>
+        <button className="purchase-button" type="submit">Purchase </button>
       </form>
     </div>
   )
