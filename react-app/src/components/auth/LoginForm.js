@@ -47,12 +47,16 @@ const LoginForm = () => {
     return <Redirect to='/' />;
   }
 
+
+
   return (
     <div className = "form-Div">
       <form onSubmit={onLogin} className="form_placing">
         <div className="errors_div">
           {errors.map((error, ind) => (
-            <div key={ind} className='errorItem'>{error}</div>
+
+            <div key={ind} className='errorItem'>{(error.split(':'))[1]}</div>
+          
           ))}
         </div>
         <div>

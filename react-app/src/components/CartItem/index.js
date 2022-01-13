@@ -132,21 +132,21 @@ if(!item) {
             className="cart-item-button"
               onClick={handleIncreaseQuantity}
             >
-              <i class="fas fa-plus-square"></i>
+              <i className="fas fa-plus-square"></i>
             </button>
 
             <button
             className="cart-item-button"
               onClick={handleDecreaseQuantity}
             >
-              <i class="fas fa-minus-square"></i>
+              <i className="fas fa-minus-square"></i>
             </button>
 
             <button
               className="cart-item-button"
               onClick={handleDeleteCartItem}
             >
-              <i class="fas fa-trash-alt"></i>
+              <i className="fas fa-trash-alt"></i>
             </button>
 
           </div>
