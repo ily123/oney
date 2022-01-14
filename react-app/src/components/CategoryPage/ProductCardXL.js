@@ -6,16 +6,15 @@ export default function ProductCardXL({ product }) {
   return (
     <Link className={styles.link} to={`/products/${product.id}`}>
       <figure className={styles.card}>
-        <img 
+        <img
           src={imageUrl}
-          alt={product.title} 
+          alt={product.title}
         />
         <figcaption>
-          <div className={styles.productTitle}> 
+          <div className={styles.productTitle}>
             {product.title}
           </div>
           <div className={styles.productInfo}> 
-         {/*<span><i className="fas fa-heart"></i>{` ${product.num_favorers}`}</span> */}
             <span>{`$${product.price.toFixed(2)}`}</span>
           </div>
         </figcaption>

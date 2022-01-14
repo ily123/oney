@@ -24,7 +24,6 @@ function HideReviewForm(){
     const sessionUser = useSelector((state) => state.session.user);
     const user_id = sessionUser?.id
 
-    // console.log("user_id", user_id)
 
     useEffect(()=>{
         dispatch(getOneProduct(productId))

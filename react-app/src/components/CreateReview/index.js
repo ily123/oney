@@ -14,13 +14,10 @@ const ReviewForm = ({hideForm, hideButton}) => {
 
   const {productId} = useParams();
   const product_id = productId
-  // console.log("product_id", product_id)
 
   const sessionUser = useSelector((state) => state.session);
 
   const user_id = sessionUser?.user.id
-
-  // console.log("user_id", user_id)
 
   useEffect(() => {
     const validationErrors = [];
@@ -39,10 +36,8 @@ const ReviewForm = ({hideForm, hideButton}) => {
       content,rating,product_id,user_id
     }
 
-    // console.log("newReview in form component", newReview)
 
     let createdReview = await dispatch(createOneReview(newReview, product_id))
-    // console.log("createdReview", createdReview)
 
     if (createdReview) {
       hideForm();

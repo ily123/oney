@@ -16,24 +16,19 @@ function SingleProductPage({count, setCount, open, setOpen}){
 
     const productObject = useSelector((state)=>state.product)
     const indProjObj = Object.values(productObject)[0]
-    console.log('productObject: ',productObject)
     const productImgsObj = Object.values(productObject)[0]
-    console.log('productImgsObj',productImgsObj)
-    // console.log('indProjObj: ',indProjObj)
+
     const sessionUser = useSelector((state) => state.session.user);
-    // console.log('sessionUser: ', sessionUser)
+
     const {productId} = useParams()
-    // const sessionUser = useSelector((state) => state.session);
+
     const user_id = sessionUser?.id
-    // console.log("product-raw", productObject)
-    // console.log("product-values", productObject)
+
 
     const cartItemsObj = useSelector((state)=>state?.cart)
     const cartItems = Object?.values(cartItemsObj)
 
-    console.log("users cart items", cartItems)
     let [quantity, setQuantity] = useState(cartItems[0]?.quantity);
-    // console.log("users cart items", cartItems[0]?.quantity)
 
 
     useEffect(() => {
@@ -42,9 +37,6 @@ function SingleProductPage({count, setCount, open, setOpen}){
       }, [dispatch, user_id, cartItems.length, count, productId, open])
 
     const [largeSelectedImg, setLargeSelectedImg] = useState(0);
-    const[imageIdName, setImageIdName] = useState();
-
-
 
 
     const handleDelete = async(productId) => {
@@ -66,7 +58,7 @@ function SingleProductPage({count, setCount, open, setOpen}){
     if (!product.length) return null
 
     const prodImgsArr = Object.values(productImgsObj?.images)
-    console.log('prodImgsArr: ', prodImgsArr)
+
 
      // grouping of images
     const imageGroupsArr = prodImgsArr?.map((obj) => {
@@ -75,7 +67,6 @@ function SingleProductPage({count, setCount, open, setOpen}){
 
     // get array of the second image in each grouping
     let images = imageGroupsArr?.map((arr) => {
-        // console.log('arr ',arr,'arr[0]: ',arr[1], 'arr[1]',arr[0])
         if (arr.length > 2) {
             return arr[1]
         } else {
@@ -83,40 +74,26 @@ function SingleProductPage({count, setCount, open, setOpen}){
         }
     })
 
-    // let clickedPhoto;
-    // function imageClick(e) {
-    //     images.foreach(image => image.style.opacity = .3)
-    // }
-
-// console.log('!!!!!',Object.values(product[0]?.images[0])[0])
-// console.log("users cart items", cartItems[0]?.quantity)
-
-
-
 
     const checkCartItemQuantity = (productId) => {
         const toBeCartItem = cartItems?.filter(function(el){
-            // console.log("el.product_id", el.product_id)
-            // console.log("productId", productId)
+
 
             return el.product_id == productId
         });
         if(toBeCartItem) { // item exists in user's card already  ->
             // then we should be running an update
-            console.log("toBeCartItem", toBeCartItem[0]?.quantity)
-
                  setQuantity(() => {
                     return quantity += 1
                 })
-                console.log("quantity after set", quantity)
+
                 let id = toBeCartItem.id
                 let editItem = {
                 id, user_id, productId, quantity
                 }
-                // console.log("handlesubmit", editItem, quantity)
+
                 dispatch(updateCartThunk(editItem, id, user_id))
-            // await
-            // return toBeCartItem[0]?.quantity
+
         }
         else {
             return null
@@ -125,8 +102,6 @@ function SingleProductPage({count, setCount, open, setOpen}){
 
     const handleAddToCart = async(e) => {
         e.preventDefault();
-
-
         setCount(count+1)
 
         setOpen(true)
@@ -139,11 +114,8 @@ function SingleProductPage({count, setCount, open, setOpen}){
         }
 
         let waitAddProduct = await dispatch(addToCartThunk(itemAddToCart, user_id))
-        console.log("waitAddProduct", waitAddProduct)
-
         if(waitAddProduct) {
             dispatch(allCartItemsThunk(user_id)).then(()=>dispatch(openCart()))
-
         }
 
     }
@@ -190,9 +162,6 @@ function SingleProductPage({count, setCount, open, setOpen}){
                     <div>
                         <div>
                             {sessionUser &&
-                                // <button className='submitBtn' >
-                                //     Add to Cart
-                                // </button>
                                 <button id='addToCartBtn'
                                     className={(cartItem ? " selected" : "")}
                                     onClick={handleAddToCart}

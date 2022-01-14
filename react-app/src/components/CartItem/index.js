@@ -1,19 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { updateCartThunk, deleteCartItem } from '../../store/cart';
-import { clearCartItems } from '../../store/cart';
-import './CartItem.css';
+
+
 
 function CartItem({ item, count, setCount}) {
   const dispatch = useDispatch();
   let [quantity, setQuantity] = useState(item.quantity);
   const [products, setProducts] = useState([])
-  const [errors, setErrors] = useState([]);
 
   const sessionUser = useSelector((state) => state.session);
 
-  // console.log("cart item quanitty", quantity)
-  // console.log("item in cartitem", item)
 
   useEffect(() => {
     setQuantity(item.quantity);
@@ -27,7 +24,6 @@ function CartItem({ item, count, setCount}) {
     async function fetchData() {
       const response = await fetch(`/api/products/cart/${user_id}`)
       const productsList = await response.json()
-      // console.log("productList", productsList)
       setProducts(productsList);
     }
     fetchData();
@@ -40,13 +36,7 @@ function CartItem({ item, count, setCount}) {
     return null
   }
 
-  // if(item.id) {
-  //   return item
-  // } else {
-  //   return null
-  // }
 
-  // console.log("products in cart component", products)
   const productsArray = Object?.values(products)
   const getProductTitle = (item_id) => {
     const productTitle = productsArray.filter(function(el){
@@ -62,7 +52,6 @@ function CartItem({ item, count, setCount}) {
 
   let id = item.id // the id of the cart with the item
   let product_id = item.product_id
-  // console.log("user_id before handleSubmit", user_id)
   const handleIncreaseQuantity = async(e) => {
     e.preventDefault();
 
@@ -88,7 +77,6 @@ function CartItem({ item, count, setCount}) {
      let editItem = {
       id, user_id, product_id, quantity
     }
-    console.log("handlesubmit", editItem, quantity)
     dispatch(updateCartThunk(editItem, id, user_id))
   }
 
@@ -96,11 +84,9 @@ function CartItem({ item, count, setCount}) {
     e.preventDefault();
     dispatch(deleteCartItem(item.id, user_id));
     setCount(count + 1)
-    // dispatch(clearCartItems())
 
   }
 
-// grad the session user
 
 if(!item) {
   return null

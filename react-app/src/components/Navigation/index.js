@@ -15,7 +15,6 @@ const Navigation = ({count, setCount, open, setOpen}) => {
   const showCart = useSelector((state) => state.cart.showCart);
 
   const sessionUser = useSelector(state=>state.session.user)
-  // console.log("User://////////", sessionUser.id)
 
 
   let sessionLinks;

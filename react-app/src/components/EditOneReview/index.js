@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-// import { getReviews } from "../../store/review";
 import { useHistory } from 'react-router';
 import { getOneProduct } from '../../store/product';
 import { editOneReview } from '../../store/review';
@@ -16,8 +15,6 @@ const EditOneReview = () => {
 
     const review = useSelector((state) => state.review[id])
 
-  // console.log("one review from state", review)
-
   const [rating, setRating] = useState(review?.rating);
   const [content, setContent] = useState(review?.content);
   const [errors, setErrors] = useState([]);
@@ -26,7 +23,6 @@ const EditOneReview = () => {
   // we automatically know who's submitting the form
   const sessionUser = useSelector((state) => state.session.user)
   const user_id = sessionUser.id
-  // console.log("user_id", sessionUser.id)
 
 
   useEffect(()=>{
@@ -37,10 +33,6 @@ const EditOneReview = () => {
 
   // get all reviews
    let product_id = productId
-
-    // useEffect(()=> {
-    //     dispatch(getReviews(product_id))
-    //   }, [dispatch,reviews.length, product_id])
 
 
       useEffect(() => {
@@ -61,13 +53,10 @@ const EditOneReview = () => {
     const editReview = {
       content,rating,product_id,user_id
     }
-    // console.log("editreview component", editReview)
-    // console.log("product_id component", product_id)
-    // console.log("id component", id)
 
 
     let editedReview = await dispatch(editOneReview(editReview, product_id, id))
-    // console.log("editReview", editReview)
+
 
     if(editedReview) {
       history.push(`/products/${productId}`)

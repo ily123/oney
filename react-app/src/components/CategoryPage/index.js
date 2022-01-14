@@ -13,7 +13,7 @@ export default function CategoryPage() {
   const products = useSelector(state => state.category.products)
   const categories = useSelector(state => state.category.flat)
   const tree = useSelector(state => state.category.tree)
-  
+
   useEffect(() => {
     dispatch(fetchProductsForCategory(
       categoryId === "root" ? 0 : categoryId, // the backend only accepts ints, fix later
@@ -22,12 +22,6 @@ export default function CategoryPage() {
   }, [dispatch, categoryId, pageNumber])
 
   if (!categories || !products) return null
-
-  // display error message if category is not valid
-  // read this, then try again: https://redux.js.org/tutorials/essentials/part-5-async-logic
-  //if (!Object.keys(products).length) {
-  //  return categoryNotFoundError({ categoryId })
-  //}
 
   const category = categories[categoryId];
 

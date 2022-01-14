@@ -6,7 +6,7 @@ export const searchProduct = (products) => ({
 })
 
 export const search = (text) => async(dispatch) => {
-    const response = await fetch(`/api/products/search/${text}`)
+    const response = await fetch(`/api/products/search?query=${text}`)
     if (response.ok) {
         const searchResults = await response.json();
         dispatch(searchProduct(searchResults))

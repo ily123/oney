@@ -11,7 +11,7 @@ export default function Footer () {
         Oney was made by
       </div>
       <div className={styles.contributors}>
-        {CONTRIBUTORS.map(person =>{ 
+        {CONTRIBUTORS.map(person =>{
           return <PersonCard key={"persoon_"+person.name} person={person} />
         })}
       </div>
