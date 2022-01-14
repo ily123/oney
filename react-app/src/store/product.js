@@ -40,7 +40,6 @@ export const clearProducts = () => ({
 export const getOneProduct = (id) => async (dispatch) => {
     const res = await fetch(`/api/products/${id}`)
     const product = await res.json()
-    // console.log("thunk", product)
     dispatch(loadProduct(product))
 }
 

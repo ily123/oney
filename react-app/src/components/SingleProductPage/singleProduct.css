@@ -9,13 +9,6 @@
   opacity: 0.50;
 }
 
-/* #smallImgClicked {
-  height: 50px;
-  width: 50px;
-  border-radius: 3px;
-  opacity: 0.50;
-} */
-
 .largeImage {
   border-radius: 3px;
   margin-left: 5px;
@@ -31,7 +24,6 @@
 }
 /* itemInformation box */
 .itemInfoBox {
-  /* margin: 10px; */
   margin-left: 30px;
 }
 
@@ -54,7 +46,6 @@
 
 .descriptionDiv {
   width: 275px;
-  /* height: 500px; */
 }
 
 .descriptionTitle {
@@ -71,10 +62,7 @@
   display: none;
 }
 
-/* reviews */
-.reviewsDiv {
-  /* max-width: 600px; */
-}
+
 
 .delButton {
   border: 0;
@@ -87,25 +75,15 @@
 
 .delButton:hover {
   color: red;
-  /* background-color: rgb(226, 225, 225);
-  border-radius: 15px; */
-  /* padding: 5px; */
-  /* text-decoration: none; */
 }
 
 .singleProdBottomBtnsDiv {
-  /* margin: 10px; */
   margin-top: 10px;
-  /* padding: 5px; */
-  /* border:  solid 1px; */
   display: flex;
   align-items: center;
-  /* justify-content: space-around; */
 }
 
 .singleProdUpdateDiv {
-  /* display: flex;
-  justify-content: flex-start; */
   padding-bottom: 5px;
 }
 
@@ -117,8 +95,6 @@
 }
 
 .updateProductBtnDiv {
-  /* display:flex;
-  align-items: center; */
   padding: 0;
   margin-right: 10px;
 }
@@ -126,8 +102,6 @@
 .updateProdButton {
   text-decoration: none;
   color: black;
-  /* background-color: gray;
-  border-radius: 10px; */
   padding: 5px;
   text-decoration: underline;
   font-weight: normal;
@@ -135,10 +109,6 @@
 
 .updateProdButton:hover {
   color: gray;
-  /* text-decoration: none; */
-  /* color: white; */
-  /* background-color: rgb(226, 225, 225);
-  border-radius: 15px; */
 }
 
 #addToCartBtn {
@@ -154,10 +124,6 @@
 }
 
 #addToCartBtn:hover {
-  /* box-shadow: 2px 2px #222222; */
   box-shadow: 0 0 2px #222222;
   cursor: pointer;
-  /* box-shadow: rgba#222222 0px 0.5rem 0.5rem; */
-  /* width: 205px;
-  height: 35px; */
 }

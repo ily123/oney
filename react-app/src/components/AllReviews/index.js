@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-// import { useParams} from 'react-router-dom';
 import { getReviews } from "../../store/review";
 import DotDotButton from "../DotDotButton";
 import { clearReviews } from '../../store/review';
@@ -15,17 +14,8 @@ const AllReviews = ({product}) => {
 
   const sessionUser = useSelector((state) => state.session);
 
-  // console.log("sessionUser", sessionUser?.user.username)
-  // const username = sessionUser?.user.username
-
-  // const {productId} = useParams()
-
-  // console.log("all reviews", reviews)
 
   let product_id = product[0]?.id
-  // console.log("product_id in all reviews", product[0]?.id)
-
-  // console.log("product_id", product_id)
 
 
     useEffect(()=>{
@@ -40,8 +30,6 @@ const AllReviews = ({product}) => {
   },[dispatch, product_id])
 
 
-    // console.log("user_id", user_id)
-
       const [users, setUsers] = useState([]);
 
       useEffect(() => {
@@ -53,7 +41,7 @@ const AllReviews = ({product}) => {
         fetchData();
       }, []);
 
-      // console.log("users map", users)
+
 
       let user_id;
       if(sessionUser) {
@@ -66,8 +54,7 @@ const AllReviews = ({product}) => {
         const usernameDisplay = users?.filter(function(el){
           return el.id === user_id
          });
-        //  console.log("try", user_id)
-        //  console.log("tryThis", usernameDisplay[0].username)
+     
         if (usernameDisplay) {
          return usernameDisplay[0]?.username
         }

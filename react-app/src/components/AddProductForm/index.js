@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import {useHistory} from "react-router";
 import {addOneProduct} from "../../store/product";
@@ -34,7 +34,7 @@ const AddProductForm = () =>{
     const [price, setPrice] = useState('')
     const [category,setCategory] = useState(categoryList[0]?.id)
     const [image,setImage] = useState('')
-
+    const [errors, setErrors] = useState([]);
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -58,11 +58,24 @@ const AddProductForm = () =>{
     }
     }
 
+    useEffect(() => {
+        const validationErrs = [];
+        if(title.length < 3 || !title) validationErrs.push("A title is required")
+        if(!description) validationErrs.push("A description is required")
+        if(price > 1000 || price < 1) validationErrs.push("Price must be at least $1")
+        if(!image || (!image.endsWith("jpg") && !image.endsWith("jpeg") && !image.endsWith("png")) || image.trim() === "") validationErrs.push("Image URL has to be a .jpg, .jpeg or .png format")
+        setErrors(validationErrs)
+      },[title, description, price, image])
 
     return (
         <div className='add-Product-Div'>
             <h2>Let's get started! Tell us about your product</h2>
             <form onSubmit={handleSubmit} className='add-product'>
+                <div className="productErrors">
+                    <ul>
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                    </ul>
+                </div>
                 <div>
                     <label>Product Title</label>
                     <input

@@ -13,7 +13,6 @@
 .cart-item {
   display: flex;
   flex-direction: column;
-  /* margin-bottom: 24px; */
   width: min-content;
 }
 
@@ -59,7 +58,6 @@ input[type="number"] {
   width: 300px;
   right: -300px;
   transition: all 0.2s linear;
-  /* background-color: #e8d5a8; */
   background-color: rgb(239, 239, 239);
   box-shadow: 0px 0 15px 1px lightgray;
   z-index: 3;

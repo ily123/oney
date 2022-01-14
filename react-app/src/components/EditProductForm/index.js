@@ -31,15 +31,11 @@ const EditProductForm = () =>{
   const params = useParams();
   const { productId } = params;
   const product = useSelector((state) => state?.product[productId] ? state?.product[productId] : "")
-  
-  // console.log('========= ', product)
-  // console.log('the title:', product?.title)
+
   const [title, setTitle] = useState(product?.title ? product?.title : "");
-  // console.log('!!!!!!!!',product?.title)
   const [description, setDescription] = useState(product.description ? product.description : "");
   const [price, setPrice] = useState(product.price ? product.price : "")
   const [category, setCategory] = useState(product.category_id ? product.category_id : "")
-  // const [image, setImage] = useState(product?.image)
   const [errors, setErrors] = useState([]);
 
   const sessionUser = useSelector((state) => state.session.user)
@@ -51,7 +47,7 @@ const EditProductForm = () =>{
   useEffect(()=>{
     dispatch(getOneProduct(productId))
   }, [dispatch, productId])
-  
+
 
   useEffect(() => {
     if (product) {
@@ -83,7 +79,6 @@ const EditProductForm = () =>{
     }
 
     let editedProduct = await dispatch((editAProduct(payload, productId)));
-    console.log('editedProduct: ',editedProduct)
     if (editedProduct) {
       history.push(`/products/${editedProduct.id}`);
     }
@@ -99,18 +94,18 @@ const EditProductForm = () =>{
   return (
     <div>
       <div className='editBackBtnDiv'>
-        <NavLink to={`/products/${productId}`} 
+        <NavLink to={`/products/${productId}`}
           className='editProdCancel editBackBtn'
-        >Back</NavLink> 
+        >Back</NavLink>
       </div>
       <div className='EditProductDivBox'>
         <div className='innerFormContent'>
           <div className='editProductDiv editProductFormContainer'>
             <h2>Edit your product details</h2>
             <form onSubmit={handleSubmit} className='editProduct' >
-              <div>
-                <ul className='loginErrorsList'>
-                  {errors.map((error, idx) => <li key={idx} className='productErrors'>{error}</li>)}
+              <div className="productErrors">
+                <ul>
+                  {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
               </div>
               <div>
@@ -134,7 +129,7 @@ const EditProductForm = () =>{
               </div>
               <div>
                 <label>Category</label>
-                  <select 
+                  <select
                     onChange={(e)=>setCategory(e.target.value)}
                     value={category}
                     >
@@ -145,15 +140,6 @@ const EditProductForm = () =>{
                     }))}
                   </select>
               </div>
-              {/* <label> Category </label>
-              <select 
-                onChange={(e)=>setCategory(e.target.value)}
-                value={category}
-                >
-                <option value= "68887312" >Fine Art</option>
-                <option value= "68887366" >Handmade Holiday Items</option>
-                <option value="68887482">Handmade jewelry</option>
-              </select> */}
               <div>
                 <label htmlFor='Price'>Price Per Product</label>
                   <input
@@ -166,19 +152,11 @@ const EditProductForm = () =>{
                   step = "0.01"
                   />
               </div>
-              {/* <label htmlFor='Images'>Image(s)</label>
-                <input
-                onChange={(e)=>setImage(e.target.value)}
-                defaultValue={product?.image}
-                // placeholder= "Product Image URL"
-                required
-                type="url"
-                /> */}
               <div className='bottomButtons'>
                 <button className='submitBtn' type='submit'>
                   Submit
                 </button>
-                <NavLink to={`/products/${productId}`} className='editProdCancel'>Cancel</NavLink> 
+                <NavLink to={`/products/${productId}`} className='editProdCancel'>Cancel</NavLink>
               </div>
             </form>
           </div>

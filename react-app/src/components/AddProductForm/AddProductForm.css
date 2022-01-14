@@ -6,7 +6,7 @@
 }
 
 .add-product{
-    margin-top: 50px;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px
@@ -58,3 +58,14 @@ textarea{
     flex-direction: row;
     align-items: center;
 }
+
+.productErrors {
+    padding-bottom: 5px;
+  }
+
+  .productErrors li{
+  padding: 10px 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: small;
+  color:crimson
+  }

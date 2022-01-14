@@ -34,26 +34,15 @@ def update_product(id):
   form = EditProductForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   product = Product.query.get(id)
-  # print(form.validate_on_submit)
-  # print(form.data)
   if form.validate_on_submit():
-    # print('herrrrrrrrrreeeeee')
     product.title = form.data['title'],
     product.description = form.data['description'],
     product.price = form.data['price'],
     product.category_id = int(form.data['category'])
-    # product.images = [{"url_75x75": form.data['image'],
-    #                   "url_170x135": form.data['image'],
-    #                   "url_570xN": form.data['image'],
-    #                   "url_fullxfull": form.data['image']
-    #                   }],
-    # product.user_id = currentUser['id']
 
     db.session.commit()
     return product.to_dict()
   else:
-    # print('hello there!')
-    # print(form.errors)
     return 'Bad data'
 
 
@@ -68,13 +57,6 @@ def delete_product(id):
   else:
     return '401'
 
-
-# @product_routes.route('/<int:id>/delete', methods=['GET', 'DELETE'])
-# def delete_product(id):
-#   product = Product.query.get(id)
-#   db.session.delete(product)
-#   db.session.commit()
-#   return 'deleted'
 
 @product_routes.route('/new', methods=['POST'])
 def add_new_product():
@@ -101,8 +83,9 @@ def add_new_product():
     return "Bad Data"
 
 
-@product_routes.route('/search/<tag>', methods=['GET'])
-def search_products(tag):
+@product_routes.route('/search', methods=['GET'])
+def search_products():
+  tag = request.args.get('query')
   searchResult = Product.query.filter(Product.title.ilike(f'%{tag}%')).all()
   if searchResult:
     result = {p.id : p.to_dict() for p in searchResult}
@@ -124,4 +107,4 @@ def get_products_in_cart(user_id):
     return products
   else:
     return {'message': 'items in cart not found'}
-# where product.id = cart's product_id
+

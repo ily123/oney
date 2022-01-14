@@ -31,13 +31,11 @@
   font-size: 2rem;
   margin: 0;
   padding-top: 20px;
-/*  background-color: var(--light-peach) */
 }
 .categoryPageWrapper p {
   margin: 0;
   font-size: 0.9rem;
   padding: 20px;
-/* background-color: var(--light-peach); */
   color: #595959;
 }
 

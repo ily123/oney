@@ -18,7 +18,7 @@ export default function Pager({ pageNumber, category }) {
 
   const productCount = countProducts(category)
   const PRODUCTS_PER_PAGE = 12;
-  const totalPages = Math.ceil(productCount / PRODUCTS_PER_PAGE); 
+  const totalPages = Math.ceil(productCount / PRODUCTS_PER_PAGE);
   pageNumber = Number(pageNumber)
   return (
       <ul className={styles.pager}>
@@ -26,7 +26,7 @@ export default function Pager({ pageNumber, category }) {
         {(calculatePagerRange(pageNumber, totalPages).map(pageInPager => {
           return (
             <li key={pageInPager}>
-              <NavLink 
+              <NavLink
                 className={pageInPager===pageNumber ? styles.active : null}
                 to={`/category/${category.id}/page/${pageInPager}`}>{pageInPager}
               </NavLink>
@@ -51,18 +51,14 @@ function PagerArrow({ props }) {
   )
 }
 
-// I was already feeling pretty baller with the triple-ternary above,
-// but the function below is the crowning achievement of my time at appAcademy.
-// This function calculates the proper page numbers to display in the pagination slider, 
-// given total number of pages, current page number, and size of pagination range
 function calculatePagerRange(pageNumber, totalPages) {
   const NUM_PAGES = 5 // number of pages visible in pager
   // address edge cases
   if (pageNumber < 1) pageNumber = 1;
   if (totalPages <= NUM_PAGES) return Array.from(Array(totalPages).keys()).map(n => n+1)
-  if (pageNumber > totalPages) pageNumber = totalPages; 
+  if (pageNumber > totalPages) pageNumber = totalPages;
   if (pageNumber === totalPages || pageNumber + NUM_PAGES > totalPages) {
-    return Array.from(Array(NUM_PAGES).keys()).map(n => n + totalPages - NUM_PAGES + 1) 
+    return Array.from(Array(NUM_PAGES).keys()).map(n => n + totalPages - NUM_PAGES + 1)
   }
   // ordinary cases
   let range;

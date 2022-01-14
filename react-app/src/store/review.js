@@ -43,19 +43,14 @@ export const deleteReview = (product_id, id) => async dispatch => {
   const response = await fetch(`/api/products/${product_id}/reviews/${id}`, {
     method: 'DELETE',
   });
-  // const res = await response.json()
-  // console.log("delete review thunk", res)
-  // console.log("delete review thunk", response)
   if(response.ok) {
     dispatch(removeOneReview(id))
-    console.log(response)
   }
 };
 
 
 // thunk for creating a review
 export const createOneReview = (formData, product_id) => async (dispatch) => {
-  // console.log("createOneReview productId", product_id)
   const response = await fetch(`/api/products/${product_id}/reviews`, {
     method: 'POST',
     headers : {
@@ -71,7 +66,6 @@ export const createOneReview = (formData, product_id) => async (dispatch) => {
     return newReview
 
   } catch(error) {
-    console.log(error)
   }
 
 }
@@ -85,8 +79,6 @@ export const editOneReview = (editReview,product_id, id) => async dispatch => {
   },
     body: JSON.stringify(editReview)
   });
-  // console.log("editReview", editReview)
-  // console.log('response in the thunk editOneReview', response)
 
   const review = await response.json();
   dispatch(editReviewAction(review, id))
@@ -97,12 +89,9 @@ export const editOneReview = (editReview,product_id, id) => async dispatch => {
 // thunk for getting all reviews
 export const getReviews = (product_id) => async(dispatch) => {
   if (product_id) {
-    // console.log("thunk product id", product_id)
     const res = await fetch(`/api/products/${product_id}/reviews`)
     const reviews = await res.json();
-    // console.log("reviews res.json()", reviews)
     dispatch(loadAllReviews(reviews, product_id))
-
   }
 }
 
@@ -113,33 +102,26 @@ const reviewReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_REVIEWS: {
       const newState = {...state};
-      // console.log("reducer review", action.reviews)
       for (const[key,value] of Object.entries(action.reviews)) {
         newState[key] = value
       }
-      // console.log("newState LOAD_REVIEWS", newState)
       return newState
     }
     case ADD_ONE : {
-      // console.log("add_one case", action.newReview)
       if(!state[action.newReview.id]) {
         const newState = {
           ...state,
           [action.newReview.review.id]: action.newReview.review
           // because youre sending a key value pair back from the backend, return {"review":review.to_dict()}  when you dispatch that action.newReview is that key value pair.  needing to be dotted into one further
         }
-        console.log("newState in reviewReducer add_", newState)
-        console.log("action.newReview", action.newReview)
         return newState
       }
-      // return state
     }
     case EDIT_ONE_REVIEW: {
       if(!state[action.review]) {
         const newState = {
           ...state, [action.review.id]: action.review
         };
-        // console.log("this is newState", newState)
 
         return newState
       }
